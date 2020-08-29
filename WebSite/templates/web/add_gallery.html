@@ -1,0 +1,105 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    img{
+  max-width:180px;
+}
+input[type=file]{
+padding:10px;
+background:#2d2d2d;}
+
+</style>
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+<script>
+    function readURL1(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah1')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+<script>
+    function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah2')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+    <!-- slider-start -->
+
+    <!-- slider-end -->
+    <!-- courses start -->
+    <div class="advisors-area gray-bg pt-95 pb-70" style="background-image: url('{% static 'web/sbg.png' %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2">
+                    <div class="events-details-form faq-area-form mb-30 p-0">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-8 offset-xl-2">
+                                    <div class="events-form-title text-center mb-30">
+                                        <h2>Add Image</h2>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12">
+
+                                    <center><img id="blah" src="" alt="" /></center>
+                                    <br><br>
+                                      <input type='file' onchange="readURL(this);" name="image" required  />
+
+
+                                </div>
+                                <div class="col-xl-12">
+
+
+                                      <input type='text'  name="title" required  placeholder="Enter Title" />
+
+
+                                </div>
+
+
+
+                                <div class="col-xl-12">
+                                    <div class="faq-form-btn events-form-btn text-center">
+                                        <button class="btn m-0">Add Image</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- courses end -->
+    {% endblock %}

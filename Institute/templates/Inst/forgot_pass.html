@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+<title>:: Prateek Mishra :: Student Panel</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Mplify Bootstrap 4.1.1 Admin Template">
+<meta name="author" content="ThemeMakker, design by: ThemeMakker.com">
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/animate-css/animate.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/font-awesome/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/chartist/css/chartist.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css' %}">
+
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="{% static 'student/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets/css/color_skins.css' %}">
+</head>
+
+<body class="theme-blue">
+	<!-- WRAPPER -->
+	<div id="wrapper" >
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle auth-main">
+				<div class="auth-box">
+                    <div class="mobile-logo"><a href="index.html"><img src="{% static 'student/assets1/images/logo-icon.svg' %}" alt="Mplify"></a></div>
+                    <div class="auth-left">
+                        <div class="left-top">
+                            <a href="index.html">
+                                <img src="{% static 'student/assets1/images/logo-icon.svg' %}" alt="Mplify">
+                                <span>Mplify</span>
+                            </a>
+                        </div>
+                        <div class="left-slider">
+                            <img src="{% static 'student/assets1/images/login/1.jpg' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+
+                    <div class="auth-right">
+                        <div class="right-top">
+                            <ul class="list-unstyled clearfix d-flex">
+                                <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li><a href="javascript:void(0);">Help</a></li>
+                                <li><a href="javascript:void(0);">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="header">
+                                <p class="lead">Create an account</p>
+                            </div>
+                            <div class="body">
+                                <form class="form-auth-small" action="" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    {% if error %}
+                                        <p style="color:red">You Entered Wrong Values</p>
+                                    {% endif %}
+                                    <div class="form-group">
+                                        <label  class="control-label " style="float:left">You Are:</label>
+                                        <select class="form-control" name = "who" required>
+                                            <option value="">Select</option>
+                                           {% if who == "Admin" %}
+                                                <option value="Admin" selected>Admin</option>
+                                           {% else %}
+                                                <option value="Admin">Admin</option>
+                                           {% endif %}
+
+                                            {% if who == "FrontDesk" %}
+                                                <option value="FrontDesk" selected>FrontDesk</option>
+                                           {% else %}
+                                                <option value="FrontDesk">FrontDesk</option>
+                                           {% endif %}
+
+                                            {% if who == "Library" %}
+                                                <option value="Library" selected>Library Manager</option>
+                                           {% else %}
+                                                <option value="Library">Library Manager</option>
+                                           {% endif %}
+
+                                            {% if who == "Exam" %}
+                                                <option value="Exam" selected>Exam Panel Manager</option>
+                                           {% else %}
+                                                <option value="Exam">Exam Panel Manager</option>
+                                           {% endif %}
+
+                                            {% if who == "Student" %}
+                                                <option value="Student" selected>Student</option>
+                                           {% else %}
+                                                <option value="Student">Student</option>
+                                           {% endif %}
+
+
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-password" class="control-label" style="float:left">Email</label>
+                                        <input type="email" value="{{ email }}" class="form-control" name = "email" id="signup-password" placeholder="Your email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-password1" class="control-label" style="float:left">Username</label>
+                                        <input type="text" value="{{ username }}" class="form-control" name = "username" id="signup-password1" placeholder="Your username" required>
+                                    </div>
+
+                                    {% if valid %}
+                                        <div class="form-group">
+                                            <label for="signup-password" class="control-label" style="float:left">New Password</label>
+                                            <input type="password" class="form-control" name = "ps1" id="signup-password" placeholder="Your Password" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="signup-password1" class="control-label" style="float:left">Re-Enter Password </label>
+                                            <input type="password" class="form-control" name = "ps2" id="signup-password1" placeholder="Your Password" required>
+                                        </div>
+                                    {% else %}
+                                        <input type="text" value="0" class="form-control" name = "ps2" hidden>
+                                        <input type="text" value="0" class="form-control" name = "ps1" hidden>
+                                    {% endif %}
+
+
+
+
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>
+
+                                </form>
+                                <div class="separator-linethrough"><span>OR</span></div>
+                                <div class="bottom">
+                                        <span class="helper-text">Already have an account? <a href="{% url 'login' %}">Login</a></span>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->
+</body>
+</html>

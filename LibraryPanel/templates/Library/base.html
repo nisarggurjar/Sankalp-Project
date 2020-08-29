@@ -1,0 +1,144 @@
+
+{% block up %}
+{% endblock %}
+
+{% load static %}
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<body class="theme-blush" onpageshow="ExamSectionFunction();">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{{ ins_data.institute_logo.url }}" style="border-radius:50%;" width="48" height="48" alt=""></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+<!-- Top Bar -->
+<nav class="navbar p-l-5 p-r-5" style="padding-top:10px;">
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href=""><img src="{{ ins_data.institute_logo.url }}" style="border-radius:50%;" width="30" alt="">
+
+                         {% if request.user.last_name == "Admin" %}
+                            {% if not request.user.is_staff %}
+                                <span class="m-l-10">{{ request.user.visiteduser_set.first.institute }}</span></a>
+                            {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                            {% endif %}
+                        {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                        {% endif %}
+
+            </div>
+        </li>
+        <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+
+        <li class="float-right">
+
+            <a href="{% url 'logout' %}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a>
+
+        </li>
+    </ul>
+</nav>
+<!-- Left Sidebar-->
+<aside id="leftsidebar" class="sidebar">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#dashboard"></a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane stretchRight active" id="dashboard">
+            <div class="menu">
+                <ul class="list">
+                     <li>
+                        {% if request.user.last_name == "Admin" %}
+                        <div class="user-info">
+                            <div class="image"><a href=""><img src="{{ adminprofile.image.url }}" alt="{{ adminprofile.name }}"></a></div>
+                            <div class="detail">
+                                <h4>{{ adminprofile.name }}</h4>
+                                <small>Admin</small>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="user-info">
+                            <div class="image"><a href=""><img src="{{ request.user.user_management_set.first.emp.image.url }}" alt="{{ request.user.admin_profile_set.first.name }}"></a></div>
+                            <div class="detail">
+                                <h4>{{ request.user.user_management_set.first.emp.name }}</h4>
+                                <small>{{ request.user.user_management_set.first.emp.designation }}</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </li>
+                   
+					
+                    <li class=""><a href="{% url 'LibraryPanel:library_deshboard' %}"><i class="zmdi zmdi-dns">
+					</i><span>Dashboard</span></a>
+					</li>
+					
+					 <li class=""><a href="{% url 'LibraryPanel:Library_add_cat' %}"><i class="zmdi zmdi-bookmark">
+					</i><span>Book Category</span></a>
+					</li>
+					
+					 <li class=""><a href="{% url 'LibraryPanel:Library_add_sub_cat' %}"><i class="zmdi zmdi-book-image">
+					</i><span>Sub-Category</span></a>
+					</li>
+
+
+
+                    <li class=""><a href="{% url 'LibraryPanel:Library_book_List' 'All' %}"><i class="zmdi zmdi-folder">
+					</i><span>All Books</span></a>
+					</li>
+
+                    <li class=""><a href="{% url 'LibraryPanel:un_cat_book' %}"><i class="zmdi zmdi-copy">
+					</i><span>Un-Categorized Books</span></a>
+					</li>
+
+                    <li class=""><a href="{% url 'LibraryPanel:Library_online_book' %}"><i class="zmdi zmdi-library">
+					</i><span>Online Books</span></a>
+					</li>
+
+					 <li class=""><a href="{% url 'LibraryPanel:Library_issued_book' %}"><i class="zmdi zmdi-money-box">
+					</i><span>Issued Book</span></a>
+					</li>
+
+					 <li class=""><a href="{% url 'LibraryPanel:Library_Return_Book_list' %}"><i class="zmdi zmdi-tab">
+					</i><span>Issue - Return Books</span></a>
+					</li>
+                    <li class=""><a href="{% url 'LibraryPanel:Library_fine_list' %}"><i class="zmdi zmdi-account-circle">
+					</i><span>Student Library Fine List</span></a>
+					</li>
+
+                    <li>
+                        <div class="progress-container progress-primary m-t-10">
+                            <span class="progress-badge">Issued Books</span>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" id = "issue_per">
+                                    <span class="progress-value">{{ isu }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
+
+
+<script>
+ function ExamSectionFunction() {
+           var d1 = {{ isu }};
+
+           document.getElementById("issue_per").style.width = d1+"%";
+
+        }
+
+</script>
+
+
+
+{% block down %}
+{% endblock %}

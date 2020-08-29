@@ -1,0 +1,164 @@
+
+{% block up %}
+{% endblock %}
+
+{% load static %}
+
+
+
+<body class="theme-blue">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{{ ins_data.institute_logo.url }}" style="border-radius:50%;" width="48" height="48" alt="Logo"></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+<!-- Top Bar -->
+<nav class="navbar p-l-5 p-r-5" style="padding-top:10px;">
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href=""><img src="{{ ins_data.institute_logo.url }}" width="30"
+                     alt="{{ ins_data.name }}" style="border-radius:50%">
+
+                         {% if request.user.last_name == "Admin" %}
+                            {% if not request.user.is_staff %}
+                                <span class="m-l-10">{{ request.user.visiteduser_set.first.institute }}</span></a>
+                            {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                            {% endif %}
+                        {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                        {% endif %}
+
+            </div>
+        </li>
+        <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+
+
+        <li class="float-right">
+            <a href="{% url 'logout' %}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a>
+        </li>
+    </ul>
+</nav>
+<!-- Left Sidebar-->
+<aside id="leftsidebar" class="sidebar">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link"></a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane stretchRight active" id="dashboard">
+            <div class="menu">
+                <ul class="list">
+                     <li>
+                        {% if request.user.last_name == "Admin" %}
+                        <div class="user-info">
+                            <div class="image"><a href=""><img src="{{ adminprofile.image.url }}" alt="{{ adminprofile.name }}"></a></div>
+                            <div class="detail">
+                                <h4>{{ adminprofile.name }}</h4>
+                                <small>Admin</small>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="user-info">
+                            <div class="image"><a href=""><img src="{{ request.user.user_management_set.first.emp.image.url }}" alt="{{ request.user.admin_profile_set.first.name }}"></a></div>
+                            <div class="detail">
+                                <h4>{{ request.user.user_management_set.first.emp.name }}</h4>
+                                <small>{{ request.user.user_management_set.first.emp.designation }}</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </li>
+                   
+					
+                    <li class=""><a href="{% url 'ExamPanel:exam_home' %}"><i class="zmdi zmdi-dns">
+					</i><span>Dashboard</span></a>
+					</li>
+
+                     <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>Students</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'ExamPanel:institute_students_list' '0' '0' %}">Institute Students</a></li>
+                           <!-- <li><a href="{% url 'ExamPanel:add_new_students' %}">External Students</a></li>
+                            <li><a href="{% url 'ExamPanel:new_students_group' %}">Students Group</a></li> -->
+
+                        </ul>
+                    </li>
+
+					 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>Online Test Series</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'ExamPanel:create_exam_package' %}">Exam Package</a></li>
+                            <li><a href="{% url 'ExamPanel:create_exam_subpackage' '0' '0' 'New' %}">Exam Sub-Package</a></li>
+                            <li><a href="{% url 'ExamPanel:create_main_exam' '0' '0' '0' 'New' %}">Main Exam</a></li>
+                            <li><a href="{% url 'ExamPanel:add_main_exam_section' '0' '0' '0' '0'  %}">Exam Sections</a></li>
+                            <li><a href="{% url 'ExamPanel:assign_test_package_to_groups' '0' '0' '0' 'Institute' %}"><span>Assign Test Series</span> </a>
+                            </li>
+                        </ul>
+                    </li>
+
+					<li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-book-image"></i><span>Quiz</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'ExamPanel:create_quiz_package' %}">Create Quiz Package</a></li>
+                            <li><a href="{% url 'ExamPanel:create_quiz' '0' '0' 'New' %}">Create Quiz</a></li>
+                            <li><a href="{% url 'ExamPanel:assign_quiz_package_to_groups' '0' '0' '0' 'Institute' %}"><span>Assign Quiz Packages</span> </a>
+                            </li>
+                        </ul>
+                    </li>
+
+<!--
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-money-box"></i><span>Practice Material</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'ExamPanel:daily_practice_material' %}">Practice Subjects</a></li>
+                            <li><a href="{% url 'ExamPanel:daily_practice_topic' 'All' %}">Topics</a></li>
+                            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>Assign Practice Material</span> </a>
+                                <ul class="ml-menu">
+                                    <li><a href="{% url 'ExamPanel:assign_study_package_to_groups' '0' '0' '0' 'Institute' %}">Institute Student</a></li>
+                                    <li><a href="{% url 'ExamPanel:assign_study_package_to_groups' '0' '0' '0' 'External' %}">Group Student</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+-->
+
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-folder"></i><span>Study Material</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'ExamPanel:upload_material' '0' %}">Upload Study Materials</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-upload"></i><span>Questions</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'ExamPanel:questions_bank' '0' '10' %}">Your Question Bank</a></li>
+							<li><a href="{% url 'ExamPanel:create_question_section' '0' '0' 'List' %}">Question Sections</a></li>
+                            <li><a href="{% url 'ExamPanel:import' %}">Import Questions</a></li>
+                            <li><a href="{% url 'ExamPanel:null_questions' '10' '0' %}">UnDefine Questions</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-border-color"></i><span>Results</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'ExamPanel:package_result' '0' '0' '0' %}">Test Series Results</a></li>
+                            <li><a href="{% url 'ExamPanel:quiz_result' '0' '0' '0' %}">Quiz Results</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
+
+
+
+
+{% block down %}
+{% endblock %}

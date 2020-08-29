@@ -1,0 +1,132 @@
+{% extends 'Inst/base.html' %}
+{% block up %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - All SMS Templates</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/morrisjs/morris.min.css' %}" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+      <div class="container">
+          <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="body">
+                       <p ><strong style="font-family: monospace; font-size: 25px; color: #1A5276">All SMS Templates</strong>
+                           <span class="pagination pagination-danger"  style="float:right;">
+                  <span class="page-item active"><a class="page-link" href="{% url 'Master:master_create_stemp' %}">Add New Template</a></span>
+                    </span>
+                       </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="body">
+                             <div class="tab-content">
+                    <div class="tab-pane active" id="librarylist">
+                        <div class="card">
+                            <div class="body table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>SMS Template Title</th>
+                                            <th>Sender ID</th>
+                                            <th>Messege</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									{% for s in sms %}
+
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ s.title }}</td>
+                                            <td>{{ s.sender_id.name }}</td>
+                                            <td>{{ s.sms }}&nbsp;&nbsp;</td>
+                                            <td>
+                                            <a href="{% url 'Master:edit' s.id 'SmsTemp' %}"><i style="color:#1A5276;" class="zmdi zmdi-edit"></i></a>&nbsp;&nbsp;
+                                            <a href="{% url 'Master:delete' s.id 'SmsTemp' %}"><i style="color:#1A5276;" class="zmdi zmdi-delete"></i></a>
+
+                                        </td>
+                                        </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="delete_alert" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title " id="defaultModalLabel" style="font-family: monospace; font-size: 20px; color: #1A5276">Delete Sender Id Alart</h4>
+            </div>
+            <div class="modal-body">
+
+                <label style="float:left; font-family: monospace;"><b> This SMS Template is connected with Auto SMS Setting. So now you
+                can't delete it.</b></label>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="{% static 'Master/assets/assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/jvectormap.bundle.js' %}"></script> <!-- JVectorMap Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/knob.bundle.js' %}"></script> <!-- Jquery Knob-->
+
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/widgets/infobox/infobox-1.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/index.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

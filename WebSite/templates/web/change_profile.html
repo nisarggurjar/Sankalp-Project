@@ -1,0 +1,111 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    img{
+  max-width:180px;
+}
+input[type=file]{
+padding:10px;
+background:#2d2d2d;}
+
+</style>
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+    <!-- slider-start -->
+
+    <!-- slider-end -->
+    <!-- courses start -->
+    <div class="advisors-area gray-bg pt-95 pb-70" style="background-image: url('{% static 'web/sbg.png' %}')">
+        <div class="container">
+            <div class="row">
+                 <div class="col-xl-4 ">
+                    <div class="events-details-form faq-area-form mb-30 p-0">
+                        <form action="{% url 'Website:change_profile' 'Image' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-8 offset-xl-2">
+
+                                    <div class="events-form-title text-center mb-30">
+                                        <h2 style="font-size:20px;">Update Your Image</h2>
+
+                                         <img id="blah" src="{{ profile.image.url }}" alt="" />
+                                        </div>
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <label><b>Your Image</b></label>
+                                    <input type='file' onchange="readURL(this);" name="image" required />
+
+                                </div>
+
+
+                                <div class="col-xl-12">
+                                    <div class="faq-form-btn events-form-btn text-center">
+                                        <button class="btn m-0">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xl-8 ">
+                    <div class="events-details-form faq-area-form mb-30 p-0">
+                        <form action="{% url 'Website:change_profile' 'Details' %}" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-8 offset-xl-2">
+                                    <div class="events-form-title text-center mb-30">
+                                        <h2 style="font-size:20px;">Edit Your Profile</h2>
+                                        </div>
+                                </div>
+
+                                <div class="col-xl-6">
+                                    <label><b>Your Name</b></label>
+                                    <input  type="text" required name="name" value="{{ profile.name }}">
+                                </div>
+                                <div class="col-xl-6">
+                                    <label><b>Your Mobile Number</b></label>
+                                    <input  type="text" required name="mob" value="{{ profile.mobile_number }}">
+                                </div>
+                                <div class="col-xl-6">
+                                    <label><b>Your Email</b></label>
+                                    <input  type="email" required name="email" value="{{ profile.email }}">
+                                </div>
+                                <div class="col-xl-6">
+                                    <label><b>Your Address</b></label>
+                                    <input  type="text" required name="add" value="{{ profile.address }}">
+                                </div>
+                                <div class="col-xl-12">
+                                    <label><b>Director Message</b></label>
+                                    <textarea name="msg" style="height:200px;">{{ profile.director_message }}
+                                    </textarea>
+                                    </div>
+
+                                <div class="col-xl-12">
+                                    <div class="faq-form-btn events-form-btn text-center">
+                                        <button class="btn m-0">Update now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- courses end -->
+    {% endblock %}

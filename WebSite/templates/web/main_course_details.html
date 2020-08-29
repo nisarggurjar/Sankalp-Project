@@ -1,0 +1,70 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- slider-start -->
+
+    <div class="slider-area">
+        <div class="page-title">
+            <div class="single-slider   d-flex align-items-center" style="background-image: url('{% static 'web/img/bg/others_bg.jpg' %}');height:200px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider-content slider-content-breadcrumb text-center">
+                                <h2 class="white-color f-700">{{ data.name }}</h2>
+                                <nav class="text-center" aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'Website:website_home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{ data.name }} Details</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- courses start -->
+    <div class="advisors-area gray-bg pt-20 pb-70" style="background-image: url('{% static 'web/sbg.png' %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="section-title mb-50 text-center">
+                        <div class="section-title-heading mb-20">
+                            <h2 class="primary-color">All Sub Courses for {{ data.name }}</h2>
+                            {% if request.user.is_staff %}
+                            <div class="courses-pricing-3">
+                                <br>
+                                <a href="{% url 'Website:add_sub_course' data.id %}"><span>Add More Course</span></a>
+                                    </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for i in data.sub_course_set.all %}
+                     <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="skill-style">
+                        <div class="img-box">
+                            <div class="text-box text-center">
+                                <a href="{% url 'Website:sub_cdetails' i.id %}"><div class="inner hvr-bounce-to-bottom" style="min-height: 230px;">
+                                    <div class="icon-box">
+                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                    </div><!-- /.icon-box -->
+                                    <a href="{% url 'Website:sub_cdetails' i.id %}"><h3>{{ i.name }}</h3></a>
+                                    <p>{{ i.dis }}</p>
+                                    <a href="{% url 'Website:sub_cdetails' i.id %}" class="more">Read More </a>
+                                </div><!-- /.inner --></a>
+                            </div><!-- /.text-box -->
+                        </div><!-- /.img-box -->
+                    </div><!-- /.single-service-style-three -->
+                </div>{% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- courses end -->
+
+    {% endblock %}

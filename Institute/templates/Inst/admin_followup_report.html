@@ -1,0 +1,131 @@
+<!doctype html>
+{% extends 'Inst/base.html' %}
+{% block up %}
+
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Follow Up Report</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}">
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+      <div class="container">
+
+         <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                       <div class="body">
+                       <p ><strong style="font-family: monospace; font-size: 23px; color: #1A5276">Course wise Follow up Report</strong>
+
+                       </p>
+
+                    </div>
+
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <thead>
+                                <tr>
+                                <th>Course Name</th>
+                                <th>Today's Follow-ups</th>
+                                <th>This Month Follow-ups</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in all_course %}
+                                <tr>
+                                <td style="font-family: monospace; font-size: 15px; color: #1A5276">{{ course.name }}</td>
+                                <td style="font-family: monospace; font-size: 15px; color: #1A5276">
+                                    <span id = 't{{ forloop.counter }}'></span>&nbsp;
+                                 <span class="icon"><i class="icon-note" style="color:#1A5276"></i> </span>
+
+                                </td>
+                                <td style="font-family: monospace; font-size: 15px; color: #1A5276">
+                                    <span id ='tm{{ forloop.counter }}'></span>&nbsp;
+                                <span class="icon"><i class="icon-note" style="color:#1A5276"></i> </span>
+
+                                </td>
+
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+ function myfunction() {
+
+           var d1 = {{ today }}
+           var d2 = {{ This_month }}
+
+
+
+                 for (var i = 0; i<d1.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("t"+k);
+                      td3.innerText = d1[i];
+                    }
+
+                 for (var j = 0; j<d2.length; j++)
+                    {
+                      var t1 = j + 1;
+                      var k1 = t1.toString();
+                      var td4 = document.getElementById("tm"+k1);
+                      td4.innerText = d2[j];
+                    }
+
+
+
+        }
+window.onload =myfunction;
+</script>
+
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<!-- data tables -->
+<!-- Jquery DataTable Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+
+{% endblock %}
+</body>
+
+</html>

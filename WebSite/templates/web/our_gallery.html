@@ -1,0 +1,56 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}    <!-- slider-start -->
+    <div class="slider-area" >
+        <div class="page-title">
+            <div class="single-slider   d-flex align-items-center" style="background-image: url('{% static 'web/img/bg/others_bg.jpg' %}');height:200px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider-content slider-content-breadcrumb text-center">
+                                <h2 class="white-color f-700">Our Gallery</h2>
+                                <nav class="text-center" aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'Website:website_home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Our Gallery</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- about start -->
+     <div class="shop-area gray-bg pt-100 pb-70">
+        <div class="container">
+            <div class="shop-list">
+                <div class="row shop-active">
+
+
+                   {% for i in data %}
+                    <div class="col-xl-12">
+                        <div class="shop-inner mb-30 white-bg">
+                            <div class="shop-thumb">
+                                <a href=""><img src="{{ i.image.url }}" alt="" height="100px;" width="120px;"></a>
+                            </div>
+                            <div class="book-inner-content">
+                                <div class="sohop-heading mb-20">
+                                    <h1 class="shop-book-name"><a href="">{{ i.Title }}</a>
+                                        {% if request.user.is_staff %}
+                                        <a href="{% url 'Website:delete_stuff' 'Gallery' i.id %}"><span class="ti-trash"></span></a>
+                                        {% endif %}
+                                    </h1>
+                                   </div>
+
+                            </div>
+                        </div>
+                    </div>{% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+   
+   {% endblock %}

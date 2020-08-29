@@ -1,0 +1,188 @@
+{% extends 'StudentHome/base.html' %}
+{% block body %}
+{% load static %}
+
+<style type="text/css">
+	.leftborder {
+		position: absolute;
+    content: '';
+    left: 0;
+    top: 15px;
+    width: 3px;
+    height: 65%;
+    background: #ffce4b;
+	}
+</style>
+
+    <div id="main-content" class="taskboard">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-8 col-sm-12">                        
+                        <h2>Web Development with Django</h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-4 col-sm-12 text-right">
+                        <ul class="breadcrumb justify-content-end">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>                            
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item active">TaskBoard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+           
+            	<div class="row clearfix" style="width: 100%;">
+            		<div class="col-lg-2 col-md-12"></div>
+                  <div class="col-lg-8 col-md-12">
+                    <div class="card progress_task">
+                        <div class="header">
+                            <ul class="header-dropdown">
+                            	 <li><a href="javascript:void(0);" data-toggle="modal" data-target="#addcontact"><i class="icon-plus"></i></a></li>
+                                <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
+                                <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
+                            </ul>
+                        </div>
+                       <a href="{% url 'StudentPanel:single_question' %}">
+                       	 <div class="body taskboard">
+                            <div class="dd" data-plugin="nestable">
+                                <ol class="dd-list">
+                                    <li class="dd-item" >
+                                        <div style="width: 100%;padding: 10px;border: 1px solid #efefef; margin: 0;">
+                                        	<div class="leftborder"></div>
+                                            <h5>1/3 Python</h5>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                            
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div></a>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+	<div class="row clearfix" style="width: 100%;">
+            		<div class="col-lg-2 col-md-12"></div>
+                  <div class="col-lg-8 col-md-12">
+                    <div class="card progress_task">
+                        <div class="header">
+                            <ul class="header-dropdown">
+                            	 <li><a href="javascript:void(0);" data-toggle="modal" data-target="#addcontact"><i class="icon-plus"></i></a></li>
+                                <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
+                                <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="body taskboard">
+                            <div class="" data-plugin="nestable">
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <h4>2/3 Python</h4>
+                                            <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero</p>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+<div class="row clearfix" style="width: 100%;">
+            		<div class="col-lg-2 col-md-12"></div>
+                  <div class="col-lg-8 col-md-12">
+                    <div class="card progress_task">
+                        <div class="header">
+                            <ul class="header-dropdown">
+                            	 <li><a href="javascript:void(0);" data-toggle="modal" data-target="#addcontact"><i class="icon-plus"></i></a></li>
+                                <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
+                                <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="body taskboard">
+                            <div class="dd" data-plugin="nestable">
+                                <ol class="dd-list">
+                                    <li class="dd-item" data-id="1">
+                                        <div class="dd-handle">
+                                            <h5>3/3 Python</h5>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                            <ul class="list-unstyled clearfix action">
+                                                <li><a href="javascript:void(0);"><i class="fa fa-paperclip"></i> 1</a></li>
+                                                <li><a href="javascript:void(0);"><i class="fa fa-dot-circle-o"></i> UX</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    
+</div>
+
+<!-- Add New Task -->
+<div class="modal fade" id="addcontact" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="title" id="defaultModalLabel">Add New Task</h6>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-12">
+                        <div class="form-group">                                    
+                            <input type="text" class="form-control" placeholder="Task no.">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">                                   
+                            <input type="text" class="form-control" placeholder="Job title">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">                                    
+                            <textarea class="form-control" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <select class="form-control show-tick m-b-10">
+                            <option>Select Team</option>
+                            <option>John Smith</option>
+                            <option>Hossein Shams</option>
+                            <option>Maryam Amiri</option>
+                            <option>Tim Hank</option>
+                            <option>Gary Camara</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label>Range</label>
+                        <div class="input-daterange input-group" data-provide="datepicker">
+                            <input type="text" class="form-control" name="start">
+                            <span class="input-group-addon"> to </span>
+                            <input type="text" class="form-control" name="end">
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

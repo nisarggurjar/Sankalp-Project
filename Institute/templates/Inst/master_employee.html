@@ -1,0 +1,117 @@
+{% extends 'Inst/base.html' %}
+{% block up %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - All Employee</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/morrisjs/morris.min.css' %}" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/ecommerce.css' %}">
+
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="body">
+                        <p ><strong style="font-family: monospace; font-size: 25px; color: #1A5276">All Employees</strong></p>
+
+                        <div class="row clearfix">
+
+
+					<div class="col-md-12">
+
+
+						<div class="row clearfix">
+		        {% for emp in all_employee %}
+                 <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card product_item" style="max-width:250px;">
+                    <div class="body">
+                        <center>
+                        <div class="cp_img">
+                            {% if emp.image %}
+                            <img id="blah" src="{{ emp.image.url }}" alt="Product" class="img-fluid" width="250px;" height="220px;"/>
+                            {% else %}
+                            <img id="blah" src="{% static 'download.png' %}" width="250px;" height="220px;" />
+
+                            {% endif %}
+                            <div class="hover">
+                                <a href="{% url 'Master:admin_VED_employee' emp.id 'View' %}" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-eye"></i></a>
+                                <a href="{% url 'Master:admin_VED_employee' emp.id 'Edit' %}" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-edit"></i></a>
+
+                                <a href="{% url 'Master:admin_VED_employee' emp.id 'Delete' %}" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-delete"></i></a>
+                            </div>
+                        </div></center>
+                        <div class="product_details">
+                            <h5 ><a href="ec-product-detail.html"><span style="font-family: monospace;  color: #1A5276">{{ emp.name }}</span></a></h5>
+                            <ul class="product_price list-unstyled">
+                                <li class="new_price">Designation:</li>
+                                <li>{{ emp.designation }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>{% endfor %}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div></div></section>
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(300)
+                        .height(300);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+</script>
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="{% static 'Master/assets/assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/jvectormap.bundle.js' %}"></script> <!-- JVectorMap Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/knob.bundle.js' %}"></script> <!-- Jquery Knob-->
+
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/widgets/infobox/infobox-1.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/index.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

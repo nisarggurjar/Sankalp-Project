@@ -1,0 +1,171 @@
+
+{% extends 'front/front_base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Send Notification</title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon"> <!-- Favicon-->
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Send Notification
+               </h2>
+            </div>
+
+        </div>
+
+
+    </div>
+
+       {% if Sms_Templates %}
+         <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card student-list">
+                      <div class="header">
+            <h2><strong>Template </strong> List</h2>
+        </div>
+<form action="" method="post">{% csrf_token %}
+                    <div class="body">
+                        <div class="body table-responsive">
+                             <table class="table table-striped table-hover js-basic-example dataTable" id="myTable">
+                                <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Choose</th>
+                                            <th>SMS Template Title</th>
+                                            <th>Sender ID</th>
+                                            <th>Messege</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									{% for s in Sms_Templates %}
+
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td><input type="radio" name="sms_select" value="{{ s.id }}" required></td>
+                                            <td>{{ s.title }}</td>
+                                            <td>{{ s.sender_id.name }}</td>
+                                            <td>{{ s.sms }}</td>
+
+                                        </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+                            </table>
+                            </div>
+
+                    </div>
+                    <div class="content col-md-12">
+                        <center>
+                        <div>
+                                <input class="btn btn-primary btn-round " type = "submit" value="Send Notification">
+
+                            </div></center>
+
+
+                    </div>
+                  </form>
+                </div>
+                </div>
+            </div>
+    {% else %}
+        <div class="row clearfix" style="margin-top:200px;">
+                <div class="card" >
+
+     <div class="body">
+                        <div class="row clearfix">
+
+						 <div class="container">
+                             <div class="col-md-12">
+       <center> <p style="color:red;margin-top:50px;">There is no <b>SMS Template</b> to send <b>Notification.</b></p>
+       </center>
+                             <br><br></div></div></div></div></div>
+    {% endif %}
+
+</section>
+
+<!-- Jquery Core Js -->
+
+
+
+
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/index.bundle.js' %}"></script> <!-- Jquery Knob, Count To, Sparkline Js -->
+<script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'assets/plugins/dropzone/dropzone.js' %}"></script> <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'assets/js/pages/index2.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://127.0.0.1:8000/master_panel/ -->
+<html class="no-js chrome" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>TechSim+ - Admin-Dashboard</title>
+<link rel="icon" href="./TechSim+ - Admin-Dashboard_files/attempt_FDxVUNI.png" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="./TechSim+ - Admin-Dashboard_files/bootstrap.min.css">
+<link rel="stylesheet" href="./TechSim+ - Admin-Dashboard_files/jquery-jvectormap-2.0.3.min.css">
+<link rel="stylesheet" href="./TechSim+ - Admin-Dashboard_files/morris.min.css">
+<!-- Custom Css -->
+<link rel="stylesheet" href="./TechSim+ - Admin-Dashboard_files/main.css">
+<link rel="stylesheet" href="./TechSim+ - Admin-Dashboard_files/color_skins.css">
+
+    
+<link rel="icon" href="./TechSim+ - Admin-Dashboard_files/attempt_FDxVUNI.png" type="image/x-icon"><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;box-sizing: content-box;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+
+
+
+ <!-- Favicon-->
+
+<body class="theme-cyan" onpageshow="startTime()" style="overflow: auto;">
+<!-- Page Loader -->
+<div class="page-loader-wrapper" style="display: none;">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="./TechSim+ - Admin-Dashboard_files/attempt_FDxVUNI.png" width="48" height="48" alt=""></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+
+<!-- Top Bar -->
+<nav class="top_navbar">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="navbar-logo">
+                    <a href="javascript:void(0);" class="bars"></a>
+                    <a class="navbar-brand" href="http://127.0.0.1:8000/master_panel/"><img src="./TechSim+ - Admin-Dashboard_files/attempt_FDxVUNI.png" style="border-radius: 50%;" width="30" alt="InfiniO"><span class="m-l-10">TechSim+</span></a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><span style="color:white; font-size:20px; font-family:monospace;" class="hidden-xs">Time:</span> </li>
+                    <li><span style="color:white; font-size:25px; font-family:monospace;"><span class="hidden-xs" id="txt">23:56:20</span></span> </li>
+                    <li class="dropdown notifications">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="icon-bell"></i><span class="label-count" id="cnt"></span></a>
+                        <ul class="dropdown-menu pullDown">
+                            <li class="header">Upcoming Follow ups</li>
+                            <li class="body">
+                                <br>
+                                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><ul class="menu list-unstyled" style="overflow: hidden; width: auto; height: 250px;">
+                                    
+                                    <li>
+                                            <div class="media">
+
+                                                <div class="media-body">
+
+                                                    <span class="name"><i class="zmdi zmdi-circle col-teal"></i> &nbsp;&nbsp;Prateek Mishra &nbsp;&nbsp;<span class="text-primary">05/01/2019</span></span>
+                                                    <span class="message"><span class="text-success">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Remark: </span><b>Interested to Join</b></span>
+                                                </div>
+                                            </div>
+
+                                    </li>
+                                    
+
+                                </ul><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.2); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 3px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                            </li>
+                            <li class="footer"> </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown app_menu hidden-sm"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="icon-grid"></i></a>
+                        <ul class="dropdown-menu pullDown">
+                            <li>
+								<ul>
+									<li><a href="http://127.0.0.1:8000/master_panel/All_students/"><i class="zmdi zmdi-accounts"></i><span>All Students</span></a></li>
+									<li><a href="http://127.0.0.1:8000/master_panel/courses/"><i class="icon-list"></i><span>All Courses</span></a></li>
+									<li><a href="http://127.0.0.1:8000/master_panel/master_employee/"><i class="icon-users"></i><span>Employees</span></a></li>
+									<li><a href="http://127.0.0.1:8000/master_panel/All_books/"><i class="icon-notebook"></i><span>All Books</span></a></li>
+                                    <li><a href="http://127.0.0.1:8000/master_panel/All_todays_followup/"><i class="icon-bubble"></i><span>Today's followUp</span></a></li>
+
+									<li><a href="http://127.0.0.1:8000/master_panel/student_due_fee_report/"><i class="icon-calendar"></i><span>Fee Reminders </span></a></li>
+								</ul>
+							</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown profile">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <img class="rounded-circle" src="./TechSim+ - Admin-Dashboard_files/Anushree_MMs1jjS.jpg" width="25px;" height="35px;" alt="User">
+                        </a>
+                        <ul class="dropdown-menu pullDown">
+                            <li>
+                                <div class="user-info">
+                                    <h6 class="user-name m-b-0">Prateek Mishra</h6>
+                                   <br>
+                                    <a title="facebook" href="javascript:void(0);"><i class="zmdi zmdi-facebook"></i></a>
+                                    <a title="twitter" href="javascript:void(0);"><i class="zmdi zmdi-twitter"></i></a>
+                                    <a title="instagram" href="javascript:void(0);"><i class="zmdi zmdi-instagram"></i></a>
+                                    <a title="linkedin" href="javascript:void(0);"><i class="zmdi zmdi-linkedin-box"></i></a>
+                                    <hr>
+                                </div>
+                            </li>
+                            <li><a href="http://127.0.0.1:8000/master_panel/"><i class="icon-user m-r-10"></i> <span>My Profile</span></a></li>
+                           <li><a href="http://127.0.0.1:8000/master_panel/"><i class="icon-note m-r-10"></i> <span>Edit Profile</span></a></li>
+
+                            <li><a href="http://127.0.0.1:8000/logout"><i class="icon-power m-r-10"></i><span>Sign Out</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a></a></li><li><a></a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<aside id="leftsidebar" class="sidebar h_menu">
+<div class="container">
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="menu">
+                    <ul class="list">
+
+                        <li> <a href="http://127.0.0.1:8000/master_panel/" class="menu-toggle waves-effect waves-block"><i class="icon-home"></i></a></li>
+                        <li><a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-grid"></i><span>Masters</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/courses/" class=" waves-effect waves-block">Courses</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/fee_type/" class=" waves-effect waves-block">Fee Type</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_fee_packege/" class=" waves-effect waves-block">Fee Package</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_fee_packege/Choose_packege/" class=" waves-effect waves-block">Make Installment</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_medium/" class=" waves-effect waves-block">Medium</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_batch/" class=" waves-effect waves-block">Batches</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_designation/" class=" waves-effect waves-block">Designation</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_sender_id/" class=" waves-effect waves-block">SMS Sender ID</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_sms_template/" class=" waves-effect waves-block">SMS Template</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_holiday/" class=" waves-effect waves-block">Holidays</a></li>
+
+                                <li><a href="http://127.0.0.1:8000/master_panel/Book_Fine/" class=" waves-effect waves-block">Book Fine</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/change_invoice_number/Exam/" class=" waves-effect waves-block">Invoice Start Number</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-basket-loaded"></i><span>Students</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_students/" class=" waves-effect waves-block">All Students</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Todays_addmission_list/" class=" waves-effect waves-block">Todays Addmission</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_cancal_addmission_list/" class=" waves-effect waves-block">All Cancel Addmission</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_fee_receipts/" class=" waves-effect waves-block">Fee Receipts</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_Student_fee_report/0/0" class=" waves-effect waves-block">Students Fee Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Fee_installment_due_fee_report/" class=" waves-effect waves-block">Due Fee Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_open_enquiry/" class=" waves-effect waves-block">Open Enquiries</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_close_enquiry/" class=" waves-effect waves-block">Close Enquiries</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_todays_enquiry/" class=" waves-effect waves-block">Todays Enquiries</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_todays_followup/" class=" waves-effect waves-block">Todays Follow Ups</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Upcoming_follow_ups/" class=" waves-effect waves-block">Upcoming Follow Ups</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_External_enquiry/" class=" waves-effect waves-block">External Follow Ups</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-doc"></i><span>Library</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_Category/" class=" waves-effect waves-block">Book Categories</a></li>
+
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_books/" class=" waves-effect waves-block">All Books</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_E_books/" class=" waves-effect waves-block">E-Learning Books</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_uncat_book/" class=" waves-effect waves-block">Uncategorized Books</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_issued_book/" class=" waves-effect waves-block">Issued Books</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_return_book/" class=" waves-effect waves-block">Issued Return List</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-tag"></i><span>Sales</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/Course_wise_sales/" class=" waves-effect waves-block">Course Wise Sales</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/select_month_year/" class=" waves-effect waves-block">Month Wise Sales</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Exam_Packege_wise_sales/" class=" waves-effect waves-block">Total Exam Package Sales</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Quiz_Packege_wise_sales/" class=" waves-effect waves-block">Total Quiz Packege Sales</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-bar-chart"></i><span>Frontdesk</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_External_enquiry/" class=" waves-effect waves-block">Phone Call Log Book</a></li>
+                                <li><strong style="color: #6f42c1;">Reminders</strong></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_previous_follow_up/" class=" waves-effect waves-block">Previous Follow Ups</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Upcoming_follow_ups/" class=" waves-effect waves-block">Upcoming Follow Ups</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/student_due_fee_report/" class=" waves-effect waves-block">Fee Reminders</a></li>
+
+                                <li><strong style="color: #6f42c1;">Upload Section</strong></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/upload_new_file/0/" class=" waves-effect waves-block">New Upload</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/All_Uploaded_files/" class=" waves-effect waves-block">Uploaded Files</a></li>
+
+                                <li><strong style="color: #6f42c1;">Notification</strong></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Notification_for_batch/0/0" class=" waves-effect waves-block">Batch Wise Students</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Send_notification/0/0" class=" waves-effect waves-block">Individual Student</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Select_enquiry_students/0/" class=" waves-effect waves-block">Enquiry Students</a></li>
+
+                                <li><a href="http://127.0.0.1:8000/master_panel/Notification_for_staff/" class=" waves-effect waves-block">All Staff</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Notification_for_single_staff/" class=" waves-effect waves-block">Individual Staff Member</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-puzzle"></i><span>Settings</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/Institut_Profile/" class=" waves-effect waves-block">Institute Profile</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/user_management_Setting/" class=" waves-effect waves-block">User Management</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Auto_SMS_Setting/" class=" waves-effect waves-block">Auto SMS Setting</a></li>
+                                </ul>
+                        </li>
+                        <li> <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-lock"></i><span>Report</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/Addmission_report/" class=" waves-effect waves-block">Student Admission Report </a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Enquiry_report/" class=" waves-effect waves-block">Enquiry Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Course_wise_sales/" class=" waves-effect waves-block">Fee Collection Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/select_month_year/" class=" waves-effect waves-block">Month Wise Fee Collection Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/receivable_amount_list/" class=" waves-effect waves-block">Receivable Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Fee_installment_due_fee_report/" class=" waves-effect waves-block">Installment Due Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/Follow_up_report/" class=" waves-effect waves-block">Follow Up Report</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/call_log_report/" class=" waves-effect waves-block">Call Logs Report</a></li>
+
+                              </ul>
+                        </li>
+                        <li> <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-folder-alt"></i><span>Employees</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/master_panel/Add_employee/" class=" waves-effect waves-block">Add New Employee</a></li>
+                                <li><a href="http://127.0.0.1:8000/master_panel/master_employee/" class=" waves-effect waves-block">All Employee</a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block"><i class="icon-map"></i><span>Other Panels</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="http://127.0.0.1:8000/frontdesk/" target="_blank" class=" waves-effect waves-block">FrontDesk</a></li>
+                                <li><a href="http://127.0.0.1:8000/exam_controller/dashboard/" target="_blank" class=" waves-effect waves-block">Examination</a></li>
+                                <li><a href="http://127.0.0.1:8000/library_panel/" target="_blank" class=" waves-effect waves-block">Library</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+  <script>
+function count_one(){
+      var c = [&lt;Front_enquiry_data: Prateek Mishra -- Advanced Python with Web Development&gt;];
+      var cc = c.length
+     document.getElementById("cnt").innerText = cc;
+     }
+     window.onload = count_one;
+</script>
+
+
+<script>
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+
+
+
+
+
+<!-- Main Content -->
+<section class="content">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="body block-header">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <h2>Welcome to TechSim+</h2>
+                                <ul class="breadcrumb p-l-0 p-b-0 ">
+                                    <li class="breadcrumb-item"><a href="http://127.0.0.1:8000/master_panel/"><i class="icon-home"></i></a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ul>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <div class="chart chart-line"><canvas width="60" height="45" style="display: inline-block; width: 60px; height: 45px; vertical-align: top;"></canvas></div>
+                        </div>
+                        <div class="content">
+                            <div class="text">Addmission sales</div>
+                            <div class="number">₹&nbsp;<span class="number count-to" data-from="0" data-to="3450" data-speed="2000" data-fresh-interval="700">3450</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <div class="chart chart-bar"><canvas width="54" height="45" style="display: inline-block; width: 54px; height: 45px; vertical-align: top;"></canvas></div>
+                        </div>
+                        <div class="content">
+                            <div class="text">Packege sales</div>
+                            <div class="number">₹&nbsp;<span class="number count-to" data-from="0" data-to="10900" data-speed="2000" data-fresh-interval="700">10900</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <span class="chart chart-line"><canvas width="60" height="45" style="display: inline-block; width: 60px; height: 45px; vertical-align: top;"></canvas></span>
+                        </div>
+                        <div class="content">
+                            <div class="text">Total Income</div>
+                            <div class="number">₹&nbsp;<span class="number count-to" data-from="0" data-to="14350" data-speed="2000" data-fresh-interval="700">14350</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <div class="chart chart-bar"><canvas width="59" height="45" style="display: inline-block; width: 59px; height: 45px; vertical-align: top;"></canvas></div>
+                        </div>
+                        <div class="content">
+                            <div class="text">Upcoming Amount</div>
+                            <div class="number">₹&nbsp;<span class="number count-to" data-from="0" data-to="1050" data-speed="2000" data-fresh-interval="700">1050</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xl-8 col-lg-12 col-md-12">
+               <div class="card">
+                    <div class="header">
+                        <h2><strong>Sales</strong> Report</h2>
+
+
+                    </div>
+                    <div class="body">
+                        <div id="m_area_chart" class="m-b-20" style="height: 217px; position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><svg height="217" version="1.1" width="796.656" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="35.84375" y="178" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#f6f6f6" d="M48.34375,178H771.656" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="35.84375" y="139.75" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">22.5</tspan></text><path fill="none" stroke="#f6f6f6" d="M48.34375,139.75H771.656" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="35.84375" y="101.5" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">45</tspan></text><path fill="none" stroke="#f6f6f6" d="M48.34375,101.5H771.656" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="35.84375" y="63.25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">67.5</tspan></text><path fill="none" stroke="#f6f6f6" d="M48.34375,63.25H771.656" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="35.84375" y="25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">90</tspan></text><path fill="none" stroke="#f6f6f6" d="M48.34375,25H771.656" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="681.2419687499998" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-08</tspan></text><text x="590.8279375" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-07</tspan></text><text x="500.4139062499999" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-06</tspan></text><text x="409.9998749999999" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-05</tspan></text><text x="319.58584375" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-04</tspan></text><text x="229.17181249999996" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-03</tspan></text><text x="138.75778125" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-02</tspan></text><text x="48.34375" y="190.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2019-01-01</tspan></text><path fill="none" stroke="#72c2ff" d="M48.34375,25C70.9472578125,35.625,116.1542734375,56.875,138.75778125,67.5C161.3612890625,78.125,206.56830468749996,110,229.17181249999996,110C251.77532031249996,110,296.98233593749995,67.5,319.58584375,67.5C342.18935156249995,67.5,387.39636718749995,110,409.9998749999999,110C432.60338281249994,110,477.8103984374999,78.125,500.4139062499999,67.5C523.0174140624999,56.875,568.2244296875,30.312500000000004,590.8279375,25C613.4314453124999,19.687500000000007,658.6384609374999,25,681.2419687499998,25C703.8454765624998,25,749.0524921874999,25,771.6559999999998,25" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#222222" d="M48.34375,161C70.9472578125,133.375,116.1542734375,59,138.75778125,50.5C161.3612890625,42,206.56830468749996,93,229.17181249999996,93C251.77532031249996,93,296.98233593749995,50.5,319.58584375,50.5C342.18935156249995,50.5,387.39636718749995,93,409.9998749999999,93C432.60338281249994,93,477.8103984374999,48.375,500.4139062499999,50.5C523.0174140624999,52.625,568.2244296875,101.2875,590.8279375,110C613.4314453124999,118.71249999999999,658.6384609374999,123.6,681.2419687499998,120.2C703.8454765624998,116.8,749.0524921874999,92.15,771.6559999999998,82.8" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="48.34375" cy="25" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="138.75778125" cy="67.5" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="229.17181249999996" cy="110" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="319.58584375" cy="67.5" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="409.9998749999999" cy="110" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="500.4139062499999" cy="67.5" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="590.8279375" cy="25" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="681.2419687499998" cy="25" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="771.6559999999998" cy="25" r="4" fill="#72c2ff" stroke="#72c2ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="48.34375" cy="161" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="138.75778125" cy="50.5" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="229.17181249999996" cy="93" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="319.58584375" cy="50.5" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="409.9998749999999" cy="93" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="500.4139062499999" cy="50.5" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="590.8279375" cy="110" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="681.2419687499998" cy="120.2" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="771.6559999999998" cy="82.8" r="4" fill="#222222" stroke="#222222" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle></svg><div class="morris-hover morris-default-style" style="display: none;"></div></div>
+                        <br>
+                        <div class="row text-center">
+                            <div class="col-sm-4 col-6">
+                                <h4 class="margin-0">₹ 12150 <i class="zmdi zmdi-caret-up col-green"></i></h4>
+                                <p class="text-muted m-b-0"> Today's Sales</p>
+                            </div>
+                            <div class="col-sm-4 col-6">
+                                <h4 class="margin-0">₹ 14350 <i class="zmdi zmdi-caret-up col-green"></i></h4>
+                                <p class="text-muted m-b-0">This Month's Sales</p>
+                            </div>
+                            <div class="col-sm-4 col-6">
+                                <h4 class="margin-0">₹ 14350<i class="zmdi zmdi-caret-up col-green"></i></h4>
+                                <p class="text-muted m-b-0">This Year's Sales</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 col-md-12">
+                  <div class="card">
+                   <div class="header">
+                       <h2><strong>Course</strong> Details</h2>
+
+                   </div>
+                       <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover m-b-0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-graduation-cap"></i>
+                                                 &nbsp;
+                                                Total Courses</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0" style="color:#f78c40">4</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-device-hub"></i>
+                                                 &nbsp;
+                                                Running Batches</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0 " style="color:#4875b4">2</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-account-circle"></i>
+                                                 &nbsp;
+                                                Institute Students</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0" style="color:#f78c40">2</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-account"></i>
+                                                 &nbsp;
+                                                External Students</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0 " style="color:#4875b4">2</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                               <i class="zmdi zmdi-library"></i>
+                                                 &nbsp;Total Enquiries</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0 " style="color:#f78c40">4</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-phone"></i>
+                                                 &nbsp;
+                                               Total Call Logs</h6>
+                                            <span></span>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0" style="color:#4875b4">0</h6>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="col-xl-5 col-lg-6 col-md-12">
+                 <div class="card">
+                    <div class="header">
+                        <h2><strong>Today's</strong> Report</h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="m-b-0" style="font-family: monospace; color: #1A5276">₹&nbsp;3450</h4>
+                                <h6 style="font-family: monospace; font-size:12px; color: #1A5276">Today's addmission Collection</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sparkline m-b-20" data-type="bar" data-width="97%" data-height="60px" data-bar-width="2" data-bar-spacing="5" data-bar-color="#00ced1"><canvas width="107" height="60" style="display: inline-block; width: 107px; height: 60px; vertical-align: top;"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover m-b-0">
+                                <tbody>
+                                    <tr>
+                                        <th><i class="zmdi zmdi-circle text-success"></i></th>
+                                        <td>Today's Enquiry</td>
+                                        <td><span>4</span></td>
+                                        </tr>
+                                     <tr>
+                                        <th><i class="zmdi zmdi-circle col-teal"></i></th>
+                                        <td>Today's Follow Ups</td>
+                                        <td><span>15</span></td>
+                                        </tr>
+                                    <tr>
+                                    </tr><tr>
+                                        <th><i class="zmdi zmdi-circle text-info"></i></th>
+                                        <td>Today's Addmission</td>
+                                        <td><span>2</span></td>
+                                        </tr>
+
+                                    <tr>
+                                        <th><i class="zmdi zmdi-circle"></i></th>
+                                        <td>Today's Test Packege Assignment</td>
+                                        <td><span>6</span></td>
+                                        </tr>
+                                    <tr>
+                                        <th><i class="zmdi zmdi-circle text-primary"></i></th>
+                                        <td>Today's Quiz Packege Assignment</td>
+                                        <td><span>3 </span></td>
+                                       </tr>
+                                    <tr>
+                                     </tr><tr>
+                                        <th><i class="zmdi zmdi-circle text-warning"></i></th>
+                                        <td>Today's Test Packege Income</td>
+                                        <td><span>₹ 7200</span></td>
+                                        </tr>
+                                    <tr>
+                                        <th><i class="zmdi zmdi-circle text-danger"></i></th>
+                                        <td>Today's Quiz Packege Income</td>
+                                        <td><span>₹ 1500</span></td>
+                                       </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-7 col-lg-12 col-md-12">
+                 <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                     <div class="header">
+                        <h2><strong>Library</strong> Details</h2>
+                     <ul class="row profile_state list-unstyled">
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-copy col-blue"></i>
+                                <h4>1</h4>
+                                <span>Book Category</span>
+                            </div>
+
+                        </li>
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-book-image col-teal"></i><br>
+
+                                <h4>13</h4>
+                                <span>Total Books</span>
+                            </div>
+
+                        </li>
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-book col-red"></i>
+                                <h4>1</h4>
+                                <span>Total E-Books</span>
+                            </div>
+
+                        </li>
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-copy col-blue"></i>
+                                <h4>0</h4>
+                                <span>Un-categorized Books</span>
+                            </div>
+
+                        </li>
+
+                    </ul>
+                     </div>
+
+                </div>
+            </div>
+        </div>
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Books</strong> Report</h2></div>
+                      <div hidden="hidden" id="donut_chart" class="donut_chart" style=""><svg height="342" version="1.1" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><path fill="none" stroke="#3aaaec" d="M0,-6.666666666666667A-6.666666666666667,-6.666666666666667,0,0,0,-3.36982348975258,-5.7522807730809" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#3aaaec" stroke="#ffffff" d="M0,-3.666666666666667A-3.666666666666667,-3.666666666666667,0,0,0,-1.8534029193639192,-3.1637544251944947L-7.582102851943305,-12.942631739432024A-15,-15,0,0,1,0,-15Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#7868da" d="M-3.36982348975258,-5.7522807730809A-6.666666666666667,-6.666666666666667,0,0,0,3.067464798806407,5.919045881941448" stroke-width="2" opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path><path fill="#7868da" stroke="#ffffff" d="M-1.8534029193639192,-3.1637544251944947A-3.666666666666667,-3.666666666666667,0,0,0,1.6871056393435238,3.2554752350677965L4.60119719820961,8.878568822912172A-10,-10,0,0,1,-5.05473523462887,-8.628421159621348Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#fb4364" d="M3.067464798806407,5.919045881941448A-6.666666666666667,-6.666666666666667,0,0,0,0.0020943950679349903,-6.666666337679857" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#fb4364" stroke="#ffffff" d="M1.6871056393435238,3.2554752350677965A-3.666666666666667,-3.666666666666667,0,0,0,0.0011519172873642447,-3.6666664857239213L0.004712388902853728,-14.999999259779676A-15,-15,0,0,1,6.901795797314415,13.317853234368258Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="0" y="-10" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="15px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 15px; font-weight: 800;" font-weight="800" transform="matrix(NaN,NaN,NaN,NaN,0,0)" stroke-width="1"><tspan dy="-10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Desktops</tspan></text><text x="0" y="10" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="14px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 14px;" transform="matrix(NaN,NaN,NaN,NaN,0,0)" stroke-width="1"><tspan dy="10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">45%</tspan></text></svg></div>
+
+                              <div class="row clearfix">
+            <div class="col-lg-4 col-md-6">
+                <div>
+                    <div class="body text-center">
+                        <input type="text" class="knob" value="8" readonly="" data-width="70" data-height="70" data-thickness="0.1" data-fgcolor="#ff598f">
+                        <h3 class="m-b-0 m-t-10 number count-to" data-from="0" data-to="1" data-speed="2000" data-fresh-interval="700">1</h3>
+                        <span>Today's Issued Book</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div>
+                    <div class="body text-center">
+                        <input type="text" class="knob" value="8" readonly="" data-width="70" data-height="70" data-thickness="0.1" data-fgcolor="#400191">
+                        <h3 class="m-b-0 m-t-10 number count-to" data-from="0" data-to="1" data-speed="2000" data-fresh-interval="700">1</h3>
+                        <span>Total Issued Book</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div>
+                    <div class="body text-center">
+                        <input type="text" class="knob" value="0" readonly="" data-width="70" data-height="70" data-thickness="0.1" data-fgcolor="#f78c40">
+                        <h3 class="m-b-0 m-t-10 number count-to" data-from="0" data-to="0" data-speed="2000" data-fresh-interval="700">0</h3>
+                        <span>Today's Returned Book</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+                    </div>
+                </div>
+
+            </div>
+        <div class="row clearfix">
+            <div class="col-xl-4 col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Course Wise </strong> Enquiry and Addmission </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>Enquiry</th>
+                                        <th>Addmission</th>
+                                       </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Advanced Python with Web Development</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Artificial Intelligence</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Advanced Embedded System</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Machine Learning</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-12 col-md-12">
+                 <div class="card">
+                   <div class="header">
+                        <h2><strong>Course Wise</strong> Exam Packege and Quiz packege </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                           <table class="table table-hover m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>Exam Packege</th>
+                                        <th>Quiz Packege</th>
+                                       </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Advanced Python with Web Development</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Artificial Intelligence</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Advanced Embedded System</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Machine Learning</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12">
+                   <div class="card">
+
+                        <div class="header">
+                        <h2><strong>Course Wise</strong> Call Logs </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                         <table class="table  table-hover ">
+                            <thead>
+                                <tr>
+                                <th>Course Name</th>
+                                <th>Today</th>
+                                <th>This month</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                <td>Advanced Python with Web Development</td>
+                                <td>
+                                    <span id="t1">0</span>&nbsp;
+                                 </td>
+                                <td>
+                                    <span id="tm1">0</span>&nbsp;
+                                </td>
+
+                                </tr>
+                            
+                                <tr>
+                                <td>Artificial Intelligence</td>
+                                <td>
+                                    <span id="t2">0</span>&nbsp;
+                                 </td>
+                                <td>
+                                    <span id="tm2">0</span>&nbsp;
+                                </td>
+
+                                </tr>
+                            
+                                <tr>
+                                <td>Advanced Embedded System</td>
+                                <td>
+                                    <span id="t3">0</span>&nbsp;
+                                 </td>
+                                <td>
+                                    <span id="tm3">0</span>&nbsp;
+                                </td>
+
+                                </tr>
+                            
+                                <tr>
+                                <td>Machine Learning</td>
+                                <td>
+                                    <span id="t4">0</span>&nbsp;
+                                 </td>
+                                <td>
+                                    <span id="tm4">0</span>&nbsp;
+                                </td>
+
+                                </tr>
+                            
+
+                            </tbody>
+                         </table> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="row clearfix">
+     <div class="col-xl-8 col-lg-7 col-md-12">
+                <div class="card user-account">
+                    <div class="header">
+                        <h2><strong>Course Wise</strong> Addmission sales</h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>Today</th>
+                                        <th class="hidden-xs">This Month</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    <tr>
+                                        <td style="width: 25px;">1</td>
+                                        <td style="width: 60px;">Advanced Python with Web Development</td>
+                                        <td>₹&nbsp;<span id="tsale1">3450</span></td>
+                                        <td> ₹&nbsp;<span id="msale1">3450</span></td>
+                                        <td style="font-size:19px;"><span class="badge badge-success" id="tosale1">3450</span></td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td style="width: 25px;">2</td>
+                                        <td style="width: 60px;">Artificial Intelligence</td>
+                                        <td>₹&nbsp;<span id="tsale2">0</span></td>
+                                        <td> ₹&nbsp;<span id="msale2">0</span></td>
+                                        <td style="font-size:19px;"><span class="badge badge-success" id="tosale2">0</span></td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td style="width: 25px;">3</td>
+                                        <td style="width: 60px;">Advanced Embedded System</td>
+                                        <td>₹&nbsp;<span id="tsale3">0</span></td>
+                                        <td> ₹&nbsp;<span id="msale3">0</span></td>
+                                        <td style="font-size:19px;"><span class="badge badge-success" id="tosale3">0</span></td>
+                                    </tr>
+                                
+                                    <tr>
+                                        <td style="width: 25px;">4</td>
+                                        <td style="width: 60px;">Machine Learning</td>
+                                        <td>₹&nbsp;<span id="tsale4">0</span></td>
+                                        <td> ₹&nbsp;<span id="msale4">0</span></td>
+                                        <td style="font-size:19px;"><span class="badge badge-success" id="tosale4">0</span></td>
+                                    </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <div class="col-xl-4 col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="header">
+                        <h2><strong>Course Wise</strong> Close Enquiry </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                           <table class="table table-hover m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>Close Enquiry</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Advanced Python with Web Development</td>
+                                        <td id="close1">1</td>
+                                        </tr>
+                                
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Artificial Intelligence</td>
+                                        <td id="close2">0</td>
+                                        </tr>
+                                
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Advanced Embedded System</td>
+                                        <td id="close3">0</td>
+                                        </tr>
+                                
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Machine Learning</td>
+                                        <td id="close4">0</td>
+                                        </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      <div class="row clearfix">
+            <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="body">
+                        <div class="row pw_content">
+                            <div class="col-12 pw_header">
+                                <h6> Uploaded Documents &nbsp;&nbsp; <span style="font-size:20px;color:#673AB7;">2 </span></h6>
+                                </div>
+                            <div class="col-8 pw_header">
+                                <h6>Total Receipts&nbsp;&nbsp; <span style="font-size:20px;color:#FF5722;">14 </span></h6>
+                               </div>
+                            <div class="col-4">
+                                <div class="sparkline m-t-10" data-type="bar" data-width="97%" data-height="26px" data-bar-width="2" data-bar-spacing="7" data-bar-color="#7460ee"><canvas width="83" height="26" style="display: inline-block; width: 83px; height: 26px; vertical-align: top;"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="body">
+                        <div class="row pw_content">
+                            <div class="col-12 pw_header">
+                                <h6>Pending Followup&nbsp;&nbsp; <span style="font-size:20px;color:#673AB7;">3 </span></h6>
+                                </div>
+                            <div class="col-8 pw_header">
+                                <h6>Upcoming Followup&nbsp;&nbsp; <span style="font-size:20px;color:#FF5722;">0 </span></h6>
+                                </div>
+                            <div class="col-4">
+                                <div class="sparkline m-t-10" data-type="bar" data-width="97%" data-height="26px" data-bar-width="2" data-bar-spacing="7" data-bar-color="#60bafd"><canvas width="83" height="26" style="display: inline-block; width: 83px; height: 26px; vertical-align: top;"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="body">
+                        <div class="row pw_content">
+                            <div class="col-12 pw_header">
+                                <h6>Close Enquiry&nbsp;&nbsp; <span style="font-size:20px;color:#673AB7;">1 </span></h6>
+                                </div>
+                            <div class="col-8 pw_header">
+                                <h6>Cancel Addmission&nbsp;&nbsp; <span style="font-size:20px;color:#FF5722;">0 </span></h6>
+                                </div>
+                            <div class="col-4">
+                                <div class="sparkline m-t-10" data-type="bar" data-width="97%" data-height="26px" data-bar-width="2" data-bar-spacing="7" data-bar-color="#000000"><canvas width="83" height="26" style="display: inline-block; width: 83px; height: 26px; vertical-align: top;"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-4 col-lg-5 col-md-12">
+                <div class="card overflowhidden weather2">
+                    <div class="body city-selected l-khaki">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="city"><span>City:</span> New York</div>
+                                <div class="night">Day - 12:07 PM</div>
+                            </div>
+                            <div class="info col-7">
+                                <div class="temp"><h2>34°</h2></div>
+                            </div>
+                            <div class="icon col-5">
+                                <img src="./TechSim+ - Admin-Dashboard_files/summer.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                  <div class="card tasks_report">
+                    <div class="header">
+                        <h2><strong>Total</strong> Revenue</h2>
+
+                    </div>
+                    <div class="body text-center">
+                        <h4 class="m-t-0">Total Storage</h4>
+                        <h6 class="m-b-20">2,45,124</h6>
+                        <input type="text" class="knob dial1" value="10" data-width="140" data-height="140" data-thickness="0.1" data-fgcolor="#000" readonly="">
+                        <h6 class="m-t-30">Useages</h6>
+                        <small class="displayblock">47% Average <i class="zmdi zmdi-trending-up"></i></small>
+                        </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-7 col-md-12">
+                <div class="card user-account">
+                    <div class="header">
+                        <h2><strong>All</strong> Employee</h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Profile</th>
+                                        <th>Name</th>
+                                        <th>Employee Id</th>
+                                        <th class="hidden-xs">Email Address</th>
+                                        <th>Designation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    <tr onclick="window.location.href=&#39;/master_panel/master_employee_details/1/View/&#39;">
+                                        <td style="width: 25px;">1</td>
+                                        <td style="width: 60px;"><img src="./TechSim+ - Admin-Dashboard_files/Anushree_qPVQWDR.jpg" alt="" class="rounded"></td>
+                                        <td>Anushree Kulkarni</td>
+                                        <td>123654789</td>
+                                        <td class="hidden-xs">prateek29mishra@gmail.com</td>
+                                        <td><span class="badge badge-success">Trainer</span></td>
+                                    </tr>
+                                
+                                    <tr onclick="window.location.href=&#39;/master_panel/master_employee_details/2/View/&#39;">
+                                        <td style="width: 25px;">2</td>
+                                        <td style="width: 60px;"><img src="./TechSim+ - Admin-Dashboard_files/attempt_PryqcEw.png" alt="" class="rounded"></td>
+                                        <td>Prateek Mishra</td>
+                                        <td>123654789</td>
+                                        <td class="hidden-xs">prateek29mishra@gmail.com</td>
+                                        <td><span class="badge badge-success">Director</span></td>
+                                    </tr>
+                                
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="m_area_chart2" hidden="hidden" style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><svg height="342" version="1.1" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="12.5" y="-25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="-25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#e0e0e0" d="M25,-25H26" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="12.5" y="-25.25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="-25.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">50</tspan></text><path fill="none" stroke="#e0e0e0" d="M25,-25.25H26" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="12.5" y="-25.5" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="-25.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">100</tspan></text><path fill="none" stroke="#e0e0e0" d="M25,-25.5H26" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="12.5" y="-25.75" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="-25.75" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">150</tspan></text><path fill="none" stroke="#e0e0e0" d="M25,-25.75H26" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="12.5" y="-26" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="-26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">200</tspan></text><path fill="none" stroke="#e0e0e0" d="M25,-26H26" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="#6fbff7" stroke="none" d="M25,-25.05L25.20032840722496,-25.63L25.400109469074987,-25.39L25.599890530925013,-25.445L25.79967159277504,-25.875L26,-25.63L26,-25L25,-25Z" fill-opacity="0.4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.4;"></path><path fill="none" stroke="#2ca8ff" d="M25,-25.05L25.20032840722496,-25.63L25.400109469074987,-25.39L25.599890530925013,-25.445L25.79967159277504,-25.875L26,-25.63" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="25" cy="-25.05" r="0" fill="#2ca8ff" stroke="#2ca8ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.20032840722496" cy="-25.63" r="0" fill="#2ca8ff" stroke="#2ca8ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.400109469074987" cy="-25.39" r="0" fill="#2ca8ff" stroke="#2ca8ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.599890530925013" cy="-25.445" r="0" fill="#2ca8ff" stroke="#2ca8ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.79967159277504" cy="-25.875" r="0" fill="#2ca8ff" stroke="#2ca8ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="26" cy="-25.63" r="0" fill="#2ca8ff" stroke="#2ca8ff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><path fill="#2ee425" stroke="none" d="M25,-25L25.20032840722496,-25.39L25.400109469074987,-25.29L25.599890530925013,-25.925L25.79967159277504,-25.62L26,-25.51L26,-25L25,-25Z" fill-opacity="0.4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0.4;"></path><path fill="none" stroke="#18ce0f" d="M25,-25L25.20032840722496,-25.39L25.400109469074987,-25.29L25.599890530925013,-25.925L25.79967159277504,-25.62L26,-25.51" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="25" cy="-25" r="0" fill="#18ce0f" stroke="#18ce0f" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.20032840722496" cy="-25.39" r="0" fill="#18ce0f" stroke="#18ce0f" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.400109469074987" cy="-25.29" r="0" fill="#18ce0f" stroke="#18ce0f" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.599890530925013" cy="-25.925" r="0" fill="#18ce0f" stroke="#18ce0f" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="25.79967159277504" cy="-25.62" r="0" fill="#18ce0f" stroke="#18ce0f" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="26" cy="-25.51" r="0" fill="#18ce0f" stroke="#18ce0f" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle></svg><div class="morris-hover morris-default-style" style="display: none;"></div></div>
+        <div class="row clearfix">
+            <div class="col-md-12 col-lg-12">
+                <div class="card active-bg">
+                    <div class="body">
+                        <p class="copyright m-b-0 text-white">Copyright 2018 © All Rights Reserved. InfiniO Dashboard Template</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+</section>
+<script>
+ function myfunction() {
+
+           var d1 = [1, 0, 0, 0]
+           var d11 = [0, 0, 0, 0]
+           var d22 = [0, 0, 0, 0]
+           var d13 = [3450, 0, 0, 0]
+           var d23 = [3450, 0, 0, 0]
+           var d33 = [3450, 0, 0, 0]
+
+
+                 for (var i = 0; i<d1.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("close"+k);
+                      td3.innerText = d1[i];
+                    }
+                    for (var i = 0; i<d11.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("t"+k);
+                      td3.innerText = d11[i];
+                    }
+
+                 for (var j = 0; j<d22.length; j++)
+                    {
+                      var t1 = j + 1;
+                      var k1 = t1.toString();
+                      var td4 = document.getElementById("tm"+k1);
+                      td4.innerText = d22[j];
+                    }
+                     for (var i = 0; i<d13.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("tsale"+k);
+                      td3.innerText = d13[i];
+                    }
+
+                 for (var j = 0; j<d23.length; j++)
+                    {
+                      var t1 = j + 1;
+                      var k1 = t1.toString();
+                      var td4 = document.getElementById("msale"+k1);
+                      td4.innerText = d23[j];
+                    }
+                 for (var i = 0; i<d33.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("tosale"+k);
+                      td3.innerText = d33[i];
+                    }
+
+
+
+
+        }
+window.onload =myfunction;
+</script>
+
+
+<script src="./TechSim+ - Admin-Dashboard_files/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) --> 
+<script src="./TechSim+ - Admin-Dashboard_files/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="./TechSim+ - Admin-Dashboard_files/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
+<script src="./TechSim+ - Admin-Dashboard_files/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
+<script src="./TechSim+ - Admin-Dashboard_files/knob.bundle.js"></script> <!-- Jquery Knob-->
+
+<script src="./TechSim+ - Admin-Dashboard_files/mainscripts.bundle.js"></script>
+<script src="./TechSim+ - Admin-Dashboard_files/infobox-1.js"></script>
+<script src="./TechSim+ - Admin-Dashboard_files/index.js"></script>
+
+</body></html>

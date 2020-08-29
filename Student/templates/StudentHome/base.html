@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+<title>:: {{ student.name }} :: Student Panel</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Mplify Bootstrap 4.1.1 Admin Template">
+<meta name="author" content="ThemeMakker, design by: ThemeMakker.com">
+
+<link rel="icon" href="{{ ins_data.ins.institute_logo.url }}">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/animate-css/animate.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/font-awesome/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/chartist/css/chartist.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css' %}">
+
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="{% static 'student/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets/css/color_skins.css' %}">
+    <script src="{% static 'aes.js' %}"></script>
+
+<style>
+.dot {
+    height: 40px;
+    width: 40px;
+    background-color: #092C35;
+    border-radius: 50%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid #51647a;
+
+}
+
+.cdot {
+    height: 35px;
+    width: 35px;
+    background-color: #AAB7B8;
+    border-radius: 50%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid #AAB7B8;
+    padding-bottom: 30px;
+
+}
+
+</style>
+
+
+<script>
+function Uncheck() {
+    var ele = document.getElementsByName("ans");
+    for(var i=0;i<ele.length;i++)
+      ele[i].checked = false;
+}
+</script>
+
+
+</head>
+<body class="theme-cyan">
+
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{{ ins_data.ins.institute_logo.url }}" style="border-radius:50%;" width="48" height="48" alt="{{ ins_data.ins.name }}"></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+<!-- Overlay For Sidebars -->
+<div class="overlay" style="display: none;"></div>
+
+<div id="wrapper">
+
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+
+            <div class="navbar-brand">
+                <a href="">
+
+                    <img src="{{ ins_data.ins.institute_logo.url }}" alt="{{ ins_data.ins.name }}" style="border-radius:50%;" class="img-responsive logo">
+                    <span class="name" style="font-size:15px;">{{ ins_data.ins.name }}</span>
+                </a>
+            </div>
+
+            <div class="navbar-right">
+                <ul class="list-unstyled clearfix mb-0">
+                    <li>
+                        <div class="navbar-btn btn-toggle-show">
+                            <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
+                        </div>
+                        <a href="javascript:void(0);" class="btn-toggle-fullwidth btn-toggle-hide"><i class="fa fa-bars"></i></a>
+                    </li>
+
+                    <li>
+                        <div id="navbar-menu">
+                            <ul class="nav navbar-nav">
+                                {% if request.user.last_name == "I_Student" %}
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                    {% if request.user.front_student_data_set.first.image %}
+                                        <img class="rounded-circle" src="{{ request.user.front_student_data_set.first.image.url }}" width="30" height="30" alt="">{% endif %}
+                                    </a>
+                                    <div class="dropdown-menu animated flipInY user-profile">
+                                        <div class="d-flex p-3 align-items-center">
+                                            <div class="drop-left m-r-10">
+                                                {% if request.user.front_student_data_set.first.image %}
+                                                <img src="{{ request.user.front_student_data_set.first.image.url }}" class="rounded" width="50" alt="">{% endif %}
+                                            </div>
+                                            <div class="drop-right">
+                                                <h4>{{ request.user.front_student_data_set.first.name }}</h4>
+                                                <p class="user-name">{{ request.user.front_student_data_set.first.email }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="m-t-10 p-3 drop-list">
+                                            <ul class="list-unstyled">
+                                                <li><a href="{% url 'StudentPanel:profile' %}"><i class="icon-user"></i>My Profile</a></li>
+
+                                                <li><a href="{% url 'StudentPanel:edit_profile' %}"><i class="icon-pencil"></i>Edit Profile</a></li>
+                                                <li><a href="{% url 'StudentPanel:change_password' %}"><i class="fa fa-eraser"></i>Change Password</a></li>
+
+                                                <li class="divider"></li>
+                                                <li><a href="{% url 'logout' %}"><i class="icon-power"></i>Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% if request.user.last_name == "E_Student" %}
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                        <img class="rounded-circle" src="{{ request.user.add_new_student_set.first.photo.url }}" width="30" height="30" alt="">
+                                    </a>
+                                    <div class="dropdown-menu animated flipInY user-profile">
+                                        <div class="d-flex p-3 align-items-center">
+                                            <div class="drop-left m-r-10">
+                                                <img src="{{ request.user.add_new_student_set.first.photo.url }}" class="rounded-circle" width="50" alt="">
+                                            </div>
+                                            <div class="drop-right">
+                                                <h4>{{ request.user.add_new_student_set.first.name }}</h4>
+                                                <p class="user-name">{{ request.user.add_new_student_set.first.email }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="m-t-10 p-3 drop-list">
+                                            <ul class="list-unstyled">
+                                                <li class="divider"></li>
+                                                <li><a href="{% url 'logout' %}"><i class="icon-power"></i>Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="leftsidebar" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav id="leftsidebar-nav" class="sidebar-nav">
+                <ul id="main-menu" class="metismenu">
+
+                    <li class="active"><a href="{% url 'StudentPanel:home' %}"><i class="icon-home"></i><span>Dashboard</span></a></li>
+                    <li class="heading">Main</li>
+
+
+                    {% if request.user.last_name == "I_Student" %}
+
+                    <li>
+                        <a href="{% url 'StudentPanel:courses' %}" class="has-arrow"><i class="fa fa-folder"></i>
+                        	<span>Your Courses</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'StudentPanel:FeeDetails' %}" class="has-arrow"><i class="fa fa-money"></i>
+                        	<span>Fee Details</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'StudentPanel:student_notification' %}" class="has-arrow"><i class="fa fa-bell"></i>
+                        	<span>Notification</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'StudentPanel:student_ecorner' %}" class="has-arrow"><i class="fa fa-tag"></i>
+                        	<span>E-Corner</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'StudentPanel:issue_return_book' %}" class="has-arrow"><i class="fa fa-book"></i>
+                        	<span>Issued-Retuned Book</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'StudentPanel:student_upload_document' %}" class="has-arrow"><i class="fa fa-download"></i><span>Upload Section</span></a>
+
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+
+
+
+
+    {% block body %}
+    {% endblock %}
+
+
+</div>
+
+<!-- Javascript -->
+<script src="{% static 'student/assets/bundles/libscripts.bundle.js' %}"></script>
+<script src="{% static 'student/assets/bundles/vendorscripts.bundle.js' %}"></script>
+
+<script src="{% static 'student/assets/bundles/chartist.bundle.js' %}"></script>
+<script src="{% static 'student/assets/bundles/knob.bundle.js' %}"></script> <!-- Jquery Knob-->
+<script src="{% static 'student/assets/bundles/flotscripts.bundle.js' %}"></script> <!-- flot charts Plugin Js -->
+<script src="{% static 'student/assets1/vendor/flot-charts/jquery.flot.selection.js' %}"></script>
+
+<script src="{% static 'student/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'student/assets/js/index.js' %}"></script>
+
+
+<script>
+
+    $('.knob').knob({
+        draw: function() {
+            // "tron" case
+            if (this.$.data('skin') == 'tron') {
+
+                var a = this.angle(this.cv) // Angle
+                    ,
+                    sa = this.startAngle // Previous start angle
+                    ,
+                    sat = this.startAngle // Start angle
+                    ,
+                    ea // Previous end angle
+                    , eat = sat + a // End angle
+                    ,
+                    r = true;
+
+                this.g.lineWidth = this.lineWidth;
+
+                this.o.cursor &&
+                    (sat = eat - 0.3) &&
+                    (eat = eat + 0.3);
+
+                if (this.o.displayPrevious) {
+                    ea = this.startAngle + this.angle(this.value);
+                    this.o.cursor &&
+                        (sa = ea - 0.3) &&
+                        (ea = ea + 0.3);
+                    this.g.beginPath();
+                    this.g.strokeStyle = this.previousColor;
+                    this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
+                    this.g.stroke();
+                }
+
+                this.g.beginPath();
+                this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
+                this.g.stroke();
+
+                this.g.lineWidth = 2;
+                this.g.beginPath();
+                this.g.strokeStyle = this.o.fgColor;
+                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                this.g.stroke();
+
+                return false;
+            }
+        }
+    });
+
+     $('#linecustom1').sparkline('html',{
+        height: '55px',
+        width: '100%',
+        lineColor: '#a095e5',
+        fillColor: '#a095e5',
+        minSpotColor: true,
+        maxSpotColor: true,
+        spotColor: '#e2a8df',
+        spotRadius: 0
+    });
+
+    $('#linecustom2').sparkline('html',{
+        height: '55px',
+        width: '100%',
+        lineColor: '#75c3f2',
+        fillColor: '#75c3f2',
+        minSpotColor: true,
+        maxSpotColor: true,
+        spotColor: '#8dbfe0',
+        spotRadius: 0
+    });
+
+    $('#linecustom3').sparkline('html',{
+        height: '55px',
+        width: '100%',
+        lineColor: '#fc7b92',
+        fillColor: '#fc7b92',
+        minSpotColor: true,
+        maxSpotColor: true,
+        spotColor: '#e0b89d',
+        spotRadius: 0
+    });
+</script>
+
+
+</body>
+</html>
+
+<!-- Localized -->

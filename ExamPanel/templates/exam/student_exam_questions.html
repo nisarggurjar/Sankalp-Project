@@ -1,0 +1,441 @@
+{% extends 'exam/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Student Exam Question</title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+
+
+
+
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>All Student Exam Question
+
+                </h2>
+            </div>
+
+        </div>
+    </div>
+      <div class="container-fluid">
+
+          <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Assets</strong> Exam Packages</h2>
+
+                    </div>
+                    <div class="body">
+                        <ul class="nav nav-tabs padding-0">
+                            <li class="nav-item">
+                                  <select class="show-tick" required='required'
+                                           onchange="window.location=this.value" style="width:20px;">
+                                    {% if pno == '10' %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '10'  %}" selected>Per Page: 10</option>
+                                    {% else %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '10'  %}">Per Page: 10</option>
+                                    {% endif %}
+
+                                    {% if pno == '25' %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '25'  %}" selected>Per Page: 25</option>
+                                    {% else %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '25'  %}">Per Page: 25</option>
+                                    {% endif %}
+
+                                    {% if pno == '50' %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '50'  %}" selected>Per Page: 50</option>
+                                    {% else %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '50'  %}">Per Page: 50</option>
+                                    {% endif %}
+
+                                     {% if pno == '100' %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '100'  %}" selected>Per Page: 100</option>
+                                    {% else %}
+                                      <option value="{% url 'ExamPanel:quiz_question_list' cid '100'  %}">Per Page: 100</option>
+                                    {% endif %}
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                   {% for i in questions %}
+
+                        {% if i.Question.Type1 %}
+                    <div class="tab-pane active" id="librarylist">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2><strong style="font-size:20px;">
+                                        Question-{{ forloop.counter|add:num }} <a href="{% url 'ExamPanel:edit_multi_questions' i.Question.id complete_url 'Student' %}">
+                                        <i class="zmdi zmdi-border-color"></i></a>
+                                    <a href="{% url 'ExamPanel:remove_questions' i.id 'quiz' %}">
+                                        <i class="zmdi zmdi-delete"></i></a></strong></h2><br>
+
+                                    <div class="row" style="float:right; padding-right:20px;">
+                                         <div class="col-sm-0">
+                                            <ul class="pagination pagination-success">
+                                                <li class="page-item active" ><a class="page-link">{{ i.Question.marks1 }}</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-0">
+                                            <ul class="pagination pagination-danger">
+                                                <li class="page-item active"><a class="page-link">-{{ i.Question.minus1 }}</a></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="body">
+                                    <p>{{ i.Question.Questions | safe }}</p>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.TrueAns == '1' %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">1
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_1 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">1
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_1 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.TrueAns == '2' %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">2
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_2 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">2
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_2 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.TrueAns == '3' %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">3
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_3 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">3
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_3 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.TrueAns == '4' %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">4
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_4 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">4
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option_4 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                    <p style="font-family:monospace; font-size:20px;">Explanation</p>
+                                    <p>{{ i.Question.explain1 | safe }}</p>
+
+                                </div>
+                            </div>
+                         </div>
+
+                    </div>
+                        {% endif %}
+
+                     {% if i.Question.Type2 %}
+                    <div class="tab-pane active">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2><strong style="font-size:20px;">
+                                        Question-{{ forloop.counter|add:num }}
+                                    <a href="{% url 'ExamPanel:edit_multi_response_questions' i.Question.id complete_url 'Student' %}">
+                                        <i class="zmdi zmdi-border-color"></i></a>
+                                        <a href="{% url 'ExamPanel:remove_questions' i.id 'quiz' %}">
+                                        <i class="zmdi zmdi-delete"></i></a>
+                                    </strong></h2><br>
+
+                                    <div class="row" style="float:right; padding-right:20px;">
+                                         <div class="col-sm-0">
+                                            <ul class="pagination pagination-success">
+                                                <li class="page-item active" ><a class="page-link">{{ i.Question.marks2 }}</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-0">
+                                            <ul class="pagination pagination-danger">
+                                                <li class="page-item active"><a class="page-link">-{{ i.Question.minus2 }}</a></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="body">
+                                    <p>{{ i.Question.Question | safe }}</p>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.Answer1 %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">1
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option1 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">1
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option1 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.Answer2 %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">2
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option2 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">2
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option2 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.Answer3 %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">3
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option3 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">3
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option3 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.Answer4 %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">4
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option4 | safe }}
+                                                </ul>
+                                            {% else %}
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">4
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Option4 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                    <p style="font-family:monospace; font-size:20px;">Explanation</p>
+                                    <p>{{ i.Question.explain2 | safe }}</p>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                        {% endif %}
+
+
+                    {% if i.Question.Type3 %}
+                    <div class="tab-pane active">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2><strong style="font-size:20px;">
+                                        Question-{{ forloop.counter|add:num }}
+                                    <a href="{% url 'ExamPanel:edit_fill_questions' i.Question.id complete_url 'Student' %}">
+                                        <i class="zmdi zmdi-border-color"></i></a>
+                                        <a href="{% url 'ExamPanel:remove_questions' i.id 'quiz' %}">
+                                        <i class="zmdi zmdi-delete"></i></a>
+                                    </strong></h2><br>
+
+                                    <div class="row" style="float:right; padding-right:20px;">
+                                         <div class="col-sm-0">
+                                            <ul class="pagination pagination-success">
+                                                <li class="page-item active" ><a class="page-link">{{ i.Question.marks3 }}</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-0">
+                                            <ul class="pagination pagination-danger">
+                                                <li class="page-item active"><a class="page-link">-{{ i.Question.minus3 }}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <p>{{ i.Question.Que | safe }}</p>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.Answer31 %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">1
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Answer31 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            {% if i.Question.Answer32 %}
+                                                <ul class="pagination pagination-success">
+                                                    <li class="page-item active" ><a class="page-link">2
+                                                    </a></li> &nbsp; &nbsp;{{ i.Question.Answer32 | safe }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <p style="font-family:monospace; font-size:20px;">Explanation</p>
+                                        <p>{{ i.Question.explain3 | safe }}</p>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                        {% endif %}
+
+
+
+                    {% if i.Question.Type4 %}
+                    <div class="tab-pane active">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2><strong style="font-size:20px;">
+                                        Question-{{ forloop.counter|add:num }}
+                                    <a href="{% url 'ExamPanel:edit_true_false_questions' i.Question.id complete_url 'Student' %}">
+                                        <i class="zmdi zmdi-border-color"></i></a>
+                                        <a href="{% url 'ExamPanel:remove_questions' i.id 'quiz' %}">
+                                        <i class="zmdi zmdi-delete"></i></a>
+                                    </strong></h2><br>
+                                    <div class="row" style="float:right; padding-right:20px;">
+                                         <div class="col-sm-0">
+                                            <ul class="pagination pagination-success">
+                                                <li class="page-item active" ><a class="page-link">{{ i.Question.marks4 }}</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-0">
+                                            <ul class="pagination pagination-danger">
+                                                <li class="page-item active"><a class="page-link">-{{ i.Question.minus4 }}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="body">
+                                    <p>{{ i.Question.Ques_tion | safe }}</p>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                                <ul class="pagination pagination-warning">
+                                                    <li class="page-item active" ><a class="page-link">1
+                                                    </a></li> &nbsp; &nbsp;Statement is: &nbsp;&nbsp;
+                                                    {% if i.Question.TrueAns1 == '1' %}
+                                                    <b style="color:green;">True</b>
+                                                    {% else %}
+                                                    <b style="color:red;">False</b>
+                                                    {% endif %}
+                                                </ul>
+                                        </div>
+                                    </div>
+                                   <p style="font-family:monospace; font-size:20px;">Explanation</p>
+                                    <p>{{ i.Question.explain4 | safe }}</p>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+
+                {% if users.has_other_pages %}
+                  <ul class="pagination">
+                    {% if users.has_previous %}
+                      <li><a href="?page={{ users.previous_page_number }}">
+                          <button class="btn btn-primary btn-round">Previous</button></a></li>
+                    {% endif %}
+
+
+
+                      {% for i in users.paginator.page_range %}
+                          {% if i <= users.number|add:2 and i >= users.number|add:-2 %}
+                              {% if users.number == i %}
+                                <li class="page-item active" style="padding-top:10px;"><a class="page-link">{{ i }}</a></li>
+                              {% else %}
+                                <li class="page-item" style="padding-top:10px;"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                              {% endif %}
+                          {% endif %}
+                      {% endfor %}
+
+
+                    {% if users.has_next %}
+                      <li><a href="?page={{ users.next_page_number }}">
+                          <button class="btn btn-primary btn-round">Next</button>
+                      </a></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

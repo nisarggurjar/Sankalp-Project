@@ -1,0 +1,91 @@
+{% extends 'Inst/base.html' %}
+{% block up %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Book Fine</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/morrisjs/morris.min.css' %}" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+      <div class="container">
+         <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong style="font-family: monospace; font-size: 25px; color: #1A5276"><u>Book Fine</u></strong></h2>
+
+                    </div>
+                    <div class="body">
+                        {% if data %}
+                        <h5 style="font-family: monospace; color: #1A5276">Your Library Book fine is {{ data.libraryfine }} Rs.for per day.</h5>
+                    <button class="btn btn-primary btn-round  " data-toggle="collapse" data-target="#librarylist">Change Book Fine</button>
+                      {% else %}
+                        <div class="body">
+                             <div class="col-md-12 col-lg-4" >
+                             <form action="" method="post">
+                                 {% csrf_token %}
+                                 <lable style="font-family: monospace; color: #1A5276"><b>Book Fine Per day</b></lable><br><br>
+                                 <input type="number" name="fine" class="form-control" placeholder="Enter Book Fine" required><br>
+                                 <input type="submit" value="Create" class="btn btn-primary btn-round  " >
+
+                             </form>
+                                 </div>
+                         </div>
+                        {% endif %}
+                    </div>
+                     <div class="collapse" id="librarylist">
+                         <div class="body">
+                             <div class="col-md-12 col-lg-4" >
+                             <form action="" method="post">
+                                  {% csrf_token %}
+                                 <lable style="font-family: monospace; color: #1A5276"><b>Book Fine per day</b></lable><br><br>
+                                 <input type="number" name="fine" class="form-control" placeholder="Enter Book Fine" required><br>
+                                 <input type="submit" value="change" class="btn btn-primary btn-round  " >
+
+                             </form>
+                                 </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="{% static 'Master/assets/assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/jvectormap.bundle.js' %}"></script> <!-- JVectorMap Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/knob.bundle.js' %}"></script> <!-- Jquery Knob-->
+
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/widgets/infobox/infobox-1.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/index.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

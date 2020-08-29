@@ -1,0 +1,120 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Asign Category to Book</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Asign Category
+
+                </h2>
+            </div>
+
+        </div>
+    </div>
+  <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card student-list">
+                    <div class="header">
+                        <h2><strong>Asign</strong> Category</h2>
+                                            </div>
+                    <div class="body widget tag-clouds">
+                    <center>
+                        <div class="content col-md-6">
+
+                            <form class="form" action="" method="post" enctype="multipart/form-data"
+                >
+                {% csrf_token %}
+                <div class="form-group">
+                    <label><b>Select category</b></label>
+                    <select class="form-control show-tick" name = 'category' required='required' onchange="window.location=this.value" >
+
+                                    <option value="" > -- Select Book Category --</option>
+
+                                    {% for ct in all_cat %}
+                                    {% if ct.id == cat.id %}
+
+                                    <option value="{% url 'LibraryPanel:asign_cat' ct.id bid %}" selected>{{ ct.name }}</option>
+                                    {% else %}
+                                    <option value="{% url 'LibraryPanel:asign_cat' ct.id bid %}" >{{ ct.name }}</option>
+
+                                    {% endif %}
+                                    {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                   <label><b>Select Subcategory</b></label>
+                   <select class="form-control show-tick" name = 'subcat' required='required'  >
+
+                                    <option value=""> -- Select Book SubCategory --</option>
+                                        {% for subcat in cat.master_subcatbook_data_set.all %}
+
+                                    <option value="{{ subcat.id }}">{{ subcat.name }}</option>
+                                      {% endfor %}
+
+
+                    </select>
+                </div>
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Asign" >
+                </center>
+
+               </form><br><br>
+
+
+
+                        </div>
+                    </center>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

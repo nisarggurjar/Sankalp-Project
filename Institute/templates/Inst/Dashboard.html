@@ -1,0 +1,688 @@
+{% extends 'Inst/base.html' %}
+{% block up %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Admin-Dashboard</title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/morrisjs/morris.min.css' %}" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+</head>
+{% endblock %}
+
+{% block body %}
+<!-- Main Content -->
+<section class="content">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="body block-header">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <h2>Welcome to {{ ins_data.name }}</h2>
+                                <ul class="breadcrumb p-l-0 p-b-0 ">
+                                    <li class="breadcrumb-item"><a href=""><i class="icon-home"></i></a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <div class="chart chart-line">6,4,8,6,8,10,5,6,7,9,5</div>
+                        </div>
+                        <div class="content">
+                            <div class="text">Admission sales</div>
+                            <div class="number">&#8377;&nbsp;<span class="number count-to" data-from="0" data-to="{{ addmission_sales }}" data-speed="2000" data-fresh-interval="700">98</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <div class="chart chart-bar">6,4,8,6,8,10,5,6,7,9,5</div>
+                        </div>
+                        <div class="content">
+                            <div class="text">Today's Admission</div>
+                            <div class="number">&#8377;&nbsp;<span class="number count-to" data-from="0" data-to="{{ todays_collection }}" data-speed="2000" data-fresh-interval="700">98</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <span class="chart chart-line">9,4,6,5,6,4,7,3</span>
+                        </div>
+                        <div class="content">
+                            <div class="text">Total Income</div>
+                            <div class="number">&#8377;&nbsp;<span class="number count-to" data-from="0" data-to="{{ total_income }}" data-speed="2000" data-fresh-interval="700"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card info-box-2">
+                    <div class="body">
+                        <div class="icon">
+                            <div class="chart chart-bar">4,6,-3,-1,2,-2,4,3,6,7,-2,3</div>
+                        </div>
+                        <div class="content">
+                            <div class="text">Upcoming Amount</div>
+                            <div class="number">&#8377;&nbsp;<span class="number count-to" data-from="0" data-to="{{ upcoming_amount }}" data-speed="2000" data-fresh-interval="700">1063</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xl-8 col-lg-12 col-md-12">
+               <div class="card">
+                    <div class="header">
+                        <h2><strong>Sales</strong> Report</h2>
+                    </div>
+                    <div class="body">
+                        <div class="row text-center" style="margin-bottom:-50px;">
+                            <div class="col-sm-4 col-6">
+                                <h4 class="margin-0">&#8377; {{ Tday_sal }} <i class="zmdi zmdi-caret-up col-green"></i></h4>
+                                <p class="text-muted m-b-0"> Today's Sales</p>
+                            </div>
+                            <div class="col-sm-4 col-6">
+                                <h4 class="margin-0">&#8377; {{ Mnth_sale }} <i class="zmdi zmdi-caret-up col-green"></i></h4>
+                                <p class="text-muted m-b-0">This Month's Sales</p>
+                            </div>
+                            <div class="col-sm-4 col-6">
+                                <h4 class="margin-0">&#8377; {{ YEAR_SALES }}<i class="zmdi zmdi-caret-up col-green"></i></h4>
+                                <p class="text-muted m-b-0">This Year's Sales</p>
+                            </div>
+                        </div>
+                    </div>
+                   <BR><BR><BR>
+                </div>
+                <div class="card" style="height:370px;">
+                    <div class="header">
+                        <h2><strong>Sales</strong> Report</h2>
+
+                    </div>
+                    <div class="body">
+                        <div id="m_area_chart" class="m-b-20" style="height: 230px; padding-bottom:20px;"></div>
+                    </div>
+                   <BR><BR><BR>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 col-md-12">
+                  <div class="card">
+                   <div class="header">
+                       <h2><strong>Course</strong> Details</h2>
+
+                   </div>
+                       <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover m-b-0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-graduation-cap"></i>
+                                                 &nbsp;
+                                                Total Courses</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0" style="color:#f78c40">{{ all_course.count }}</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-device-hub"></i>
+                                                 &nbsp;
+                                                Running Batches</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0 " style="color:#4875b4">{{ running_batch }}</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-account-circle"></i>
+                                                 &nbsp;
+                                                Institute Students</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0" style="color:#f78c40">{{ all_students }}</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+
+                                <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                               <i class="zmdi zmdi-library"></i>
+                                                 &nbsp;Total Enquiries</h6>
+                                            <span></span>
+                                            <br>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0 " style="color:#f78c40">{{ all_enquiry.count }}</h6>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                        <td>
+                                            <h6 style="font-size:13px;" class="margin-0">
+                                                <i class="zmdi zmdi-phone"></i>
+                                                 &nbsp;
+                                               Total Call Logs</h6>
+                                            <span></span>
+                                        </td>
+                                        <td class="text-right">
+                                            <h6 class="margin-0" style="color:#4875b4">{{ all_call_logs }}</h6>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="col-xl-5 col-lg-6 col-md-12">
+                 <div class="card">
+                    <div class="header">
+                        <h2><strong>Today's</strong> Report</h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="m-b-0" style="font-family: monospace; color: #1A5276">&#8377;&nbsp;{{ todays_collection }}</h4>
+                                <h6 style="font-family: monospace; font-size:12px; color: #1A5276">Today's Admission Collection</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sparkline m-b-20" data-type="bar" data-width="97%" data-height="60px" data-bar-Width="2" data-bar-Spacing="5" data-bar-Color="#00ced1">2,5,6,4,8,7,5,6,2,3,5,6,2,3,4,2</div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover m-b-0">
+                                <tbody>
+                                    <tr>
+                                        <th><i class="zmdi zmdi-circle text-success"></i></th>
+                                        <td>Today's Enquiry</td>
+                                        <td><span>{{ todays_enquiry }}</span></td>
+                                        </tr>
+                                     <tr>
+                                        <th><i class="zmdi zmdi-circle col-teal"></i></th>
+                                        <td>Today's Follow Ups</td>
+                                        <td><span>{{ todays_followup }}</span></td>
+                                        </tr>
+                                    <tr>
+                                    <tr>
+                                        <th><i class="zmdi zmdi-circle text-info"></i></th>
+                                        <td>Today's Admission</td>
+                                        <td><span>{{ todays_addmission }}</span></td>
+                                        </tr>
+
+                                    <tr>
+                                        <th><i class="zmdi zmdi-circle"></i></th>
+                                        <td>Today's Admission Collection</td>
+                                        <td><span> &#8377;{{ todays_collection }}</span></td>
+                                        </tr>
+                                    <tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-7 col-lg-12 col-md-12">
+                 <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                     <div class="header">
+                        <h2><strong>Library</strong> Details</h2>
+                     <ul class="row profile_state list-unstyled">
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-copy col-blue"></i>
+                                <h4>{{ all_category }}</h4>
+                                <span>Book Category</span>
+                            </div>
+
+                        </li>
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-book-image col-teal"></i><br>
+
+                                <h4>{{ total_book }}</h4>
+                                <span>Total Books</span>
+                            </div>
+
+                        </li>
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-book col-red"></i>
+                                <h4>{{ total_ebook }}</h4>
+                                <span>Total E-Books</span>
+                            </div>
+
+                        </li>
+                        <li class="col-lg-3 col-md-3 col-6">
+
+                            <div class="body">
+                                <i class="zmdi zmdi-copy col-blue"></i>
+                                <h4>{{ all_un_cat_book }}</h4>
+                                <span>Un-categorized Books</span>
+                            </div>
+
+                        </li>
+
+                    </ul>
+                     </div>
+
+                </div>
+            </div>
+        </div>
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Books</strong> Report</h2></div>
+                      <div hidden="hidden" id="donut_chart"  class="donut_chart"></div>
+
+                              <div class="row clearfix">
+            <div class="col-lg-4 col-md-6">
+                <div >
+                    <div class="body text-center">
+                        <input type="text" class="knob" value="{{ per2 }}" readonly data-width="70" data-height="70" data-thickness="0.1" data-fgColor="#ff598f">
+                        <h3 class="m-b-0 m-t-10 number count-to" data-from="0" data-to="{{ todys_issued_book }}" data-speed="2000" data-fresh-interval="700">2078</h3>
+                        <span >Today's Issued Book</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div >
+                    <div class="body text-center">
+                        <input type="text" class="knob" value="{{ per1 }}" readonly data-width="70" data-height="70" data-thickness="0.1" data-fgColor="#400191">
+                        <h3 class="m-b-0 m-t-10 number count-to" data-from="0" data-to="{{ all_issued_book }}" data-speed="2000" data-fresh-interval="700">1278</h3>
+                        <span>Total Issued Book</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div >
+                    <div class="body text-center">
+                        <input type="text" class="knob" value="{{ per4 }}" readonly data-width="70" data-height="70" data-thickness="0.1" data-fgColor="#f78c40">
+                        <h3 class="m-b-0 m-t-10 number count-to" data-from="0" data-to="{{ todays_return_book }}" data-speed="2000" data-fresh-interval="700">521</h3>
+                        <span>Today's Returned Book</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+                    </div>
+                </div>
+
+            </div>
+        <div class="row clearfix">
+            <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Course Wise </strong> Enquiry and Admission </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>Enquiry</th>
+                                        <th >Addmission</th>
+                                       </tr>
+                                </thead>
+                                <tbody>
+                                    {% for c in all_course %}
+                                    <tr>
+                                        <td >{{ forloop.counter }}</td>
+                                        <td >{{ c.name }}</td>
+                                        <td>{{ c.front_enquiry_data_set.count }}</td>
+                                        <td>{{ c.front_student_course_batch_data_set.count }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-12">
+                   <div class="card">
+
+                        <div class="header">
+                        <h2><strong>Course Wise</strong> Call Logs </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                         <table class="table  table-hover ">
+                            <thead>
+                                <tr>
+                                <th>Course Name</th>
+                                <th>Today</th>
+                                <th>This month</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in all_course %}
+                                <tr>
+                                <td >{{ course.name }}</td>
+                                <td >
+                                    <span id = 't{{ forloop.counter }}'></span>&nbsp;
+                                 </td>
+                                <td >
+                                    <span id ='tm{{ forloop.counter }}'></span>&nbsp;
+                                </td>
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                         </table> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="row clearfix">
+     <div class="col-xl-8 col-lg-7 col-md-12">
+                <div class="card user-account">
+                    <div class="header">
+                        <h2><strong>Course Wise</strong> Admission sales</h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>Today</th>
+                                        <th class="hidden-xs">This Month</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in all_course %}
+                                    <tr>
+                                        <td style="width: 25px;">{{ forloop.counter }}</td>
+                                        <td style="width: 60px;">{{ c.name }}</td>
+                                        <td>&#8377;&nbsp;<span  id="tsale{{ forloop.counter }}"></span></td>
+                                        <td> &#8377;&nbsp;<span  id="msale{{ forloop.counter }}"> </span></td>
+                                        <td style="font-size:19px;"><span class="badge badge-success" id="tosale{{ forloop.counter }}"></span></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <div class="col-xl-4 col-lg-12 col-md-12">
+                 <div class="card">
+                    <div class="header">
+                        <h2><strong>Course Wise</strong> Close Enquiry </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                           <table class="table table-hover m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>Close Enquiry</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in all_course %}
+                                    <tr>
+                                        <td >{{ forloop.counter }}</td>
+                                        <td >{{ c.name }}</td>
+                                        <td id="close{{ forloop.counter }}"></td>
+                                        </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      <div class="row clearfix">
+            <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="body">
+                        <div class="row pw_content">
+                            <div class="col-12 pw_header">
+                                <h6> Uploaded Documents &nbsp;&nbsp; <span style="font-size:20px;color:#673AB7;" >{{ all_doc }} </span></h6>
+                                </div>
+                            <div class="col-8 pw_header">
+                                <h6>Total Receipts&nbsp;&nbsp; <span style="font-size:20px;color:#FF5722;" >{{ all_receipts }} </span></h6>
+                               </div>
+                            <div class="col-4">
+                                <div class="sparkline m-t-10" data-type="bar" data-width="97%" data-height="26px" data-bar-Width="2" data-bar-Spacing="7" data-bar-Color="#7460ee">2,5,6,3,4,5,5,6,2,1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="body">
+                        <div class="row pw_content">
+                            <div class="col-12 pw_header">
+                                <h6>Pending Followup&nbsp;&nbsp; <span style="font-size:20px;color:#673AB7;">{{ previous_fup }} </span></h6>
+                                </div>
+                            <div class="col-8 pw_header">
+                                <h6>Upcoming Followup&nbsp;&nbsp; <span style="font-size:20px;color:#FF5722;" >{{ upcoming_fup }} </span></h6>
+                                </div>
+                            <div class="col-4">
+                                <div class="sparkline m-t-10" data-type="bar" data-width="97%" data-height="26px" data-bar-Width="2" data-bar-Spacing="7" data-bar-Color="#60bafd">2,5,6,3,4,5,5,6,2,1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="body">
+                        <div class="row pw_content">
+                            <div class="col-12 pw_header">
+                                <h6>Close Enquiry&nbsp;&nbsp; <span style="font-size:20px;color:#673AB7;" >{{ close_enq }} </span></h6>
+                                </div>
+                            <div class="col-8 pw_header">
+                                <h6>Cancel Admission&nbsp;&nbsp; <span style="font-size:20px;color:#FF5722;" >{{ cancel_add }} </span></h6>
+                                </div>
+                            <div class="col-4">
+                                <div class="sparkline m-t-10" data-type="bar" data-width="97%" data-height="26px" data-bar-Width="2" data-bar-Spacing="7" data-bar-Color="#000000">2,3,6,5,4,5,8,7,6,3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-8 col-lg-7 col-md-12">
+                <div class="card user-account">
+                    <div class="header">
+                        <h2><strong>All</strong> Employee</h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Profile</th>
+                                        <th>Name</th>
+                                        <th>Employee Id</th>
+                                        <th class="hidden-xs">Email Address</th>
+                                        <th>Designation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for emp in all_employe %}
+                                    <tr onclick="window.location.href='{% url 'Master:admin_VED_employee' emp.id 'View' %}'">
+                                        <td style="width: 25px;">{{ forloop.counter }}</td>
+                                        <td style="width: 60px;"><img src="{{ emp.image.url }}" alt="" class="rounded"></td>
+                                        <td>{{ emp.name }}</td>
+                                        <td>123654789</td>
+                                        <td class="hidden-xs">{{ emp.email }}</td>
+                                        <td><span class="badge badge-success">{{ emp.designation }}</span></td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="m_area_chart2" hidden="hidden"></div>
+        <div class="row clearfix">
+            <div class="col-md-12 col-lg-12">
+                <div class="card active-bg">
+                    <div class="body">
+                        <p class="copyright m-b-0 text-white">Copyright 2019 © All Rights Reserved. TechSim+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+</section>
+<script>
+ function myfunction() {
+
+           var d1 = {{ li }}
+           var d11 = {{ tcall }}
+           var d22 = {{ mcall }}
+           var d13 = {{ tsale }}
+           var d23 = {{ msale }}
+           var d33 = {{ tosale }}
+
+
+                 for (var i = 0; i<d1.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("close"+k);
+                      td3.innerText = d1[i];
+                    }
+                    for (var i = 0; i<d11.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("t"+k);
+                      td3.innerText = d11[i];
+                    }
+
+                 for (var j = 0; j<d22.length; j++)
+                    {
+                      var t1 = j + 1;
+                      var k1 = t1.toString();
+                      var td4 = document.getElementById("tm"+k1);
+                      td4.innerText = d22[j];
+                    }
+                     for (var i = 0; i<d13.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("tsale"+k);
+                      td3.innerText = d13[i];
+                    }
+
+                 for (var j = 0; j<d23.length; j++)
+                    {
+                      var t1 = j + 1;
+                      var k1 = t1.toString();
+                      var td4 = document.getElementById("msale"+k1);
+                      td4.innerText = d23[j];
+                    }
+                 for (var i = 0; i<d33.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("tosale"+k);
+                      td3.innerText = d33[i];
+                    }
+
+        }
+window.onload =myfunction;
+</script>
+
+
+
+
+
+
+
+
+
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) --> 
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/knob.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/jvectormap.bundle.js' %}"></script> <!-- JVectorMap Plugin Js -->
+ <!-- Jquery Knob-->
+<script src="{% static 'Master/assets/assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/widgets/infobox/infobox-1.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/index.js' %}"></script>
+{% endblock %}
+</body>
+</html>

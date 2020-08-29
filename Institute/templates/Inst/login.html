@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+<title>:: SkyLark :: Online Examination</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Mplify Bootstrap 4.1.1 Admin Template">
+<meta name="author" content="ThemeMakker, design by: ThemeMakker.com">
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/animate-css/animate.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/font-awesome/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/chartist/css/chartist.min.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets1/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css' %}">
+
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="{% static 'student/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'student/assets/css/color_skins.css' %}">
+</head>
+
+<body class="theme-blue">
+	<!-- WRAPPER -->
+	<div id="wrapper" >
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle auth-main">
+				<div class="auth-box">
+                    <div class="mobile-logo"><a href="index.html"><img src="{{ ins_data.institute_logo.url }}" alt="{{ ins_data.name }}"></a></div>
+                    <div class="auth-left">
+                        <div class="left-top">
+                            <a href="index.html">
+                                <img src="{{ ins_data.institute_logo.url }}" alt="{{ ins_data.name }}" style="border-radius:50%;">
+                                <span>{{ ins_data.name }}</span>
+                            </a>
+                        </div>
+                        <div class="left-slider">
+                            <img src="{% static 'student/assets1/images/login/1.jpg' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+
+                    <div class="auth-right">
+
+                        <div class="card">
+                            <div class="header">
+                                <p class="lead">Login account</p>
+                            </div>
+                            <div class="body">
+                                {% if error %}
+                                    <p style="color:red;" >You Entered Wrong Username or Password</p>
+                                {% endif %}
+                                <form class="form-auth-small" action="" method="post">{% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="signup-email" class="control-label" style="float:left">Username</label>
+                                        <input type="text" class="form-control" name = "username" id="signup-email" placeholder="UserName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-password" class="control-label" style="float:left">Password</label>
+                                        <input type="password" class="form-control" name = "pass" id="signup-password" placeholder="Password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                                </form>
+                                <div class="separator-linethrough"><span>OR</span></div>
+                                <div class="bottom">
+                                        <span class="helper-text m-b-10"><i class="fa fa-lock"></i>
+                                            <a href="">Forgot password?</a></span>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->
+</body>
+</html>

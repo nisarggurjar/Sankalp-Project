@@ -1,0 +1,429 @@
+<!doctype html>
+{% extends 'Inst/base.html' %}
+{% block up %}
+
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Add Employee</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}">
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+    <link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-steps/jquery.steps.css' %}" />
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+ <script language="Javascript">
+
+        // Declaring valid date character, minimum year and maximum year
+        var dtCh = "/";
+        var minYear = 1900;
+        var maxYear = 2100;
+
+        function isInteger(s) {
+            var i;
+            for (i = 0; i < s.length; i++) {
+                // Check that current character is number.
+                var c = s.charAt(i);
+                if (((c < "0") || (c > "9"))) return false;
+            }
+            // All characters are numbers.
+            return true;
+        }
+
+        function stripCharsInBag(s, bag) {
+            var i;
+            var returnString = "";
+            // Search through string's characters one by one.
+            // If character is not in bag, append to returnString.
+            for (i = 0; i < s.length; i++) {
+                var c = s.charAt(i);
+                if (bag.indexOf(c) == -1) returnString += c;
+            }
+            return returnString;
+        }
+
+        function daysInFebruary(year) {
+            // February has 29 days in any year evenly divisible by four,
+            // EXCEPT for centurial years which are not also divisible by 400.
+            return (((year % 4 == 0) && ((!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28);
+        }
+        function DaysArray(n) {
+            for (var i = 1; i <= n; i++) {
+                this[i] = 31
+                if (i == 4 || i == 6 || i == 9 || i == 11) { this[i] = 30 }
+                if (i == 2) { this[i] = 29 }
+            }
+            return this
+        }
+
+        function isDate(dtStr) {
+            var daysInMonth = DaysArray(12)
+            var pos1 = dtStr.indexOf(dtCh)
+            var pos2 = dtStr.indexOf(dtCh, pos1 + 1)
+            var strDay = dtStr.substring(0, pos1)
+            var strMonth = dtStr.substring(pos1 + 1, pos2)
+            var strYear = dtStr.substring(pos2 + 1)
+            strYr = strYear
+            if (strDay.charAt(0) == "0" && strDay.length > 1) strDay = strDay.substring(1)
+            if (strMonth.charAt(0) == "0" && strMonth.length > 1) strMonth = strMonth.substring(1)
+            for (var i = 1; i <= 3; i++) {
+                if (strYr.charAt(0) == "0" && strYr.length > 1) strYr = strYr.substring(1)
+            }
+            month = parseInt(strMonth)
+            day = parseInt(strDay)
+            year = parseInt(strYr)
+            if (pos1 == -1 || pos2 == -1) {
+                alert("The date format should be : dd/mm/yyyy")
+                return false
+            }
+            if (strMonth.length < 1 || month < 1 || month > 12) {
+                alert("Please enter a valid month")
+                return false
+            }
+            if (strDay.length < 1 || day < 1 || day > 31 || (month == 2 && day > daysInFebruary(year)) || day > daysInMonth[month]) {
+                alert("Please enter a valid day")
+                return false
+            }
+            if (strYear.length != 4 || year == 0 || year < minYear || year > maxYear) {
+                alert("Please enter a valid 4 digit year between " + minYear + " and " + maxYear)
+                return false
+            }
+            if (dtStr.indexOf(dtCh, pos2 + 1) != -1 || isInteger(stripCharsInBag(dtStr, dtCh)) == false) {
+                alert("Please enter a valid date")
+                return false
+            }
+            return true
+        }
+
+        function ValidateForm() {
+            var dt = document.frmSample.join_date
+
+
+            if (isDate(dt.value) == false ) {
+                dt.focus()
+                return false
+            }
+
+            return true
+        }
+
+
+    </script>
+
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+       <div class="container-fluid">
+	<form action="" method = "post" enctype="multipart/form-data" name="frmSample"  onsubmit="return ValidateForm();">
+        {% csrf_token %}
+                       <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+            <h2 style="font-family: monospace; font-size: 23px; color: #1A5276">
+                <strong style="font-family: monospace; font-size: 23px; color: #1A5276">
+                    {% if Edit %}
+                    Edit Employee
+                    {% else %}
+                    Add Employee
+                    {% endif %}
+                </strong></h2>
+                   <center>  <h5 style="font-family: monospace; color: #1A5276">Your Image</h5>
+                        {% if data %}
+                            {% if data.image %}
+                                <img id="blah" src="{{ data.image.url }}" height="120" width="150"  />
+                            {% else %}
+                                <img id="blah" src="{% static 'download.png' %}" height="120" width="150"  />
+                            {% endif %}
+                       {% else %}
+                           <img id="blah" src="{% static 'download.png' %}" height="120" width="150"  />
+                       {% endif %}
+                            <br><br>
+					<div class="content col-md-4">
+                        <div >
+                            {{ form.image }}
+
+                            </div>
+                    </div></center>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                       <h2 style="font-family: monospace; font-size: 20px; color: #1A5276">
+                <strong style="font-family: monospace; font-size: 20px; color: #1A5276">Basic</strong> Details</h2>
+
+
+                    </div>
+                    <div class="body">
+
+
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Name</b></label></center>
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Date Of Birth</b></label></center>
+                                    {{ form.dob }}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+
+                                <center><label style="font-family: monospace; color: #1A5276"><b>Gender</b></label></center>
+                                   {{form.gender}}
+
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Mobile no.</b></label></center>
+                                   {{ form.mobile }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                               <div class="form-group">
+							   <center><label style="font-family: monospace; color: #1A5276"><b>Email</b></label></center>
+                                   {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                               <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Address</b></label></center>
+                                   {{ form.address }}
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Addhar Number</b></label></center>
+                                   {{form.aadhar_card}}
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+			        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                       <h2 style="font-family: monospace; font-size: 20px; color: #1A5276">
+                <strong style="font-family: monospace; font-size: 20px; color: #1A5276">Education</strong> Details</h2>
+
+
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Qualification</b></label></center>
+                                    {{ form.qualification }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>University</b></label></center>
+                                   {{ form.university }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Qualification Year</b></label></center>
+                                    {{ form.quali_year }}
+                                </div>
+                            </div>
+							 <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Experiance</b></label></center>
+                                    {{ form.exp_year }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Discription</b></label></center>
+                                    {{ form.discription_exp }}
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Disignation</b></label></center>
+                                    <select class="form-control show-tick" name="desig" required>
+                                        <option value="">choose designtion</option>
+                                      {% if dd %}
+                                        {% for i in all_designation %}
+                                            {% if dd == i.name %}
+                                                <option value="{{ i.name }}" selected>{{ i.name }}</option>
+                                            {% else %}
+                                                <option value="{{ i.name }}">{{ i.name }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                      {% else %}
+                                        {% for i in all_designation %}
+                                        <option value="{{ i.name }}">{{ i.name }}</option>
+                                        {% endfor %}
+                                      {% endif %}
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                   <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card">
+                     <div class="header">
+                        <h2 style="font-family: monospace; font-size: 20px; color: #1A5276">
+                <strong style="font-family: monospace; font-size: 20px; color: #1A5276">Working</strong> Details</h2>
+
+
+                     </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Office In Time</b></label></center>
+                                    {{ form.office_in_time }}
+                                </div>
+                             </div>
+                    <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Office Out Time</b></label></center>
+                                    {{ form.office_out_time }}
+                                </div>
+                    </div>
+                         <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Salary</b></label></center>
+                                    {{ form.salary }}
+                                </div>
+                         </div>
+                    <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                               {% if IdError %}
+								<center><label style="font-family: monospace; color: red;"><b>This Employee ID Already Exist</b></label></center>
+                               {% else %}
+								<center><label style="font-family: monospace; color: #1A5276"><b>Employee Id</b></label></center>
+                                {% endif %}
+                                    {{ form.employee_id }}
+                                </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Joining Date</b></label></center>
+                                    {{ form.join_date }}
+                                </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label style="font-family: monospace; color: #1A5276"><b>Resume</b></label></center>
+                                    {{ form.resume }}
+                                </div>
+                    </div>
+
+
+                        </div>
+                        <center>
+					<div class="content col-md-5">
+
+                        <div>{% if Edit %}
+                                <input class="btn btn-primary btn-round btn-lg " type = "submit" value="Edit Employee">
+                            {% else %}
+                             <input class="btn btn-primary btn-round btn-lg " type = "submit" value="Add Employee">
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+          </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+		</form>
+        </div>
+</section>
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+</script>
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<!-- data tables -->
+<!-- Jquery DataTable Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/dataTables.buttons.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-validation/jquery.validate.js' %}"></script> <!-- Jquery Validation Plugin Css -->
+<script src="{% static 'Master/assets/plugins/jquery-steps/jquery.steps.js' %}"></script> <!-- JQuery Steps Plugin Js -->
+<script src="{% static 'Master/assets/assets/js/pages/forms/form-wizard.js' %}"></script>
+
+{% endblock %}
+</body>
+
+</html>

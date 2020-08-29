@@ -1,0 +1,585 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sankalp Institute</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="https://basictheme.net/html/sikkha-prv/sikkha/site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'web/img/favicon.png' %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/meanmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/default.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/responsive.css' %}">
+<style>
+    .skill-style {
+  padding-top: 50px;
+  margin-bottom: 50px;
+}
+.skill-style .sec-title {
+  margin-bottom: 70px;
+}
+.skill-style {
+  max-width: 370px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 155px;
+  margin-top: 30px;
+}
+.skill-style .img-box {
+  position: relative;
+}
+.skill-style .img-box img {
+  border-radius: 10px;
+}
+.skill-style .text-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0 20px;
+  margin-top: -30px;
+}
+.skill-style .text-box .inner {
+  padding-bottom: 40px;
+  background: #0B0B46;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+.skill-style .text-box .inner:before {
+  background: #fff;
+}
+.skill-style .text-box .inner .icon-box {
+  border-radius: 50%;
+  width: 81px;
+  height: 81px;
+  background: #fff;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -40.5px;
+  position: relative;
+  z-index: 10;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+.skill-style .text-box .inner .icon-box i {
+  color: #29166f;
+  font-size: 40px;
+  line-height: 81px;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+.skill-style .text-box .inner h3,
+.skill-style .text-box .inner p {
+  margin: 0;
+  color: #fff;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+.skill-style .text-box .inner h3 {
+  font-size: 24px;
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: #fdb10f;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+.skill-style .text-box .inner p {
+  font-size: 16px;
+  line-height: 24px;
+  width: 77%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.skill-style .text-box .inner a.more {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Poppins';
+  color: #29166f;
+  display: block;
+  margin-top: 10px;
+  opacity: 0;
+  margin-top: -37px;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+.skill-style .text-box:hover .inner {
+  padding-bottom: 25px;
+  -webkit-box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.2);
+}
+.skill-style .text-box:hover .inner .icon-box {
+  background: #fdb10f;
+}
+.skill-style .text-box:hover .inner .icon-box i {
+  color: #fff;
+}
+.skill-style .text-box:hover .inner h3 {
+  color: #262626;
+}
+.skill-style .text-box:hover .inner p {
+  color: #555555;
+}
+.skill-style .text-box:hover .inner a.more {
+  margin-top: 10px;
+  opacity: 1;
+}
+/* Bounce To Bottom */
+.hvr-bounce-to-bottom {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-to-bottom:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #2098D1;
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-bounce-to-bottom:hover, .hvr-bounce-to-bottom:focus, .hvr-bounce-to-bottom:active {
+  color: white;
+}
+.hvr-bounce-to-bottom:hover:before, .hvr-bounce-to-bottom:focus:before, .hvr-bounce-to-bottom:active:before {
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+
+
+</style>
+    <style>
+        .courses1 {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  border-bottom: 2px solid #e6e6e6;
+  padding: 34px 38px 24px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  -webkit-box-shadow: 0px -1px 37px 8px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px -1px 37px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px -1px 37px 8px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+.courses1 h3 {
+  color: #29166f;
+  margin-bottom: 12px;
+}
+.courses1 p {
+  font-size: 14px;
+  color: #444;
+}
+.courses1 img {
+  position: absolute;
+  width: 85px;
+  right: -10px;
+  bottom: -10px;
+}
+.courses1:hover {
+  -webkit-box-shadow: 0px 14px 13px -7px rgba(194, 194, 194, 0.75);
+  -moz-box-shadow: 0px 14px 13px -7px rgba(194, 194, 194, 0.75);
+  box-shadow: 0px 14px 13px -7px rgba(194, 194, 194, 0.75);
+}
+    </style>
+</head>
+
+<body>
+
+
+    <!-- Add your site or application content here -->
+    <!-- header-start -->
+    <header id="home">
+        <div class="header-area">
+            <!-- header-top -->
+            <div class="header-top primary-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                            <div class="header-contact-info d-flex">
+                                <div class="header-contact header-contact-phone">
+                                    <span class="ti-headphone"></span>
+                                    <p class="phone-number">{{ profile.mobile_number }}</p>
+                                </div>
+                                <div class="header-contact header-contact-email">
+                                    <span class="ti-email"></span>
+                                    <p class="email-name">{{ profile.email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="header-social-icon-list">
+                                <ul>
+                                    {% if request.user.is_staff %}
+                                     <li><a href="{% url 'Website:add_gallery' %}"><span class="ti-plus"></span> ADD Gallery Image</a></li>
+
+
+                                    <li><a href="{% url 'Website:add_brand' %}"><span class="ti-plus"></span> ADD BRAND</a></li>
+
+                                    <li><a href="{% url 'Website:web_slider' %}"><span class="ti-plus"></span> ADD SLIDER</a></li>
+                                    <li><a href="{% url 'logout' %}"><span class="ti-lock"></span> LOGOUT</a></li>
+
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /end header-top -->
+            <!-- header-bottom -->
+            <div class="header-bottom-area header-sticky" style="transition: .6s;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-2 col-md-6 col-6">
+                            <div class="logo">
+                                {% if request.user.is_staff %}
+                                <a href="{% url 'Website:change_profile' '0' %}">
+                                    <img src="{% static 'web/img/logo/logo_2.png' %}" alt="">
+                                    <h6 style="color:#333370;font-family:Comic Sans MS;"><b>Vedi SanKalp </b></h6>
+                                </a>
+                                {% else %}
+                                <a href="">
+                                    <img src="{% static 'web/img/logo/logo_2.png' %}" alt="">
+                                    <h6 style="color:#333370;font-family:Comic Sans MS;"><b>Vedi SanKalp </b></h6>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-6 col-6">
+                            <div class="header-bottom-icon f-right">
+                                <ul>
+
+
+                                </ul>
+                            </div>
+                            <div class="main-menu f-right">
+                                <nav id="mobile-menu" style="display: block;">
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'Website:website_home' %}">Home</a>
+
+                                        </li>
+                                         <li>
+                                            <a href="{% url 'Website:aboutus' %}">About Us</a>
+
+                                        </li>
+                                         <li>
+                                            <a href="{% url 'Website:our_gallery' %}">Our Gallery</a>
+
+                                        </li>
+                                        <li>
+                                            <a href="">Courses</a>
+                                            <ul class="submenu">
+												{% for i in all_course %}
+                                                <li>
+                                                    <a href="{% url 'Website:main_cdetails' i.id %}">{{ i.name }}</a>
+                                                </li>
+												{%  endfor%}
+
+                                            </ul>
+                                        </li>
+                                      <li>
+                                            <a href="{% url 'Website:branches' %}">Branches</a>
+
+                                        </li>
+                                        <li>
+                                            <a href="">Student's Zone</a>
+                                            <ul class="submenu">
+                                                <li>
+                                                    <a href="{% url 'Website:student_zone' %}">New Batch Start</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'Website:student_review' %}">Student's Feedabck</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                         <li>
+                                            <a href="{% url 'Website:contact' %}">Contact Us</a>
+
+                                        </li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /end header-bottom -->
+        </div>
+    </header>
+    <!-- header-end -->
+{% block body %}
+{% endblock %}
+    <!-- counter start -->
+    <div class="counter-area" style="background-image: url('{% static 'web/bg.png' %}')">
+        <div class="container pt-90 pb-65">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="couter-wrapper mb-30 text-center">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'Website:edit_counter' %}"><img src="{% static 'web/img/counter/counter_icon1.png' %}" alt=""></a>
+                        {% else %}
+                        <img src="{% static 'web/img/counter/counter_icon1.png' %}" alt="">
+
+                        {% endif %}
+                        <span class="counter" style="color:white">{{ counter.value1 }}</span>
+                        <h3 style="color:white">SATISFIED STUDENTS</h3>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="couter-wrapper mb-30 text-center">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'Website:edit_counter' %}">
+                        <img src="{% static 'web/img/counter/counter_icon2.png' %}" alt="">
+                        </a>
+                        {% else %}
+                        <img src="{% static 'web/img/counter/counter_icon2.png' %}" alt="">
+
+                        {% endif %}
+                        <span class="counter" style="color:white">{{ counter.value2 }}</span>
+                        <h3 style="color:white">COURESES COMPLETED</h3>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="couter-wrapper mb-30 text-center">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'Website:edit_counter' %}">
+
+                        <img src="{% static 'web/img/counter/counter_icon4.png' %}" alt="">
+                        </a>
+                        {% else %}
+                        <img src="{% static 'web/img/counter/counter_icon4.png' %}" alt="">
+                        {% endif %}
+                        <span class="counter" style="color:white">{{ counter.value3 }}</span>
+                        <h3 style="color:white">EXPERT FACULTIES</h3>
+                    </div>
+                </div>
+                 <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="couter-wrapper mb-30 text-center">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'Website:edit_counter' %}">
+
+
+                        <img src="{% static 'web/img/counter/counter_icon3.png' %}" alt="">
+                        </a>
+                        {% else %}
+                         <img src="{% static 'web/img/counter/counter_icon3.png' %}" alt="">
+                        {% endif %}
+
+                        <span class="counter" style="color:white">{{ counter.value4 }}</span>
+                        <h3 style="color:white">AWARDS WON</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- counter end -->
+<!-- brand start -->
+    <div class="brand-area pt-80 pt-80 pb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="brand-list">
+                        <ul>
+                            {% for i in brand %}
+                            <li><img src="{{ i.image.url }}"  alt="" height="80px;" width="80px;">
+                            <br><br> {% if request.user.is_staff %}
+                                <a href="{% url 'Website:delete_stuff' 'Brand' i.id %}"><span class="ti-trash" style="font-size:20px;"></span></a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- brand end -->
+    <!-- subscribe start -->
+    <div class="subscribe-area">
+        <div class="container">
+            <div class="subscribe-box">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1 col-md-12">
+                        <div class="row justify-content-between">
+                            <div class="col-xl-6 col-lg-7 col-md-8">
+                                <div class="subscribe-text">
+                                    <h1>Contect Us</h1>
+                                    <span>Enter your email and get latest updates.</span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-5 col-md-4 justify-content-end">
+                                <div class="email-submit-form">
+                                    <div class="subscribe-form">
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+
+                                            <input placeholder="Enter your email" type="email">
+
+                                            <input type="submit" class="btn btn-warning" style="background-color:#fdc800">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- subscribe end -->
+    <!-- footer start -->
+    <footer id="Contact">
+        <div class="footer-area primary-bg pt-150">
+            <div class="container">
+                <div class="footer-top pb-35">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="footer-widget mb-30">
+                                <div class="footer-logo">
+                                    <img src="{% static 'web/img/logo/logo_2.png' %}" alt="">
+                                </div>
+                                <div class="footer-para">
+                                    <p>if you are interested in knowing further about our courses and programs, contact us at the
+earliest for step-by-step coaching and guidance.</p>
+                                </div>
+                                <div class="footer-socila-icon">
+                                    <span>Follow Us</span>
+                                    <div class="footer-social-icon-list">
+                                        <ul>
+                                            <li><a href=""><span class="ti-facebook"></span></a></li>
+                                            <li><a href=""><span class="ti-google"></span></a></li>
+                                            <li><a href=""><span class="ti-instagram"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="footer-widget mb-30">
+                                <div class="footer-heading">
+                                    <h1>Quick Links</h1>
+                                </div>
+                                <div class="footer-menu clearfix">
+                                    <ul>
+                                        <li><a href="{% url 'Website:aboutus' %}">About Us</a></li>
+                                        <li ><a href="{% url 'Website:contact' %}">Contact Us</a></li>
+                                        <li><a href="{% url 'Website:branches' %}">Branches</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4  col-md-6">
+                            <div class="footer-widget mb-30">
+                                <div class="footer-heading">
+                                    <h1>Contact Us</h1>
+                                </div>
+                                <div class="footer-contact-list">
+                                    <div class="single-footer-contact-info">
+                                        <span class="ti-headphone "></span>
+                                        <span class="footer-contact-list-text">{{ profile.mobile_number }}</span>
+                                    </div>
+                                    <div class="single-footer-contact-info">
+                                        <span class="ti-email "></span>
+                                        <span class="footer-contact-list-text">{{ profile.email }}</span>
+                                    </div>
+                                    <div class="single-footer-contact-info">
+                                        <span class="ti-location-pin"></span>
+                                        <span class="footer-contact-list-text">{{ profile.address }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom pt-25 pb-25">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="footer-copyright text-center">
+                                    <span>Copyright © 2018. All rights reserved</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+
+
+    <!-- JS here -->
+    <script src="{% static 'web/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'web/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'web/js/popper.min.js' %}"></script>
+    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'web/js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'web/js/one-page-nav-min.js' %}"></script>
+    <script src="{% static 'web/js/slick.min.js' %}"></script>
+    <script src="{% static 'web/js/ajax-form.js' %}"></script>
+    <script src="{% static 'web/js/wow.min.js' %}"></script>
+    <script src="{% static 'web/js/jquery.meanmenu.min.js' %}"></script>
+    <script src="{% static 'web/js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'web/js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'web/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'web/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'web/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'web/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'web/js/plugins.js' %}"></script>
+    <script src="{% static 'web/js/main.js' %}"></script>
+</body>
+
+</html>

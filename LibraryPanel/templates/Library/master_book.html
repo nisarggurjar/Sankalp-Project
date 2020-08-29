@@ -1,0 +1,175 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - All Books</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+{% if opt == 'error' %}
+<script>
+    alert(' This RollNumber is not exists ');
+</script>
+{% endif %}
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>All Books
+               
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">                
+                
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="{% url 'LibraryPanel:Library_add_books' 'ALL' %}" ><i class="zmdi zmdi-plus-square"></i> &nbsp;Add Book</a></li>
+                   
+                </ul>                
+            </div>
+        </div>
+    </div>    
+  <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card student-list">
+                    <div class="header">
+                        <h2><strong>Books</strong> List</h2>
+                                            </div>
+                    <div class="body widget tag-clouds">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+										 <th>Book Name</th>
+                                        <th>Category</th>
+										<th>Sub-Category</th>
+                                        <th>ISBN Number</th>
+                                        <th>In Stock</th>
+                                        <th>Details</th>
+                                        <th>Issue Book</th>
+                                        <th>Delete</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+								{% for book in all_book %}
+                                {% if book.category or book.subcategory %}
+                                    <tr>
+
+                                        <td>&nbsp;&nbsp;&nbsp;{{ forloop.counter }}</td>
+										<td>{{ book.book_title }}</td>
+                                        <td>{{ book.category.name }}</td>
+										<td>{{ book.subcategory.name }}</td>
+                                        <td>{{ book.ISBN }}</td>
+                                        <td>{{ book.ave_copy }}</td>
+                                        <td><a href ="{% url 'LibraryPanel:Library_book_details' book.id %}"><span class="badge bg-info">Details</span></a></td>
+                                        {% if book.ave_copy != '0' %}
+                                        <td style="text-align:center"><button class=" btn  badge bg-warning" data-toggle="modal" data-target="#IssueBook{{ forloop.counter }}"><b>Issue</b></button></td>
+                                        {% else %}
+                                        <td style="text-align:center"><button class=" btn badge bg-warning" onclick="myFunction();"><b>Issue</b></button></td>
+
+                                        {% endif %}
+                                        {% if book in li %}
+                                        <td><button class=" btn badge bg-danger" onclick="myFunction2();"><b>Delete</b></button></td>
+
+                                        {% else %}
+                                        <td><a href ="{% url 'LibraryPanel:delete_for_all' book.id 'Book' %}"><button class=" btn badge bg-danger"><b>Delete</b></button></a></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endif %}
+                                {% endfor %}
+                                 </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% for book in all_book %}
+<div class="modal fade" id="IssueBook{{ forloop.counter }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel1111"><strong>Issue Book</strong></h6>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'LibraryPanel:filter_roll_number' %}" method="post" enctype="multipart/form-data"
+                >
+                {% csrf_token %}
+
+                <div class="form-group">
+                   <label><b>Enter RollNumber</b></label>
+                    <div class="form-line">
+                        <input type="text" class="form-control" name="roll_number" placeholder="Enter RollNumber" required="required" >
+                    </div>
+                    <div class="form-line">
+                        <input type="hidden" class="form-contdocrol" name="book_id" value="{{ book.id }}">
+                    </div>
+                </div>
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Submit" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+                </div>
+
+        </div>
+
+{% endfor %}
+<script>
+    function myFunction() {
+    alert("This Book out of stock you can't issue it");
+    }
+</script>
+<script>
+    function myFunction2() {
+    alert("This Book is issued by someone. So, you can not delete it now...");
+    }
+</script>
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

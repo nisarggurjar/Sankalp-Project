@@ -1,0 +1,137 @@
+{% extends 'StudentHome/base.html' %}
+{% block body %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'assets/css/inbox.css' %}">
+    <div id="main-content" class="taskboard">
+        <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <center><h2>Welcome</h2>
+                                <h3 style="font-family: monospace; font-size: 35px; color: #1A5276">{{ student.name }}</h3></center>
+                        </div>
+                        <div class="header">
+                          <h4 style="font-family: monospace;">Here is a list of your all Notification.</h4>
+                                
+                        </div>
+                        <div class="body">
+                            <ul class="mail_list list-group list-unstyled">
+                      {% for n in all_notification %}
+                    <li class="list-group-item">
+                        <div class="media">
+                            <div class="pull-left">
+                                <div class="controls">
+
+
+                                </div>
+                                </div>
+                            <div class="media-body">
+                                <div class="media-heading">
+
+                                    <small class="float-right text-muted"><time class="hidden-sm-down" datetime="2017"><span class="badge bg-blue " style="color:green;">date: {{ n.noti_date }}</span></time><i class="zmdi zmdi-attachment-alt"></i> </small>
+                                </div>
+                                <p class="msg" style="font-family: monospace;">{{ n.info }}. </p>
+                            </div>
+                        </div>
+                    </li>{% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            	
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Add New Task -->
+<div class="modal fade" id="addcontact" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="title" id="defaultModalLabel">Add New Task</h6>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-12">
+                        <div class="form-group">                                    
+                            <input type="text" class="form-control" placeholder="Task no.">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">                                   
+                            <input type="text" class="form-control" placeholder="Job title">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">                                    
+                            <textarea class="form-control" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <select class="form-control show-tick m-b-10">
+                            <option>Select Team</option>
+                            <option>John Smith</option>
+                            <option>Hossein Shams</option>
+                            <option>Maryam Amiri</option>
+                            <option>Tim Hank</option>
+                            <option>Gary Camara</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label>Range</label>
+                        <div class="input-daterange input-group" data-provide="datepicker">
+                            <input type="text" class="form-control" name="start">
+                            <span class="input-group-addon"> to </span>
+                            <input type="text" class="form-control" name="end">
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+// Set the date we're counting down to
+var countDownDate = 0;
+var count = new Date().getTime();
+var h = 1000 * 60 * 60 * 1;
+var m = 1000 * 60 * 10;
+var s = 1000 * 20;
+countDownDate = count + h + m + s + 2000;
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+    
+    // Time calculations for days, hours, minutes and seconds
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = hours + ":" + minutes + ":" + seconds;
+    
+    // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+}, 1000);
+</script>
+
+
+{% endblock %}

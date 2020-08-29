@@ -1,0 +1,184 @@
+<!doctype html>
+{% extends 'Inst/base.html' %}
+{% block up %}
+
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Student Fee Report</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+      <div class="container">
+
+
+         <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+
+                        <div class="row clearfix">
+
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+                 <div class="body">
+                       <p ><strong style="float:left;font-family: monospace; font-size: 20px; color: #1A5276"> Select course and batch.</strong>
+
+                       </p>
+
+                    </div>
+
+                  <center>
+					<div class="content col-md-5">
+
+                             <div >
+                                <label style="font-family: monospace;  color: #1A5276"><b> Course</b></label>
+                                <select class="form-control show-tick" name = 'course' required="required"
+                                onchange="window.location=this.value">
+                                    <option value="">-- Select Courses --</option>
+									{% for c in all_course %}
+                                    {% if course.id == c.id %}
+                                    <option value="{% url 'Master:admin_fee_report' c.id '0' %}" selected>{{ c.name }}/{{c.medium}}</option>
+                                    {% else %}
+                                     <option value="{% url 'Master:admin_fee_report' c.id '0'  %}" >{{ c.name }}/{{c.medium}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+                        <br>
+
+                    </div></center>
+                  <center>
+					<div class="content col-md-5">
+                        <div >
+                            <label style="font-family: monospace; color: #1A5276"><b> Batch</b></label>
+                            <select class="form-control show-tick" name = 'batch' required="required"
+                              onchange="window.location=this.value">
+                                    <option value="">-- Select batch --</option>
+                                   {% if course %}
+									{% for b in course.master_batch_data_set.all %}
+                                   {% if batch.id == b.id %}
+                                    <option value="{% url 'Master:admin_fee_report' course.id b.id %}" selected>{{ b.name }}</option>
+                                {% else %}
+                                 <option value="{% url 'Master:admin_fee_report' course.id b.id %}">{{ b.name }}</option>
+                                   {% endif %}
+                                {% endfor %}
+                                   {% endif %}
+                            </select>
+
+                        </div>
+
+                    </div></center><br>
+
+            </div>
+        </div>
+    </div>
+
+                        </div>
+                    {% if data %}
+
+                    <div class="body">
+                         <p ><strong style="font-family: monospace; font-size: 20px; color: #1A5276">Students Fee Report List.</strong>
+
+                       </p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Roll Number</th>
+                                        <th>Total Fee</th>
+                                        <th>Paid Fee</th>
+                                        <th>Remaining Fee</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for details in data %}
+
+
+                                <tr>
+                                        <td>{{ details.student.name }}</td>
+                                        <td>{{ details.student.roll_number }}</td>
+                                        <td>{{ details.total_fee }}</td>
+                                        <td>{{ details.total_fee_pay }}</td>
+                                        <td>{{ details.fee_after_pay }}</td>
+
+
+                                </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% for i in all_student %}
+<div class="modal fade" id="option{{ forloop.counter }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <p >
+                   <strong class="title" style="font-family: monospace; font-size: 20px; color: #1A5276"> Do you want to View student or Delete student.</strong>
+                </p>
+               <a href="{% url 'Frontdesk:front_VED_student' 'View' i.id %}" target="_blank"><button class="btn btn-primary btn-sm">View</button></a> &nbsp;&nbsp;&nbsp;
+                <a href=""><button class="btn btn-primary btn-sm">Delete</button></a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<!-- data tables -->
+<!-- Jquery DataTable Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+
+{% endblock %}
+</body>
+
+</html>

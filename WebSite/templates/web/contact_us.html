@@ -1,0 +1,133 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- slider-start -->
+    <div class="slider-area">
+        <div class="page-title">
+            <div class="single-slider   d-flex align-items-center" style="background-image: url('{% static 'web/img/bg/others_bg.jpg' %}');height:200px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider-content slider-content-breadcrumb text-center">
+                                <h2 class="white-color f-700">Contact Us</h2>
+                                <nav class="text-center" aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'Website:website_home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- courses start -->
+    <div class="advisors-area gray-bg pt-95 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 col-md-10 offset-md-1 ml-md-auto">
+                    <div class="contact-info-text">
+                        <div class="section-title mb-20">
+                            <div class="section-title-heading mb-10">
+                                <h1>Contact Info</h1>
+                            </div>
+                            <div class="section-title-para">
+                                <p>if you are interested in knowing further about our courses and programs, contact us at the earliest for step-by-step coaching and guidance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info mb-50 wow fadeInRight" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInRight;">
+                        <ul>
+                            <li>
+                                <div class="contact-icon">
+                                    <i class="ti-headphone"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>Call Us</h5>
+                                    <span>{{ profile.mobile_number }}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon">
+                                    <i class="ti-email"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>Email Us</h5>
+                                    <span>{{ profile.email }}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon">
+                                    <i class="ti-location-pin"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>Location</h5>
+                                    <span>{{ profile.address }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-6 col-md-10 offset-md-1 ml-md-auto">
+                    <div class="events-details-form faq-area-form mb-30 p-0">
+                        <form action="{% url 'Website:student_query' %}" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-8">
+                                    <div class="events-form-title mb-25">
+                                        <h2>Do You Have Any Questions</h2>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                    <select name="course" class="form-control" required>
+                                                <option value="">
+                                                 --Select Course--
+                                                </option>
+                                                {% for i in all_sub_course %}
+                                                <option value="{{ i.id }}">{{ i.main_course.name }} - {{ i.name }}</option>
+                                                 {% endfor %}
+                                            </select>
+                                </div><br><br><br>
+                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                   <select name="center" class="form-control" required>
+                                                <option value="">
+                                               --Select center--
+                                                </option>
+                                                {% for i in all_center %}
+                                                <option value="{{ i.id }}">{{ i.Title }}</option>
+                                                 {% endfor %}
+                                            </select>
+                                </div><br><br><br>
+                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                    <input placeholder="Name :" type="text" name="name">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                    <input placeholder="Email :" type="text" name="email">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                    <input placeholder="Mobile Number :" type="text" name="mob">
+                                </div>
+
+                                <div class="col-xl-12 ">
+                                    <textarea cols="30" rows="10" placeholder="Message :" name="msg"></textarea>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="faq-form-btn events-form-btn">
+                                        <button class="btn m-0">submit now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- courses end -->
+    <!-- map start -->
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7332.825986979507!2d77.43183612289518!3d23.228053848605995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf2dc54d146c5ee4c!2sTechSim%2B!5e0!3m2!1sen!2sin!4v1559203959487!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <!-- map end -->
+    {% endblock %}

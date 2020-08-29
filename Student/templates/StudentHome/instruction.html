@@ -1,0 +1,126 @@
+{% extends 'StudentHome/base.html' %}
+{% block body %}
+{% load static %}
+
+    <div id="main-content">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                    <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <center><h2>Welcome</h2>
+                                <h3 style="font-family: monospace; font-size: 35px; color: #1A5276">{{ student.name }}</h3></center>
+                        </div>
+                        <div class="header">
+                          <h4 style="font-family: monospace;">Please read exam instruction carefully.</h4>
+
+                        </div>
+                        <div class="body" style="overflow-y:scroll;">
+                            {{ exam.instruction|safe }}
+                        </div>
+                        <div class="body">
+                            <p><b>Declaration</b></p>
+                            <p style="font-size: 15px;">&nbsp;<label for = "instruction"><input type="checkbox" id = "instruction" onclick="Decelatrion();" >
+                                I have read all the instructions carefully and have understood them.
+                                I agree not to cheat or use unfair means in this examination.
+                                I understand that using unfair means of any sort for my own or some else’s advantage will
+                                lead to my immediate disqualification. The decision of TechSim+
+                                will be final in these matters and cannot be appealed.</span></label></p>
+                           <center>
+                               <a href="#" id="{% url 'StudentPanel:live' exam.id sid qid '1' 'Live' '000' %}" style="color: black;"
+                                        onclick="formSubmit(this.id);"><input type="button"
+                                                                              value="I have read the instructions" class="btn btn-default btn-block max-width-100 bg-gray-6 pad-h0 pad-v8"
+                                                                              style="border:1px solid black; max-width: 200px;" disabled id = "read"></a></center>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+
+
+
+<script type="text/javascript">
+    function Decelatrion()
+    {
+        o = document.getElementById('instruction');
+        if (o.checked)
+        {
+            document.getElementById("read").disabled=false;
+        }
+        else
+        {
+         document.getElementById("read").disabled=true;   
+        }
+    }
+</script>
+
+
+            
+        </div>
+    </div>
+
+
+<script>
+ function formSubmit(href)
+{
+
+var res = href.split("000/")[0];
+var value = '';
+   var Hour = {{ hour }};
+    var key = "abc123XYZ";
+    var encrypted = "NXTftpOhr2doU6X/OKahwZhNQuaVy+m1eTdxYgnQEHk=";
+    var k = encrypted.toString();
+    for(var z = 0; z<k.length; z++)
+    {   if (k[z] != '=' && k[z] != '+' && k[z] != '/')
+        value = value + k[z];
+    }
+    value = value + "___" + Hour.toString() + "t1AZ4uvq";
+
+    var Hour = {{ min }};
+    var key = "abc123XYZ"
+    var encrypted = "NXTftpOhr2doU6X/OKahwZhNQuaVy+m1eTdxYgnQEHk=";
+    var k = encrypted.toString();
+    for(var z = 0; z<k.length; z++)
+    {   if (k[z] != '=' && k[z] != '+' && k[z] != '/')
+        value = value + k[z];
+    }
+    value = value + "___" + Hour.toString() + "t1AZ4uvq";
+
+    var Hour = {{ sec }};
+    var key = "abc123XYZ"
+    var encrypted = "NXTftpOhr2doU6X/OKahwZhNQuaVy+m1eTdxYgnQEHk=";
+    var k = encrypted.toString();
+    for(var z = 0; z<k.length; z++)
+    {   if (k[z] != '=' && k[z] != '+' && k[z] != '/')
+        value = value + k[z];
+    }
+    value = value + "___" + Hour.toString() + "t1AZ4uvq";
+
+    var Hour = {{ qmin }};
+    var key = "abc123XYZ"
+    var encrypted = "NXTftpOhr2doU6X/OKahwZhNQuaVy+m1eTdxYgnQEHk=";
+    var k = encrypted.toString();
+    for(var z = 0; z<k.length; z++)
+    {   if (k[z] != '=' && k[z] != '+' && k[z] != '/')
+        value = value + k[z];
+    }
+    value = value + "___" + Hour.toString() + "t1AZ4uvq";
+
+    var Hour = {{ qsec }};
+    var key = "abc123XYZ"
+    var encrypted = "NXTftpOhr2doU6X/OKahwZhNQuaVy+m1eTdxYgnQEHk=";
+    var k = encrypted.toString();
+    for(var z = 0; z<k.length; z++)
+    {   if (k[z] != '=' && k[z] != '+' && k[z] != '/')
+        value = value + k[z];
+    }
+    value = value + "___" + Hour.toString() + "t1AZ4uvq";
+
+    window.location.href = res + value + "/"
+
+}
+</script>
+
+{% endblock %}

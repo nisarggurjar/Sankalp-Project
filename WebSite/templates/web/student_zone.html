@@ -1,0 +1,64 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- slider-start -->
+
+    <div class="slider-area">
+        <div class="page-title">
+            <div class="single-slider   d-flex align-items-center" style="background-image: url('{% static 'web/img/bg/others_bg.jpg' %}');height:200px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider-content slider-content-breadcrumb text-center">
+                                <h2 class="white-color f-700">Batches Details</h2>
+                                <nav class="text-center" aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'Website:website_home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">New Batch</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- courses start -->
+   <div class="events-area white-bg pt-100 pb-70">
+        <div class="container">
+            <div class="events-list">
+                <center><h3 style="color:#1A2E6E;font-family:monospace;">All <span style="color:orange"><b>Upcoming Batches</b></span> For All Center.</h3>
+                 </center><div class="row">
+                     {% for i in institutes %}
+                    {% if i.id in ids %}
+                                    <div class="col-xl-6">
+                                        <div class="author-comments-box d-flex">
+                                            <div class="author-comments-avatar">
+                                                <img src="{{ i.institute_logo.url }}" alt="" height="80px;" width="80px;">
+                                            </div>
+                                            <div class="author-comments-text">
+                                                <div class="author-comments-title">
+                                                    <h5>{{ i.Title }}</h5>
+                                                    <span>{{ i.sub_title }}</span>
+                                                </div>
+                                                {% for j in upcoming_batch %}
+                                                {% if i.id == j.ins.id %}
+                                                <p style="color:black"><i class="ti-star" style="color:orange"></i> <b>{{ j.name }}</b> Start Date: <b>{{ j.start_date }}</b></p>
+                                                 {% endif %}
+                                                 {% endfor %}
+                                             </div>
+                                        </div>
+
+                                    </div>
+                     {% endif %}
+                    {% endfor %}
+
+
+                                </div>
+                            </div>
+            </div></div>
+    <!-- courses end -->
+
+    {% endblock %}

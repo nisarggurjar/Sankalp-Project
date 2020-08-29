@@ -1,0 +1,181 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    .yellow-back {
+  background: #fdb10f;
+  padding: 15px;
+  margin: 30px 0px;
+  box-shadow: 8px 8px 8px #8888;
+}
+.title2 {
+  font-size: 20px !important;
+  color: #fff;
+}
+.course-details {
+  padding: 10px 0px;
+  padding-left:12px;
+}
+</style>
+<!-- slider-start -->
+    <div class="slider-area">
+        <div class="pages-title">
+            <div class="single-slider   d-flex align-items-center" style="background-image: url('{% static 'web/img/bg/others_bg.jpg' %}');height:200px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider-content slider-content-breadcrumb text-center">
+                                <h2 class="white-color f-700">Course Details</h2>
+                                <nav class="text-center" aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'Website:website_home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{ data.name }}</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <div class="course-details-area gray-bg pt-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8">
+                    <div class="single-course-details-area mb-30">
+                        <div class="course-details-thumb">
+                            <img src="{{ data.image.url }}" alt="" height="300px;" width="50px;">
+                        </div>
+                        <div class="single-course-details white-bg">
+                            <div class="course-details-title mb-20">
+                                <h1>{{ data.main_course.name }} :: {{ data.name }} {% if request.user.is_staff %}<a href="{% url 'Website:edit_subcourse' 'all' data.id %}"><span class="ti-pencil" style="font-size:25px;"></span></a>{% endif %}</h1>
+                                <div class="courses-pricing-3" style="float:right;">
+                                        <span> &#8377; {{ data.fee }}</span>
+                                    </div><br>
+                                <p>{{ data.long_dis }}
+
+
+                                </p>
+                                {% if request.user.is_staff %}
+                                 <div class="courses-pricing-3">
+                                <a href="{% url 'Website:delete_stuff' 'SubCourse' data.id %}"><span>Delete</span></a>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="courses-details-sidebar-area">
+
+                        <div class="widget mb-40 widget-padding white-bg">
+                            <h4 class="widget-title">Category</h4>
+                            <h4 class="widget-title" style="float:right;">Courses</h4>
+                            <div class="widget-link">
+                                <ul class="sidebar-link">
+                                    {% for i in all_course %}
+                                    <li>
+                                        <a href="{% url 'Website:main_cdetails' i.id %}">{{ i.name }}</a>
+                                        <span>{{ i.sub_course_set.count }}</span>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                </div>
+
+            </div>
+                {% if content %}
+                <h3 style="font-family:monospace;color:#0D1D52"><u>Course Content</u> </h3>
+                {% if request.user.is_staff %}
+                                 <div class="courses-pricing-3" style="color:blue">
+                                <a href="{% url 'Website:add_content' data.id %}" ><span style="background-color:
+ #66b3ff;color:white;">Add Content</span></a>
+                                    </div>
+                                {% endif %}
+                {% for i in content %}
+                   <div class="col-xl-12">
+                       <h1 class="title2 yellow-back">{{ i.heading }}:
+                           {% if request.user.is_staff %}
+                           <a href="{% url 'Website:delete_stuff' 'Content' i.id %}" style="color:black"><span class="ti-trash" style="float:right"></span></a>
+
+                           <a href="{% url 'Website:edit_course_content' i.id %}" style="color:black"><span class="ti-pencil" style="float:right"></span></a>
+                       {% endif %}
+                       </h1>
+			     	<div class="course-details" style="background-color:white">
+			     		<p style="color:black;"> {{ i.content }}</p>
+			     	</div>
+                   </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+
+        </div>
+    </div>
+
+        
+    <!-- courses start -->
+    <div class="courses-area courses-bg-height gray-bg pt-60 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="section-title mb-50 text-center">
+                        <div class="section-title-heading mb-20">
+                            <h1 class="primary-color">Our Related Courses</h1>
+                        </div>
+                        <div class="section-title-para">
+                            <p>Sankalp Institute Offers Courses for Competitive exam with highly professional teachers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-list">
+                <div class="row">
+                    {% for i in related_course %}
+                    {% if i.id != data.id %}
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="courses-wrapper courses-wrapper-3 mb-30">
+
+                            <div class="courses-content  clearfix">
+                                <div class="courses-heading mt-25 d-flex">
+                                    <div class="course-title-3">
+                                        <h1><a href="{% url 'Website:sub_cdetails' i.id %}">{{ i.name }}</a></h1>
+                                    </div>
+                                    <div class="courses-pricing-3">
+                                        <span>&#8377; {{ i.fee }}</span>
+                                    </div>
+                                </div>
+                                <div class="courses-para mt-15">
+                                    <p>{{ i.dis }}</p>
+                                </div>
+                                <div class="courses-button">
+                                        <a href="{% url 'Website:sub_cdetails' i.id %}">View Details</a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div></div>
+    <!-- courses end -->
+    {% endblock %}

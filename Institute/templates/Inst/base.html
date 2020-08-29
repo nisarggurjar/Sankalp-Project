@@ -1,0 +1,271 @@
+
+{% block up %}
+{% endblock %}
+
+{% load static %}
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon"> <!-- Favicon-->
+
+<body class="theme-cyan" onpageshow="MorrisArea({{ data45 }});">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{{ ins_data.institute_logo.url }}" width="48" height="48" style="border-radius:50%;" alt=""></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+
+<!-- Top Bar -->
+<nav class="top_navbar">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="navbar-logo">
+                    <a href="javascript:void(0);" class="bars"></a>
+                    <a class="navbar-brand" href="{% url 'Master:master_deshboard'  %}">
+                        {% if ins_data.institute_logo %}
+                        <img src="{{ ins_data.institute_logo.url }}" style="border-radius: 50%;" width="30" alt="TechSim+">{% endif %}
+                        {% if request.user.last_name == "Admin" %}
+                            {% if not request.user.is_staff %}
+                                <span class="m-l-10">{{ request.user.visiteduser_set.first.institute }}</span></a>
+                            {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                            {% endif %}
+                        {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                    {% endif %} <a href="{% url 'Master:edit_institute_profile' %}"><i class="icon-note m-r-10" style="color:white;"></i></a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown notifications">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="icon-bell"></i><span class="label-count" id ="cnt">{{ lfive }}</span></a>
+                        <ul class="dropdown-menu pullDown">
+                            <li class="header">Upcoming Follow ups</li>
+                            <li class="body">
+                                <br>
+                                <ul class="menu list-unstyled">
+                                    {% for i in five %}
+                                    <li>
+                                            <div class="media">
+
+                                                <div class="media-body">
+
+                                                    <span class="name"><i class="zmdi zmdi-circle col-teal"></i> &nbsp;&nbsp;{{ i.student_name }} &nbsp;&nbsp;<span class="text-primary">{{ i.follow_up_date }}</span></span>
+                                                    <span class="message"><span class="text-success">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Remark: </span><b>{{ i.remark }}</b></span>
+                                                </div>
+                                            </div>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </li>
+                            <li class="footer"> </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown app_menu hidden-sm"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="icon-grid"></i></a>
+                        <ul class="dropdown-menu pullDown">
+                            <li>
+								<ul>
+									<li><a href="{% url 'Master:admin_all_student' %}"><i class="zmdi zmdi-accounts"></i><span>All Students</span></a></li>
+									<li><a href="{% url 'Master:master_course' %}"><i class="icon-list"></i><span>All Courses</span></a></li>
+									<li><a href="{% url 'Master:master_employee' %}"><i class="icon-users"></i><span>Employees</span></a></li>
+									<li><a href="{% url 'Master:admin_all_book' %}"><i class="icon-notebook"></i><span>All Books</span></a></li>
+                                    <li><a href="{% url 'Master:admin_todays_followup' %}"><i class="icon-bubble"></i><span>Today's followUp</span></a></li>
+
+									<li><a href="{% url 'Master:admin_fee_reminder' %}"><i class="icon-calendar"></i><span>Fee Reminders </span></a></li>
+								</ul>
+							</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown profile">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <img class="rounded-circle" src="{{ admin.image.url }}" width="25px;" height="35px;" alt="User">
+                        </a>
+                        <ul class="dropdown-menu pullDown">
+                           <!-- <li>
+                                <div class="user-info">
+                                    <h6 class="user-name m-b-0">{{ admin.name }}</h6>
+                                   <br>
+                                    <a title="facebook" href="javascript:void(0);"><i class="zmdi zmdi-facebook"></i></a>
+                                    <a title="twitter" href="javascript:void(0);"><i class="zmdi zmdi-twitter"></i></a>
+                                    <a title="instagram" href="javascript:void(0);"><i class="zmdi zmdi-instagram"></i></a>
+                                    <a title="linkedin" href="javascript:void(0);"><i class="zmdi zmdi-linkedin-box"></i></a>
+                                    <hr>
+                                </div>
+                            </li> -->
+                            <li><a href="{% url 'Master:admin_institute_profile' %}"><i class="zmdi zmdi-eye m-r-10"></i> <span>Institute Profile</span></a></li>
+
+                            <li><a href="{% url 'Master:admin_profile' %}"><i class="icon-user m-r-10"></i> <span>My Profile</span></a></li>
+                           <li><a href="{% url 'Master:edit_admin_profile' %}"><i class="icon-note m-r-10"></i> <span>Edit Profile</span></a></li>
+                           <li><a href="{% url 'Master:choose_institute' %}"><i class="zmdi zmdi-8tracks"></i> <span> Switch Your Institute</span></a></li>
+
+                            <li><a href="{% url 'logout' %}"><i class="icon-power m-r-10"></i><span>Sign Out</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a  ></a></li><li><a  ></a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<aside id="leftsidebar" class="sidebar h_menu">
+<div class="container">
+        <div class="row clearfix" >
+            <div class="col-12">
+                <div class="menu">
+                    <ul class="list">
+                        <li> <a href="{% url 'Master:master_deshboard'  %}" class="menu-toggle"><i class="icon-home"></i></a></li>
+                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="icon-grid"></i><span>Masters</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Master:master_course' %}">Courses</a></li>
+                                <li><a href="{% url 'Master:master_fee' %}">Fee Type</a></li>
+                                <li><a href="{% url 'Master:master_packege' %}">Fee Package</a></li>
+                                <li><a href="{% url 'Master:number_of_installment' %}">Make Installment</a></li>
+                                <li><a href="{% url 'Master:master_medium' %}">Medium</a></li>
+                                <li><a href="{% url 'Master:master_batch' %}">Batches</a></li>
+                                <li><a href="{% url 'Master:master_desig' %}">Designation</a></li>
+                                <li><a href="{% url 'Master:master_sid' %}">SMS Sender ID</a></li>
+                                <li><a href="{% url 'Master:master_stemp' %}">SMS Template</a></li>
+                                <li><a href="{% url 'Master:master_holiday' %}">Holidays</a></li>
+
+                                <li><a href="{% url 'Master:master_book_fine' %}">Book Fine</a></li>
+                                <li><a href="{% url 'Master:invoice_number' 'Exam' %}">Invoice Start Number</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="icon-users"></i><span>Students</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Master:admin_all_student' %}">All Students</a></li>
+                                <li><a href="{% url 'Master:admin_tday_addm_list' %}">Todays Admission</a></li>
+                                <li><a href="{% url 'Master:admin_all_cancal_add' %}">All Cancel Admission</a></li>
+                                <li><a href="{% url 'Master:admin_all_receipts' %}">Fee Receipts</a></li>
+                                <li><a href="{% url 'Master:admin_fee_report' '0' '0' %}">Students Fee Report</a></li>
+                                <li><a href="{% url 'Master:admin_due_fee_report' %}">Due Fee Report</a></li>
+                                <li><a href="{% url 'Master:admin_all_open_enq' %}">Open Enquiries</a></li>
+                                <li><a href="{% url 'Master:admin_all_close_enq' %}">Close Enquiries</a></li>
+                                <li><a href="{% url 'Master:admin_all_todays_enq' %}">Todays Enquiries</a></li>
+                                <li><a href="{% url 'Master:admin_todays_followup' %}">Todays Follow Ups</a></li>
+                                <li><a href="{% url 'Master:admin_upcoming_followup' %}">Upcoming Follow Ups</a></li>
+                                <li><a href="{% url 'Master:admin_all_external_enq' %}">External Follow Ups</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-library"></i><span>Library</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Master:admin_all_cat' %}">Book Categories</a></li>
+
+                                <li><a href="{% url 'Master:admin_all_book' %}">All Books</a></li>
+                                <li><a href="{% url 'Master:admin_all_e_book' %}">E-Learning Books</a></li>
+                                <li><a href="{% url 'Master:admin_all_uncat' %}">Uncategorized Books</a></li>
+                                <li><a href="{% url 'Master:admin_all_issued_book' %}">Issued Books</a></li>
+                                <li><a href="{% url 'Master:admin_all_return_book' %}">Issued Return List</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="icon-bar-chart"></i><span>Sales</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Master:admin_wise_sales' %}">Course Wise Sales</a></li>
+                                <li><a href="{% url 'Master:admin_select_month_year' %}">Month Wise Sales</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-folder"></i><span>Frontdesk</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Master:admin_all_external_enq' %}">Phone Call Log Book</a></li>
+                                <li><strong style="color: #6f42c1;">Reminders</strong></li>
+                                <li><a href="{% url 'Master:admin_prev_followup' %}">Previous Follow Ups</a></li>
+                                <li><a href="{% url 'Master:admin_upcoming_followup' %}">Upcoming Follow Ups</a></li>
+                                <li><a href="{% url 'Master:admin_fee_reminder' %}">Fee Reminders</a></li>
+
+                                <li><strong style="color: #6f42c1;">Upload Section</strong></li>
+                                <li><a href="{% url 'Master:admin_upload_new_file' '0' %}">New Upload</a></li>
+                                <li><a href="{% url 'Master:admin_all_upload_files' %}">Uploaded Files</a></li>
+
+                                <li><strong style="color: #6f42c1;">Notification</strong></li>
+                                <li><a href="{% url 'Master:admin_noti_for_batch' '0' '0' %}">Batch Wise Students</a></li>
+                                <li><a href="{% url 'Master:admin_select_student' '0' '0' %}">Individual Student</a></li>
+                                <li><a href="{% url 'Master:admin_select_enquiry_student' '0' %}">Enquiry Students</a></li>
+
+                                <li><a href="{% url 'Master:admin_noti_for_all_staff' %}">All Staff</a></li>
+                                <li><a href="{% url 'Master:admin_noti_for_single_staff' %}">Individual Staff Member</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="icon-settings"></i><span>Settings</span></a>
+                            <ul class="ml-menu">
+                               <!-- <li><a href="{% url 'Master:admin_institute_profile' %}">Institute Profile</a></li> -->
+                                <li><a href="{% url 'Master:user_management_settings' %}">User Management</a></li>
+                                <li><a href="{% url 'Master:auto_sms_settings' %}">Auto SMS Setting</a></li>
+                                </ul>
+                        </li>
+                        <li> <a href="javascript:void(0);" class="menu-toggle"><i class="icon-notebook"></i><span>Report</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Master:admin_addmission_report' %}">Student Admission Report </a></li>
+                                <li><a href="{% url 'Master:admin_enquiry_report' %}">Enquiry Report</a></li>
+                                <li><a href="{% url 'Master:admin_wise_sales' %}">Fee Collection Report</a></li>
+                                <li><a href="{% url 'Master:admin_select_month_year' %}">Month Wise Fee Collection Report</a></li>
+                                <li><a href="{% url 'Master:admin_receivable_amount' %}">Receivable Report</a></li>
+                                <li><a href="{% url 'Master:admin_due_fee_report' %}">Installment Due Report</a></li>
+                                <li><a href="{% url 'Master:admin_follow_up_report' %}">Follow Up Report</a></li>
+                                <li><a href="{% url 'Master:admin_call_log_report' %}">Call Logs Report</a></li>
+                                <li><a href="{% url 'Master:sms_report' %}">SMS Package</a></li>
+                                <li><a href="{% url 'Master:student_report' %}">Student Package</a></li>
+
+                              </ul>
+                        </li>
+                        <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts"></i><span>Employees</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Master:admin_add_employe' %}">Add New Employee</a></li>
+                                <li><a href="{% url 'Master:master_employee' %}">All Employee</a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="javascript:void(0);" class="menu-toggle"><i class="icon-folder-alt"></i><span>Other Panels</span></a>
+                            <ul class="ml-menu">
+                                <li><a href="{% url 'Frontdesk:home' %}" target="_blank">FrontDesk</a></li>
+                                <li><a href="{% url 'LibraryPanel:library_deshboard' %}" target="_blank">Library</a></li>
+                                <li><a href="{% url 'ExamPanel:exam_home' %}" target="_blank">Exam Panel</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+  <script>
+function count_one(){
+      var c = {{ five }};
+      var cc = c.length
+     document.getElementById("cnt").innerText = cc;
+     }
+     window.onload = count_one;
+</script>
+
+
+<script>
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+
+
+
+
+{% block body %}
+{% endblock %}

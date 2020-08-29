@@ -1,0 +1,414 @@
+
+{% extends 'front/front_base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Asign Course to student</title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon"> <!-- Favicon-->
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Add Student
+
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Asign</strong> Course </h2>
+
+                    </div>
+                    <div class="body">
+
+                        <center>
+                             {% if error %}
+                        <p style="color:red;">This course is Already Asigned</p>
+                        {% endif %}
+                         <div class=" content col-lg-6">
+                            <label><b>Choose Course</b></label>
+                         <select class="form-control show-tick" name = 'course' required="required"
+                                onchange="window.location=this.value">
+                                    <option value="">-- Select Courses --</option>
+
+									{% for c in all_course %}
+                             {% if error %}
+                                     <option value="{% url 'Frontdesk:front_asign_course' student_id c.id '0'  %}" >{{ c.name }}-{{c.medium}}</option>
+                                    {% else %}
+                                    {% if courseid.id == c.id  %}
+                                    <option value="{% url 'Frontdesk:front_asign_course' student_id c.id '0' %}" selected>{{ c.name }}-{{c.medium}}</option>
+                                    {% else %}
+                                     <option value="{% url 'Frontdesk:front_asign_course' student_id c.id '0'  %}" >{{ c.name }}-{{c.medium}}</option>
+                                    {% endif %}
+                             {% endif %}
+                                    {% endfor %}
+
+                         </select></div></center>
+
+                        <center>
+                        <div class=" content col-lg-6">
+                            <label><b>Choose Batch</b></label>
+                         <select class="form-control show-tick" name = 'course' required="required"
+                                onchange="window.location=this.value">
+                                    <option value="">-- Select Batch --</option>
+									{% for b in batches %}
+                                    {% if batch.id == b.id %}
+                                   <option value="{% url 'Frontdesk:front_asign_course' student_id courseid.id b.id %}" selected>{{ b.name }}</option>
+
+                                    {% else %}
+                                    <option value="{% url 'Frontdesk:front_asign_course' student_id courseid.id b.id %}">{{ b.name }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                         </select></div></center>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if batch %}
+		       <div class="row clearfix">
+            <div class="col-md-12">
+                <form action="" method="post">
+                    {% csrf_token %}
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Fee</strong> Details </h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label><b>Fee Packege Details</b></label></center>
+                                 <center> <button type="button" class="btn btn-default waves-effect m-r-20"
+                                                  data-toggle="modal" data-target="#largeModal">
+                                     Fee Packege Details</button></center>
+                                </div>
+                            </div>
+                            {% for i in  data.master_fee_type_packege_data_set.all %}
+                            <input type="hidden" name="feeType{{ i.id }}" value="{{ i.fee }}" id="hid{{ forloop.counter }}">
+                            {% endfor %}
+                             {% for i in  data.master_make_installment_data_set.all %}
+                            <input type="hidden" name="amount{{ i.id }}" value = "0"  id="am{{ forloop.counter }}">
+                            {% endfor %}
+							<div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label><b>Discount in %</b></label></center>
+                                  <input type="number" class="form-control" value="0" id ='discount_id'
+                                  onkeyup="myFunction3();" name="dis_count">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+								<center><label><b>Total Fee</b></label></center>
+                                   <input type="text" class="form-control" value="0" id ='total_fee_id'
+                                  readonly="readonly" name="course_total_fee">
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="content col-md-5">
+                        <center>
+                        <div>
+
+                            <input class="btn btn-primary btn-round btn-lg " type = "submit" value="Asign Course">
+
+                        </div>
+                        </center>
+
+
+                    </div>
+                </div></form>
+            </div>
+
+        </div>
+        {% endif %}
+
+
+        </div>
+
+
+    <!-- Large Size -->
+
+</section>
+
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="title" id="largeModalLabel">Packege Details</h5>
+
+                 <ul class="nav nav-tabs padding-0">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Details" onclick=" myFunction3();"> Packege Details</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Structure" onclick=" myFunction3();">Installments</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="Details">
+                        <div class="card">
+                            <div class="body">
+
+                                    <span><strong style="font-size:15px;">Course Name:</strong>{{ data.course.name }}</span>
+                                    <p><b>Fee Packege Name:&nbsp;</b>{{ data.name }}</p>
+
+                                <p>
+                                    <span><strong style="font-size:15px;">Total Fee:</strong>&nbsp;&nbsp; {{ data.total_fee }}</span><br>
+                                    <span><strong style="font-size:15px;">Maximum Discount for Student  :</strong>&nbsp; &nbsp; {{ data.discount_for_single }}
+                                &nbsp;%
+                                </span>
+                                </p>
+
+                    <div class="tab-pane" id="Students">
+                                <div class="table-responsive">
+                                    <center>
+                                    <table class="table table-hover m-b-0 c_list">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Fee Type</th>
+                                                <th data-breakpoints="xs">Fee</th>
+
+                                            </tr>
+                                        </thead>
+                                            <tbody>
+                                            {% for i in  data.master_fee_type_packege_data_set.all %}
+                                            <tr>
+                                                <td >
+                                                    <div class="checkbox">
+                                                        <input id="ch{{ forloop.counter }}" type="checkbox" checked onclick="myFunction3();">
+                                                        <label for="ch{{ forloop.counter }}">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="c_name">{{ i.fee_type }}</p>
+                                                </td>
+                                                <td id ="f{{ forloop.counter }}">
+                                                    <span class="phone">{{ i.fee }}</span>
+                                                </td>
+
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table></center>
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Structure">
+                        <div class="card">
+                            <div class="body">
+                                <h6>Installment in percentage</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Installment</th>
+                                                <th>percentage</th>
+                                                 <th>Amount</th>
+                                                 <th>Last Date</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if ins_ment_last_date %}
+                                       {% for i in ins_ment_last_date %}
+                                            <tr>
+                                                <td>{{ i.installment.name }}</td>
+                                                <td>{{ i.installment.percentage }}%</td>
+                                                <td id="ins{{ forloop.counter }}"> </td>
+                                                <td>{{ i.last_date }}</td>
+
+
+                                            </tr>
+                                       {% endfor %}
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+        </div>
+    </div>
+</div>
+<!-- Jquery Core Js -->
+<script>
+
+function myFunction3() {
+    discount_per = {{ data.discount_for_single }}
+            var num = parseInt(document.getElementById("discount_id").value);
+            if (!num)
+            {
+            num = 0;
+            }
+            if(num>discount_per)
+            {
+            var strng = "You can not provide discount more than " + discount_per.toString() + "%";
+             alert(strng);
+             document.getElementById("discount_id").value = 0;
+            }
+    var total = 0;
+    document.getElementById("total_fee_id").value = {{ data.total_fee }}
+    var n = {{ data.total_fee }};
+    var d1 = {{ fee_type }};
+    var d = {{ ins_list }};
+
+
+
+    for (var i = 0; i<d1.length; i++)
+        {
+           var t = i + 1;
+           var k = t.toString();
+           var check = document.getElementById("ch"+k);
+           if (check.checked)
+
+           {
+             document.getElementById("hid"+k).value = d1[i];
+           }
+
+           else
+
+           {
+            var fee = parseInt(document.getElementById("f"+k).innerText);
+            document.getElementById("hid"+k).value = 0;
+            var n = n-fee;
+
+           }
+
+        }
+
+      var num = parseInt(document.getElementById("discount_id").value);
+    if (num > 0)
+    {
+     n1 = (n*num)/100;
+     n = n -n1;
+    }
+
+
+    for (var i = 0; i<d.length; i++)
+        {
+           var per = (n*d[i])/100;
+           total = total + per;
+           var total2 = total
+           var t1 = i + 1;
+           var k1 = t1.toString();
+           document.getElementById("am"+k1).value = per;
+           document.getElementById("ins"+k1).innerText = per;
+
+        }
+        document.getElementById("total_fee_id").value = total2;
+
+
+}
+window.onload = myFunction3;
+
+</script>
+
+<script>
+ function add_number() {
+
+            var first_number = parseInt(document.getElementById("Text2").value);
+            var second_number = parseInt(document.getElementById("Text1").value);
+
+
+            var result = first_number - second_number  ;
+
+            document.getElementById("txtresult").value = result;
+        }
+</script>
+
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/index.bundle.js' %}"></script> <!-- Jquery Knob, Count To, Sparkline Js -->
+<script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'assets/plugins/dropzone/dropzone.js' %}"></script> <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'assets/js/pages/index2.js' %}"></script>
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

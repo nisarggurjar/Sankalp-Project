@@ -1,0 +1,150 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}    <!-- slider-start -->
+    <div class="slider-area" >
+        <div class="page-title">
+            <div class="single-slider   d-flex align-items-center" style="background-image: url('{% static 'web/img/bg/others_bg.jpg' %}');height:200px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider-content slider-content-breadcrumb text-center">
+                                <h2 class="white-color f-700">About Us</h2>
+                                <nav class="text-center" aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'Website:website_home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- about start -->
+    <div id="about" class="about-area pt-100 pb-70">
+
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-xl-7 col-lg-7">
+                   <h2 style="font-family:monospace;">About <span style="color:#e1261f;">Sankalp</span> Institute</h2>
+                    <div class="about-title-section about-title-section-2 mb-30">
+                        <h4 style="color:#eeaf0a;font-family:cursive"><b><u>Who We Are</u></b>
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'Website:edit_about_content' 'Who_we_are' %}"><span class="ti-pencil"></span></a>
+                        {% endif %}
+                        </h4>
+                        <p>{{ about_content.who_we_are }}</p></div>
+                </div>
+                <div class="col-xl-5 col-lg-5">
+                    <div class="about-img mb-55">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'Website:change_image' 'Who_we_are' %}"><img src="{{ about_content.image1.url }}" alt=""></a>
+                        {% else %}
+                        <img src="{{ about_content.image1.url }}" alt="">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+            <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-5">
+                    <div class="about-img mb-55">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'Website:change_image' 'Why_join_us' %}"><img src="{{ about_content.image2.url }}" alt=""></a>
+                        {% else %}
+                        <img src="{{ about_content.image2.url }}" alt="">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-7">
+                    <div class="about-title-section about-title-section-2 mb-30">
+                        <h4 style="color:#eeaf0a;font-family:cursive"><b><u>Why To Join Sankalp ?</u></b>
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'Website:edit_about_content' 'Why_join_us' %}"><span class="ti-pencil"></span></a>
+                        {% endif %}
+                        </h4>
+                        <p>{{ about_content.why_join_us }}</p></div>
+                </div>
+
+            </div>
+
+        </div>
+
+            <div class="container">
+            <div class="row">
+
+                <div class="col-xl-12 col-lg-12">
+                    <div class="about-title-section about-title-section-2 mb-30">
+                        <h4 style="color:#eeaf0a;font-family:cursive"><b><u>Our Vision</u></b>
+                       {% if request.user.is_staff %}
+                            <a href="{% url 'Website:edit_about_content' 'Our_vision' %}"><span class="ti-pencil"></span></a>
+                        {% endif %} 
+                        </h4>
+                    <p>{{ about_content.our_vision }}</p>
+
+                    </div>
+                </div>
+
+            </div>
+                <div class="row">
+
+                <div class="col-xl-12 col-lg-12">
+                    <div class="about-title-section about-title-section-2 mb-30">
+                        <h4 style="color:#eeaf0a;font-family:cursive"><b><u>Our Mission</u></b>
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'Website:edit_about_content' 'Our_mission' %}"><span class="ti-pencil"></span></a>
+                        {% endif %}
+                        </h4>
+                        <span> <b>{{ about_content.mission_tag_line }}{% if request.user.is_staff %}
+                            <a href="{% url 'Website:edit_about_content' 'Mission_tag_line' %}"><span class="ti-pencil"></span></a>
+                        {% endif %}</b></span>
+                        <p> {{ about_content.our_mission }}</p></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container">
+
+            <div class="row">
+
+
+                <div class="col-xl-12">
+                    <h2 style="font-family:monospace;"><span style="color:#e1261f;">Director's Message</span> </h2>
+
+
+
+                                        <div class="author-comments-box d-flex">
+
+                                            <div class="author-comments-avatar">
+                                                <img src="{{ profile.image.url }}" alt="" height="100px;" width="100px;">
+                                            </div>
+                                            <div class="author-comments-text">
+                                                <div class="author-comments-title">
+                                                    <h5>{{ profile.name }}</h5>
+                                                    <h6>Director</h6>
+                                                </div>
+                                                <p>{{ profile.director_message }}</p>
+                                                <p>Thank you for considering us as the best coaching Institute for your child.</p>
+                    <p>With best regards</p>
+                    <p><b>Mob.: {{ profile.mobile_number }}<br>
+                            Email: {{ profile.email }}</b></p>
+                                                </div>
+                                        </div>
+                                    </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- about end -->
+
+   {% endblock %}

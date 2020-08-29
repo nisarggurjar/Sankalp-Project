@@ -1,0 +1,168 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Student Fine List</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+    <link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>All Library Fine Students
+
+                </h2>
+            </div>
+
+        </div>
+    </div>
+  <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card student-list">
+                    <div class="header">
+                        <h2><strong>Library Fine</strong> List</h2>
+                                            </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Student Name</th>
+                                        <th>Roll Number</th>
+                                        <th>Book Name</th>
+                                        <th>Issued Date</th>
+                                        <th>Return Date</th>
+                                        <th>Expected Return Date</th>
+                                        <th>Fine</th>
+                                        <th>Collect Fine</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+								{% for book in data %}
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;{{ forloop.counter }}</td>
+                                        <td>{{ book.student.name }}</td>
+                                        <td>{{ book.student.roll_number }}</td>
+										<td>{{ book.book.book_title }}</td>
+                                        <td>{{ book.issue }}</td>
+                                        <td>{{ book.Return }}</td>
+                                        <td class="text-primary">{{ book.Due }}</td>
+                                        <td>{{ book.late_fee }} /-</td>
+                                        <td><a href="" data-toggle="modal" data-target="#collect{{ forloop.counter }}"><span class="badge badge-primary">Collect</span></a></td>
+
+                                        </tr>
+                                {% endfor %}
+                                 </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% for i in data %}
+<div class="modal fade" id="collect{{ forloop.counter }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel1111"><strong>Collect Fine</strong></h6>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'LibraryPanel:Library_fine_list' %}" method="post" enctype="multipart/form-data"
+                >
+                {% csrf_token %}
+
+                <div class="form-group">
+                   <label><b>Enter Fine</b></label>
+                    <div class="form-line">
+                        <input type="number" class="form-control" name="fine" placeholder="Enter Amount" required="required" id = 'fine{{ forloop.counter }}'
+                        onkeyup="myfunction();">
+                    </div>
+                    <div class="form-line">
+                        <input type="hidden" class="form-control" name="book_id" value="{{ i.book.id }}">
+                    </div>
+                    <div class="form-line">
+                        <input type="hidden" class="form-control" name="stu_id" value="{{ i.id }}">
+                    </div>
+                </div>
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Submit" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+                </div>
+
+        </div>
+
+{% endfor %}
+<script>
+    function myfunction(){
+    data = {{ fine }}
+    for(var i = 0; i<data.length; i++){
+    var ff = data[i];
+    var k = i+1;
+    var t = k.toString();
+
+    var d = parseInt(document.getElementById('fine'+t).value);
+    if (d>ff){
+        var ll = ff.toString();
+       var s = 'Fine can not be greater than' + ' ' + ll;
+       alert(s);
+       document.getElementById('fine'+t).value = 0;
+    }
+
+
+    }
+    }
+
+</script>
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

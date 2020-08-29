@@ -1,0 +1,172 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Issue Book</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link href="{% static 'assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Issue Book</h2>
+            </div>
+          
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-4">
+
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Issue date</strong> {{ issue_date }} </h2><br>
+
+                        <label><b>Enter Return Date</b></label>
+                        <form class="form" action="" method="post">
+                            {% csrf_token %}
+                        <input type="date" required class="form-control" name="rdate" placeholder="Enter Return Date"><br>
+                            <center> <input type="submit" class="btn btn-primary btn-round" value="Issue Book">
+                                </center>
+                            </form>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Student</strong> Details</h2>
+                    </div>
+                    <div class="body">
+                        <ul class="comment-reply list-unstyled">
+                            <li class="row">
+                                <div class="icon-box col-md-2 col-4"><img class="img-fluid img-thumbnail" src="{{ student_data.image.url }}" alt="Awesome Image"></div>
+                                <div class="text-box col-md-10 col-8 p-l-0 p-r0">
+                                    <h5 class="m-b-0">{{ student_data.name }} </h5>
+                                    <p><b>Roll Number:</b> {{ student_data.roll_number }}&nbsp;&nbsp;
+                                    <b>
+                                        Number of course:</b> {{ student_data.front_student_course_batch_data_set.count }}&nbsp;&nbsp;
+                                    <b >
+                                        Number of Issued Book:</b> {{ dd.count }}
+                                    </p>
+                                    <ul class="list-inline">
+                                        <li> </li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                        <h6 class="">Coures List:</h6>
+                        {% for sc in student_data.front_student_course_batch_data_set.all %}
+
+                                         <ul class="right_chat list-unstyled">
+
+                                        <li class="online">
+
+                                            <div>
+
+                                                <div class="media">
+                                                    <ul class="pagination pagination-primary">
+                                                        <li class="page-item active">
+                                                            <div class="page-link" >{{ forloop.counter }}</div>
+                                                        </li>
+                                                    </ul>
+                                                    &nbsp;&nbsp;&nbsp;
+
+                                                    <div class="media-body">
+                                                        <span class="name">{{ sc.course.name }}-{{ sc.course.medium }}</span>
+                                                        <span class="message">Batch: {{ sc.Batch.name }}</span>
+                                                        <span class=""></span>
+                                                    </div>
+
+                                                </div>
+
+
+                                              </div>
+                                        </li>
+
+                                    </ul>
+
+                                        {% endfor %}
+                        <div class="table-responsive">
+                            <table class="table  table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+										 <th>Book Name</th>
+                                        <th>Issued Date</th>
+										<th>Expect Return Date</th>
+                                        <th>Fine</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+								{% for book in dd %}
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;{{ forloop.counter }}</td>
+										<td>{{ book.book.book_title }}</td>
+                                        <td>{{ book.issue }}</td>
+										<td>{{ book.Due }}</td>
+                                        <td>{{ book.late_fee }}</td>
+
+                                       </tr>
+                                {% endfor %}
+                                 </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+			</div>
+
+
+            </div>
+
+        </div>
+
+</section>
+<!-- Jquery Core Js --> 
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/plugins/dropzone/dropzone.js' %}"></script> <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/plugins/autosize/autosize.js' %}"></script> <!-- Autosize Plugin Js -->
+<script src="{% static 'assets/plugins/momentjs/moment.js' %}"></script> <!-- Moment Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/forms/basic-form-elements.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

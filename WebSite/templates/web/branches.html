@@ -1,0 +1,72 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- slider-start -->
+
+    <div class="slider-area">
+        <div class="page-title">
+            <div class="single-slider   d-flex align-items-center" style="background-image: url('{% static 'web/img/bg/others_bg.jpg' %}');height:200px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider-content slider-content-breadcrumb text-center">
+                                <h2 class="white-color f-700">Our Branches</h2>
+                                <nav class="text-center" aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'Website:website_home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Branches</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- courses start -->
+   <div class="events-area gray-bg pt-100 pb-70">
+        <div class="container">
+            <div class="events-list">
+                <div class="row">
+                    {% for i in all_branch %}
+                    <div class="col-xl-6 offset-xl-0 col-lg-6 offset-lg-0 col-md-10 offset-md-1">
+                        <div class="single-events mb-30">
+                            <div class="events-wrapper events-wrapper-padding">
+                                <div class="events-inner d-flex">
+
+                                    <div class="events-text white-bg">
+                                        <div class="event-text-heading mb-20">
+                                            <div class="events-calendar text-center f-left">
+                                                <a href=""><img src="{{ i.institute_logo.url }}" alt="" height="50px;" width="50px;"></a>
+
+                                            </div>
+                                            <div class="events-text-title clearfix">
+                                                <a href="">
+                                                    <h4>{{ i.Title }}</h4>
+                                                </a>
+                                                <div class="time-area">
+
+                                                    <span class="published-time">{{ i.sub_title }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="events-para">
+                                            <p><b>Email: </b>{{ i.email }}</p>
+                                             <p><b>Address: </b>{{ i.office_add }}</p>
+                                             <p><b>Mobile Number: </b>{{ i.office_mob }}</p>
+                                        </div>
+                                        <div class="events-speaker">
+                                            <h2>Website : <span><a href="{{ i.website }}" target="_blank">{{ i.website }}</a></span></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div></div></div></div>
+    <!-- courses end -->
+
+    {% endblock %}

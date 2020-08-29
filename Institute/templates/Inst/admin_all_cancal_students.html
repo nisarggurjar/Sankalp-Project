@@ -1,0 +1,115 @@
+<!doctype html>
+{% extends 'Inst/base.html' %}
+{% block up %}
+
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Cancel Admission List</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}">
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+      <div class="container">
+
+         <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                       <div class="body">
+                       <p ><strong style="font-family: monospace; font-size: 23px; color: #1A5276"> All Cancel Admission List</strong>
+
+                       </p>
+
+                    </div>
+
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Name</th>
+                                        <th>Roll Number</th>
+                                        <th>Mobile Number</th>
+
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                  {% for i in all_student %}
+                                    <tr data-toggle="modal" data-target="#option{{ forloop.counter }}">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.roll_number }}</td>
+                                        <td>{{ i.mobile }}</td>
+
+                                    </tr>
+                                  {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% for i in all_student %}
+<div class="modal fade" id="option{{ forloop.counter }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <p >
+                   <strong class="title" style="font-family: monospace; font-size: 20px; color: #1A5276"> Do you want to View student or Delete student.</strong>
+                </p>
+               <a href="{% url 'Frontdesk:front_VED_student' 'View' i.id %}" target="_blank"><button class="btn btn-primary btn-sm">View</button></a> &nbsp;&nbsp;&nbsp;
+                <a href="{% url 'Master:delete' i.id 'Student' %}"><button class="btn btn-primary btn-sm">Delete</button></a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<!-- data tables -->
+<!-- Jquery DataTable Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+
+{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,393 @@
+
+{% extends 'front/front_base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Collect Fee</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Collect Fee
+               </h2>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card" >
+
+     <div class="body">
+                        <div class="row clearfix">
+
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+                        {% if student_data %}
+                         <center>
+                                <h5><strong>Course Name:</strong> {{ batch.course.name }}-{{ batch.course.medium }} </h5>
+                             <p><strong>Batch Name: </strong> {{ batch.name }}</p>
+
+                            </center>
+                            {% else %}
+
+
+                  <center>
+					<div class="content col-md-5">
+
+
+                        <div >
+                                <label><b>Choose Course</b></label>
+                                <select class="form-control show-tick" name = 'course' required="required"
+                                onchange="window.location=this.value">
+                                    <option value="">-- Select Courses --</option>
+									{% for c in all_course %}
+                                    {% if course.id == c.id %}
+                                    <option value="{% url 'Frontdesk:front_fee_details' c.id '0' %}" selected>{{ c.name }}/{{c.medium}}</option>
+                                    {% else %}
+                                     <option value="{% url 'Frontdesk:front_fee_details' c.id '0'  %}" >{{ c.name }}/{{c.medium}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+                        <br>
+
+                    </div></center>
+                  <center>
+					<div class="content col-md-5">
+                        <div >
+                            <label><b>Choose Batch</b></label>
+                            <select class="form-control show-tick" name = 'batch' required="required"
+                              onchange="window.location=this.value">
+                                    <option value="">-- Select batch --</option>
+                                   {% if course %}
+									{% for b in course.master_batch_data_set.all %}
+                                    <option value="{% url 'Frontdesk:front_fee_details' course.id b.id %}">{{ b.name }}</option>
+                                    {% endfor %}
+                                   {% endif %}
+                            </select>
+
+                        </div>
+
+                    </div></center><br>{% endif %}
+
+            </div>
+        </div>
+    </div>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {% if student_data %}
+         <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card student-list">
+                      <div class="header">
+            <h2><strong>Student </strong> List</h2>
+        </div>
+
+                    <div class="body">
+                        <div class="body table-responsive">
+                             <table class="table table-striped table-hover js-basic-example dataTable" id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Roll Number</th>
+                                        <th>Total Fee</th>
+                                        <th>Paid Fee</th>
+                                        <th>Remaining Fee</th>
+                                        <th>Fee Pay</th>
+                                        <th>Student Fee Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for details in student_data %}
+                                {% if details.fee_after_pay != '0' %}
+
+                                <tr>
+                                        <td>{{ details.student.name }}</td>
+                                        <td>{{ details.student.roll_number }}</td>
+                                        <td>{{ details.total_fee }}</td>
+                                        <td>{{ details.total_fee_pay }}</td>
+                                        <td>{{ details.fee_after_pay }}</td>
+                                        <td><a href ="" data-toggle="modal" data-target="#pay{{ details.id }}"><span class=" tag badge badge-info">PayFee</span></a></td>
+                                        <td><a href =""data-toggle="modal" data-target="#fee_details{{ details.id }}"><span class=" tag badge badge-warning">Fee Details</span></a></td>
+
+
+                                </tr>
+                                {% endif %}
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        </div>
+
+</section>
+{% if student_data %}
+
+  {% for i in student_data %}
+                  <div class="modal fade" id="pay{{ i.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="title" id="largeModalLabel">Pay Fee </h5>
+
+                 <p class="title" ><strong class="col-orange">Payment Date  </strong>  {{ payment_date }}</p>
+
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+
+                            <div class="body">
+                                <form method="post" action="" onsubmit="return ValidateForm{{forloop.counter}}()">
+                                    {% csrf_token %}
+                                    <center>
+                                          <lable><b>Select Payment Mode</b></lable>
+                                    <div class="col-lg-7">
+
+                                    <select class="form-control show-tick" onchange="yesnoCheck(this);"  name="mode" required = 'required'>
+
+                                        <option value = "cash" >Cash</option>
+                                        <option value = "cheque" >Cheque</option>
+
+                                    </select>
+
+                                        <br>
+                                        <lable>Amount</lable>
+                                        <input type="text" name="amount" class="form-control" placeholder="Amount" id = "fee{{forloop.counter}}" required="required">
+                                    <div id="ifYes{{ forloop.counter }}" style="display: none;">
+                                        <label>Bank Name</label>
+                                        <input type="text" class="form-control" name="bank_name"  placeholder="Bank Name" /><br />
+
+                                         <label>Cheque Number</label>
+                                        <input type="text" class="form-control" name="ch_number" placeholder="Cheque Number" /><br />
+
+                                        <label>Cheque Date</label>
+                                        <input type="date" class="form-control" value="{{ payment_date }}" name="ch_date" /><br />
+
+                                    </div><br>
+                                         <input type="hidden" class="form-control" value="{{ i.student.id }}" name="studnt_id" /><br />
+
+                                        <input type="submit" class="btn btn-primary " value="Pay Fee" />
+
+
+
+                                    </div></center>
+                                </form>
+
+                            </div>
+                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+<script>
+    function ValidateForm{{forloop.counter}}() {
+             var total_fee = {{ i.fee_after_pay }};
+             if (total_fee == 0)
+             {
+             alert('Your Fee has been paid')
+             return false
+             }
+
+
+             var dt = parseInt(document.getElementById("fee"+{{forloop.counter}}).value);
+
+            if (dt>parseInt(total_fee)) {
+
+               var s = total_fee.toString();
+               var st = "Amount can not be greter than "+s
+               alert(st);
+               return false
+            }
+
+
+
+         return true
+
+        }
+</script>
+            <div class="modal fade" id="fee_details{{ i.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h5 class="title" id="largeModalLabel1"><strong class="col-orange">Fee Details </strong> </h5>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                            <table class="table table-hover m-t-20">
+                                <thead>
+                                <th>Installments</th>
+                                <th>Amount</th>
+                                <th>Paid Amount</th>
+                                <th>Remaining Amount</th>
+
+                               </thead>
+                                <tbody>
+                                {% for ins in i.front_student_fee_installment_data_set.all %}
+                                <tr>
+                                <td>{{ ins.installment }}</td>
+                                <td>{{ ins.amount }}</td>
+                                <td>{{ ins.pay_fee }}</td>
+                                <td>{{ ins.remaining_fee }}</td>
+
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td><strong class="col-orange" >Total</strong></td>
+                                    <td><strong>{{ i.total_fee }}</strong></td>
+                                    <td><strong>{{ i.total_fee_pay }}</strong></td>
+                                    <td><strong>{{ i.fee_after_pay }}</strong></td>
+                                </tr>
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                            </div>
+                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+{% endfor %}
+
+{% endif %}
+
+<script>
+    function yesnoCheck(that) {
+        var n = {{ student_data.count }};
+        for (var i = 1; i<=n; i++){
+
+             var k = i.toString();
+
+
+        if (that.value == 'cheque') {
+
+
+            document.getElementById("ifYes"+k).style.display = "block";
+        } else {
+            document.getElementById("ifYes"+k).style.display = "none";
+        }
+
+}
+    }
+</script>
+
+<!-- Jquery Core Js -->
+
+
+
+
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/index.bundle.js' %}"></script> <!-- Jquery Knob, Count To, Sparkline Js -->
+<script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'assets/plugins/dropzone/dropzone.js' %}"></script> <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'assets/js/pages/index2.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+<script src="{% static 'assets/js/pages/forms/basic-form-elements.js' %}"></script>
+
+
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

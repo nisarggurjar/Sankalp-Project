@@ -1,0 +1,224 @@
+
+
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>Create - Institute Profile</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}">
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+    <link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-steps/jquery.steps.css' %}" />
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+
+</head>
+
+<!-- Main Content -->
+<section class="content">
+
+       <div class="container-fluid">
+	<form action="" method = "post" enctype="multipart/form-data" name="frmSample" >
+        {% csrf_token %}
+                       <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+            <h2 style="font-family: monospace; font-size: 23px; color: #1A5276">
+                <strong style="font-family: monospace; font-size: 23px; color: #1A5276">
+
+                    Institute Profile
+
+                </strong></h2>
+                   <center>  <h5 style="font-family: monospace; color: #1A5276">Institute Image</h5>
+                           <img id="blah" src="{% static 'download.png' %}" height="120" width="150"  />
+                            <br><br>
+					<div class="content col-md-4">
+                        <div >
+                            {{ form.institute_image }}
+
+                            </div>
+
+
+                    </div></center>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                       <h2 style="font-family: monospace; font-size: 20px; color: #1A5276">
+                <strong style="font-family: monospace; font-size: 20px; color: #1A5276">Institute</strong> Details</h2>
+
+
+                    </div>
+                    <div class="body">
+
+
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <br>
+                                <div class="form-group">
+								<center><label style="float:left;font-family: monospace; "><b>Institute Name</b></label></center>
+                                    {{ form.name }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <b>Title</b>
+                                <div class="form-group">
+
+								<center><label style="float:left;font-family: monospace; ">(To be display on receipt & invoice header)</label></center>
+
+                                    {{ form.Title }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <b>SubTitle</b>
+                                <div class="form-group">
+
+                                <center><label style="float:left;font-family: monospace; ">(To be display on receipt & invoice header)</label></center>
+
+                                   {{form.sub_title}}
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="float:left;font-family: monospace; "><b> Office Mobile no.</b></label></center>
+                                   {{ form.office_mob }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="float:left;font-family: monospace; "><b>Office Landline no.</b></label></center>
+                                   {{ form.landline_no }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                               <div class="form-group">
+							   <center><label style="float:left;font-family: monospace;"><b>Email</b></label></center>
+                                   {{ form.email }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="float:left;font-family: monospace; "><b>Office Address</b></label></center>
+                                   {{ form.office_add }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                               <div class="form-group">
+								<center><label style="float:left;font-family: monospace;"><b>City</b></label></center>
+                                   {{ form.city }}
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-6 col-sm-12">
+                               <div class="form-group">
+								<center><label style="float:left;font-family: monospace;"><b>State</b></label></center>
+                                   {{ form.state }}
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="float:left;font-family: monospace; "><b>Website Url</b></label></center>
+                                   {{form.website}}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="float:left;font-family: monospace; "><b>Pan Number</b></label></center>
+                                   {{form.pan_number}}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                                 <div class="form-group">
+								<center><label style="float:left;font-family: monospace; "><b>Institute Logo</b></label></center>
+                                   {{form.institute_logo}}
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                        <center><input type="submit" class="btn btn-primary btn-round"></center>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+		</form>
+        </div>
+</section>
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+</script>
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<!-- data tables -->
+<!-- Jquery DataTable Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/dataTables.buttons.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-validation/jquery.validate.js' %}"></script> <!-- Jquery Validation Plugin Css -->
+<script src="{% static 'Master/assets/plugins/jquery-steps/jquery.steps.js' %}"></script> <!-- JQuery Steps Plugin Js -->
+<script src="{% static 'Master/assets/assets/js/pages/forms/form-wizard.js' %}"></script>
+
+
+</body>
+
+</html>

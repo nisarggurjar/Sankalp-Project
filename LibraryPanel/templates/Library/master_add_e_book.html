@@ -1,0 +1,153 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Add E-Book</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                {% if dd %}
+                <h2>Edit Ebook</h2>
+                {% else %}
+                <h2>Add Ebook</h2>
+                {% endif %}
+            </div>
+          
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+			 <form class="form" method="post" action="" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="body">
+                                  <div class="row clearfix">
+								 
+							    {% csrf_token %}
+                                <div class="col-lg-4 col-md-12">
+								
+							
+								<label><b>Book Category</b></label>
+                                    
+                                <select class="form-control show-tick" name = 'category' required='required' onchange="window.location=this.value" >
+
+                                    <option value=""> -- Select Book Category --</option>
+
+                                {% for ct in all_category %}
+                                  {% if dd %}
+                                    {% if cat.id == ct.id %}
+                                    <option value="{% url 'LibraryPanel:Library_e_book_edit' bid ct.id subcategory.id %}" selected>{{ ct.name }}</option>
+                                    {% else %}
+                                    <option value="{% url 'LibraryPanel:Library_e_book_edit' bid ct.id subcategory.id %}">{{ ct.name }}</option>
+                                    {% endif %}
+                                  {% else %}
+                                    {% if cat.id == ct.id %}
+                                    <option value="{% url 'LibraryPanel:Library_add_e_books' ct.id %}" selected>{{ ct.name }}</option>
+                                    {% else %}
+                                    <option value="{% url 'LibraryPanel:Library_add_e_books' ct.id %}">{{ ct.name }}</option>
+                                    {% endif %}
+                                  {% endif %}
+
+                                {% endfor %}
+                                </select>
+                                  <br><br>
+                                </div>
+								
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Book SubCategory</b></label>
+                                    
+                                <select class="form-control show-tick" name = 'subcategory'required='required'>
+                                    {% if cat %}
+									{% for subcat in cat.master_subcatbook_data_set.all %}
+								{% if subcategory.id == subcat.id %}
+									<option value ="{{ subcat.id }}" selected>&nbsp;{{ subcat.name }}</option>
+                                    {% else %}
+                                    <option value ="{{ subcat.id }}" >&nbsp;{{ subcat.name }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+								<br><br>
+                                </div>                                   
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Book Title</b></label>
+                                    <div class="form-group">
+                                        {{ form.book_title }}
+                                    </div>
+                                </div>
+
+								 <div class="col-lg-4 col-md-12">
+								<label><b>Author Name</b></label>
+                                    <div class="form-group">
+                                        {{ form.author }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Publisher Name</b></label>
+                                    <div class="form-group">
+                                        {{ form.publisher }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Book File</b></label>
+                                    <div class="form-group">
+                                        {{ form.book }}
+                                    </div>
+                                </div>
+                               
+                               
+                                <div class="col-md-12">
+                                    {% if dd %}
+                                    <center><input class="btn btn-primary btn-round btn-lg" type = "submit" value="Edit Ebook"></center>
+
+                                    {% else %}
+                                <center><input class="btn btn-primary btn-round btn-lg" type = "submit" value="Add Ebook"></center>
+                                {% endif %}
+                                </div>
+								
+                            </div>
+                      
+                    </div>
+                </div>
+				</form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js --> 
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

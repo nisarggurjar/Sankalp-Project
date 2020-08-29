@@ -1,0 +1,330 @@
+
+{% extends 'front/front_base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Previous Follow up List</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+ <script language="Javascript">
+
+        // Declaring valid date character, minimum year and maximum year
+        var dtCh = "/";
+        var minYear = 1900;
+        var maxYear = 2100;
+
+        function isInteger(s) {
+            var i;
+            for (i = 0; i < s.length; i++) {
+                // Check that current character is number.
+                var c = s.charAt(i);
+                if (((c < "0") || (c > "9"))) return false;
+            }
+            // All characters are numbers.
+            return true;
+        }
+
+        function stripCharsInBag(s, bag) {
+            var i;
+            var returnString = "";
+            // Search through string's characters one by one.
+            // If character is not in bag, append to returnString.
+            for (i = 0; i < s.length; i++) {
+                var c = s.charAt(i);
+                if (bag.indexOf(c) == -1) returnString += c;
+            }
+            return returnString;
+        }
+
+        function daysInFebruary(year) {
+            // February has 29 days in any year evenly divisible by four,
+            // EXCEPT for centurial years which are not also divisible by 400.
+            return (((year % 4 == 0) && ((!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28);
+        }
+        function DaysArray(n) {
+            for (var i = 1; i <= n; i++) {
+                this[i] = 31
+                if (i == 4 || i == 6 || i == 9 || i == 11) { this[i] = 30 }
+                if (i == 2) { this[i] = 29 }
+            }
+            return this
+        }
+
+        function isDate(dtStr) {
+            var daysInMonth = DaysArray(12)
+            var pos1 = dtStr.indexOf(dtCh)
+            var pos2 = dtStr.indexOf(dtCh, pos1 + 1)
+            var strDay = dtStr.substring(0, pos1)
+            var strMonth = dtStr.substring(pos1 + 1, pos2)
+            var strYear = dtStr.substring(pos2 + 1)
+            strYr = strYear
+            if (strDay.charAt(0) == "0" && strDay.length > 1) strDay = strDay.substring(1)
+            if (strMonth.charAt(0) == "0" && strMonth.length > 1) strMonth = strMonth.substring(1)
+            for (var i = 1; i <= 3; i++) {
+                if (strYr.charAt(0) == "0" && strYr.length > 1) strYr = strYr.substring(1)
+            }
+            month = parseInt(strMonth)
+            day = parseInt(strDay)
+            year = parseInt(strYr)
+            if (pos1 == -1 || pos2 == -1) {
+                alert("The date format should be : dd/mm/yyyy")
+                return false
+            }
+            if (strMonth.length < 1 || month < 1 || month > 12) {
+                alert("Please enter a valid month")
+                return false
+            }
+            if (strDay.length < 1 || day < 1 || day > 31 || (month == 2 && day > daysInFebruary(year)) || day > daysInMonth[month]) {
+                alert("Please enter a valid day")
+                return false
+            }
+            if (strYear.length != 4 || year == 0 || year < minYear || year > maxYear) {
+                alert("Please enter a valid 4 digit year between " + minYear + " and " + maxYear)
+                return false
+            }
+            if (dtStr.indexOf(dtCh, pos2 + 1) != -1 || isInteger(stripCharsInBag(dtStr, dtCh)) == false) {
+                alert("Please enter a valid date")
+                return false
+            }
+            return true
+        }
+
+         function ValidateForm2() {
+             var enquiry = {{ number }};
+
+             for (var i = 1; i<=enquiry; i++){
+
+             var k = i.toString();
+             var dt = document.getElementById("fdate"+k);
+
+            if (isDate(dt.value) == false) {
+
+                dt.focus()
+                return false
+            }
+
+
+         }
+         return true
+
+        }
+
+    </script>
+
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Previous Followup's
+               </h2>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card student-list">
+                      <div class="header">
+            <h2><strong>Previous Followup's </strong> List</h2>
+        </div>
+
+                    <div class="body">
+                        <div class="body table-responsive">
+                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Course Name</th>
+                                        <th>Mobile Number</th>
+                                        <th>FollowUp Date</th>
+                                        <th>FollowUp Time</th>
+                                        <th>Last Remark</th>
+                                        <th>Update Follow Up</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for data in latest_followup_date %}
+
+                                <tr>
+                                        <td>{{ data.student_name }}</td>
+                                        <td>{{ data.course.name }}-{{ data.course.medium }}</td>
+                                        <td>{{ data.mobile }}</td>
+                                    <td><strong class="col-orange">{{ data.follow_up_date }}</strong></td>
+                                    <td><strong class="col-orange">{{ data.follow_up_time }}</strong></td>
+                                        <td>{{ data.remark }}</td>
+                                    <td><a href ="" data-toggle="modal" data-target="#update{{ forloop.counter }}"><span class=" tag badge badge-primary">Update FollowUP</span></a></td>
+
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</section>
+{% for anquiry in latest_followup_date %}
+
+
+<div class="modal fade" id="update{{ forloop.counter }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title col-orange" id="defaultModalLabel">Update Date And Time</h4>
+            </div>
+            <form class="form" action="{% url 'Frontdesk:front_close_or_update' anquiry.id 'Update' %}" method="post"  onsubmit="return ValidateForm2()" >
+                {% csrf_token %}
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><b>Next Follow Up Date</b></label>
+                    <div class="form-line">
+                        <input type="text" class="form-control" name = 'fdate' id = "fdate{{forloop.counter}}" placeholder="Follow Up Date"  value="{{ anquiry.follow_up_date }}"
+                         maxlength="10" size="15">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Next Follow Up Time</b></label>
+                    <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Follow UP Time " value="{{ anquiry.follow_up_time }}"
+                        name="ftime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Next Remark</b></label>
+                    <div class="form-line">
+                        <textarea class="form-control no-resize" placeholder="Remark..." name="remark">{{anquiry.remark}}</textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Update" name="Submit1">
+                <button type="button" class="btn btn-simple btn-round waves-effect" data-dismiss="modal">CLOSE</button>
+            </div></form>
+
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td,td1,td2,td3,td4,td5, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    td1 = tr[i].getElementsByTagName("td")[2];
+    td2 = tr[i].getElementsByTagName("td")[3];
+    td3 = tr[i].getElementsByTagName("td")[4];
+    td4 = tr[i].getElementsByTagName("td")[5];
+    td5 = tr[i].getElementsByTagName("td")[6];
+
+
+    if (td && td1 && td2 && td3 && td4 && td5 ) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1
+      || td1.innerHTML.toUpperCase().indexOf(filter) > -1
+      || td2.innerHTML.toUpperCase().indexOf(filter) > -1
+      || td3.innerHTML.toUpperCase().indexOf(filter) > -1
+      || td4.innerHTML.toUpperCase().indexOf(filter) > -1
+      || td5.innerHTML.toUpperCase().indexOf(filter) > -1
+      ) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+
+}
+</script>
+<!-- Jquery Core Js -->
+
+
+
+
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/index.bundle.js' %}"></script> <!-- Jquery Knob, Count To, Sparkline Js -->
+<script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'assets/plugins/dropzone/dropzone.js' %}"></script> <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'assets/js/pages/index2.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

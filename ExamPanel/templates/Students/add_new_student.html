@@ -1,0 +1,519 @@
+
+{% extends 'exam/base.html' %}
+
+{% block up %}
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Add External Student</title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon">
+<!-- Favicon-->
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<!-- Custom Css -->
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+    <link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+
+     <script language="Javascript">
+
+        var dtCh = "/";
+        var minYear = 1900;
+        var maxYear = 2100;
+
+        function isInteger(s) {
+            var i;
+            for (i = 0; i < s.length; i++) {
+                // Check that current character is number.
+                var c = s.charAt(i);
+                if (((c < "0") || (c > "9"))) return false;
+            }
+            // All characters are numbers.
+            return true;
+        }
+
+        function stripCharsInBag(s, bag) {
+            var i;
+            var returnString = "";
+            // Search through string's characters one by one.
+            // If character is not in bag, append to returnString.
+            for (i = 0; i < s.length; i++) {
+                var c = s.charAt(i);
+                if (bag.indexOf(c) == -1) returnString += c;
+            }
+            return returnString;
+        }
+
+        function daysInFebruary(year) {
+            // February has 29 days in any year evenly divisible by four,
+            // EXCEPT for centurial years which are not also divisible by 400.
+            return (((year % 4 == 0) && ((!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28);
+        }
+        function DaysArray(n) {
+            for (var i = 1; i <= n; i++) {
+                this[i] = 31
+                if (i == 4 || i == 6 || i == 9 || i == 11) { this[i] = 30 }
+                if (i == 2) { this[i] = 29 }
+            }
+            return this
+        }
+
+        function isDate(dtStr) {
+            var daysInMonth = DaysArray(12)
+            var pos1 = dtStr.indexOf(dtCh)
+            var pos2 = dtStr.indexOf(dtCh, pos1 + 1)
+            var strDay = dtStr.substring(0, pos1)
+            var strMonth = dtStr.substring(pos1 + 1, pos2)
+            var strYear = dtStr.substring(pos2 + 1)
+            strYr = strYear
+            if (strDay.charAt(0) == "0" && strDay.length > 1) strDay = strDay.substring(1)
+            if (strMonth.charAt(0) == "0" && strMonth.length > 1) strMonth = strMonth.substring(1)
+            for (var i = 1; i <= 3; i++) {
+                if (strYr.charAt(0) == "0" && strYr.length > 1) strYr = strYr.substring(1)
+            }
+            month = parseInt(strMonth)
+            day = parseInt(strDay)
+            year = parseInt(strYr)
+            if (pos1 == -1 || pos2 == -1) {
+                alert("The date format should be : dd/mm/yyyy")
+                return false
+            }
+            if (strMonth.length < 1 || month < 1 || month > 12) {
+                alert("Please enter a valid month")
+                return false
+            }
+            if (strDay.length < 1 || day < 1 || day > 31 || (month == 2 && day > daysInFebruary(year)) || day > daysInMonth[month]) {
+                alert("Please enter a valid day")
+                return false
+            }
+            if (strYear.length != 4 || year == 0 || year < minYear || year > maxYear) {
+                alert("Please enter a valid 4 digit year between " + minYear + " and " + maxYear)
+                return false
+            }
+            if (dtStr.indexOf(dtCh, pos2 + 1) != -1 || isInteger(stripCharsInBag(dtStr, dtCh)) == false) {
+                alert("Please enter a valid date")
+                return false
+            }
+            return true
+        }
+
+        function ValidateForm() {
+            var dt = document.frmSample.dob;
+
+            if (isDate(dt.value) == false ) {
+                dt.focus();
+                return false;
+            }
+            return true
+        }
+    </script>
+
+
+
+    <script>
+        function fileValidation2(id){
+            var fileInput = document.getElementById(id);
+            var filePath = fileInput.value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            if(!allowedExtensions.exec(filePath)){
+                alert('Please upload file having extensions .jpg/.jpeg/.png');
+                fileInput.value = '';
+                return false;
+            }
+              var FileSize = fileInput.files[0].size / 1024 /1024;
+                if (FileSize > 1) {
+                    alert('File size exceeds 1 MB');
+                   fileInput.value = '';
+                return false;
+                }
+        }
+    </script>
+
+
+
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>All External students
+                
+                </h2>
+            </div>
+           
+        </div>
+    </div>
+      <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>External</strong> Student List</h2>
+
+                    </div>
+                    <div class="body">
+                        <ul class="nav nav-tabs padding-0">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#librarylist">All Students</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addlibrary">Add New Student</a></li>
+                        </ul>                        
+                    </div>
+                </div>
+                <div class="tab-content">                   
+                    <div class="tab-pane active" id="librarylist">
+                        <div class="card">
+                            <div class="body table-responsive">
+                                 <table class="table  table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Student Name</th>
+                                            <th>Date of Birth</th>
+											<th>Mobile</th>
+											<th>Email</th>
+											<th>View</th>
+											<th>Edit</th>
+											<th>Delete</th>
+
+                                            
+                                        </tr>
+                                    </thead>                            
+                                    <tbody>
+								        {% for anquiry in packages %}
+                                        <tr class="widget tag-clouds">
+                                            <td>{{ anquiry.name }}</td>
+                                            <td>{{ anquiry.dob }}</td>
+                                            <td>{{ anquiry.mobile }}</td>
+                                            <td>{{ anquiry.email }}</td>
+                                            <td>
+                                            <ul class="pagination pagination-success">
+                                                <li class="page-item active">
+                                                    <a href="{% url 'ExamPanel:other_students_view' 'View' anquiry.id  %}" class="page-link">View</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                            <td>
+                                            <ul class="pagination pagination-info">
+                                                <li class="page-item active">
+                                                    <a href="{% url 'ExamPanel:edit_new_students' anquiry.id 'Edit'  %}" class="page-link">Edit</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                                <td>
+                                            <ul class="pagination pagination-primary">
+                                                <li class="page-item active">
+                                                    <a href="{% url 'ExamPanel:edit_new_students' anquiry.id 'Delete'  %}" class="page-link">Delete</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="addlibrary">
+                        <div class="card">
+                    <div class="body">
+                        <div class="row clearfix">
+						
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+							<form class="form" action="" method="post" enctype="multipart/form-data" name="frmSample" onsubmit="return ValidateForm();">
+							{% csrf_token %}
+								<div class="header">
+
+								  <center>
+									  <h5>Add New Student</h5>
+                                      <p><b>Admission Date: </b>{{ today }}</p>
+								  </center>
+                                </div>
+                  <center>
+					<div class="content">
+
+
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+								<br>
+                                <label style="float:left;"><b>Student Name</b></label>
+                                    {{ form.name }}
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                              <br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Father Name</b></label>
+                                    {{ form.father_name }}
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Date of Birth</b></label>
+                                   {{ form.dob }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Mobile Number</b></label>
+                                   {{ form.mobile }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                 <br>
+                               <div class="form-group">
+                               <label style="float:left;"><b>Email Address</b></label>
+                                   {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>College Name</b></label>
+                                   {{ form.college }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Your Current Education</b></label>
+                                   {{ form.pursuing }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Your Gender</b></label>
+                                   {{ form.gender }}
+                                </div>
+                            </div>
+							 <div class="col-lg-4 col-md-6 col-sm-12">
+							 <br>
+                                <div class="form-group">
+                                   <label style="float:left;"><b>Photo</b></label>
+                                   {{ form.photo }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>ID Proof</b></label>
+                                   {{ form.id_proof }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div></center>
+                  <center>  <div class="footer text-center" style = "max-width:400px; min-width:200px;">
+                        <input class="btn btn-primary btn-round " type = "submit" value="Add Student" name="Submit">
+
+                    </div></center>
+                </form>
+            </div>
+        </div>
+    </div>
+                            
+                        </div>
+                      
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% for anquiry in all_enquiry %}
+{% if anquiry.status == 'open' %}
+
+<div class="modal fade" id="update{{ anquiry.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title col-orange" id="defaultModalLabel">Update Date And Time</h4>
+            </div>
+            <form class="form" action="{% url 'Frontdesk:front_close_or_update' anquiry.id 'Update' %}" method="post"  onsubmit="return ValidateForm2()" >
+                {% csrf_token %}
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><b>Next Follow Up Date</b></label>
+                    <div class="form-line">
+                        <input type="text" class="form-control" name = 'fdate' id = "fdate{{forloop.counter}}" placeholder="Follow Up Date"  value="{{ anquiry.follow_up_date }}"
+                         maxlength="10" size="15">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Next Follow Up Time</b></label>
+                    <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Follow UP Time " value="{{ anquiry.follow_up_time }}"
+                        name="ftime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Next Remark</b></label>
+                    <div class="form-line">
+                        <textarea class="form-control no-resize" placeholder="Remark..." name="remark">{{anquiry.remark}}</textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Update" name="Submit1">
+                <button type="button" class="btn btn-simple btn-round waves-effect" data-dismiss="modal">CLOSE</button>
+            </div></form>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+
+{% for ii in all_enquiry %}
+<div class="modal fade" id="view_details{{ ii.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                    <h5 class="title" id="largeModalLabel1"><strong class="col-orange"> Enquiry Details </strong></h5>
+
+                <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                            <table class="table table-hover m-t-20">
+                                <thead>
+                                <th>Course</th>
+                                <th>Name</th>
+                                <th>Mobile No.</th>
+                                <th>Address</th>
+
+                               </thead>
+                                <tbody>
+                                <td>{{ii.course.name}}</td>
+                                <td>{{ii.student_name}}</td>
+                                <td>{{ii.mobile}}</td>
+                                <td>{{ii.address}}</td>
+
+
+
+                                </tbody>
+                                <thead>
+                                <th>Father's Name</th>
+                                <th>Email</th>
+                                <th>College/School</th>
+                                <th>Graduation</th>
+
+                               </thead>
+                                <tbody>
+                                <td>{{ii.father_name}}</td>
+                                <td>{{ii.email}}</td>
+                                <td>{{ii.college}}</td>
+                                <td>{{ii.graduation}}</td>
+
+
+
+                                </tbody>
+
+                                 <thead>
+                                <th>Visited Date</th>
+                                <th>Follow Up Date</th>
+                                <th>Follow Up Time</th>
+                                <th>Remark</th>
+
+                               </thead>
+                                <tbody>
+                                <td>{{ii.visited_date}}</td>
+                                <td>{{ii.follow_up_date}}</td>
+                                <td>{{ii.follow_up_time}}</td>
+                                <td>{{ii.remark}}</td>
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                            </div>
+                        </div>
+
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+{% endfor %}
+
+
+<!-- Jquery Core Js --> 
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="{% static 'assets/bundles/index.bundle.js' %}"></script> <!-- Jquery Knob, Count To, Sparkline Js -->
+<script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'assets/js/pages/index2.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+    
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+    
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover    
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+    
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+    
+    });    
+    </script>    
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

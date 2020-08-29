@@ -1,0 +1,516 @@
+<!doctype html>
+{% extends 'Inst/base.html' %}
+{% block up %}
+
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Auto SMS Settings</title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}">
+
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+    <link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+    <style>
+        	.clearfix:after {  content: "."; display:block; font-size:0; line-height:0; height:0; clear:both; visibility:hidden; }
+	.clearfix { display:inline-block; }
+	* html .clearfix { height:1%; }
+	.clearfix { display:block; }
+
+	body {margin:0; background:#FFF url(../img/body.png); -webkit-text-size-adjust:100%; -moz-text-size-adjust:100%; padding:10px 2%; font:14px/24px 'Open Sans', Helvetica, Arial, sans-serif  ; color:#000;}
+	#wrapper { background:#FFF; width:1200px; margin:0 auto; border:solid 0px #E7E7E7; border-top:5px solid #0088cc; border-radius:6px; box-shadow:0 0 3px rgba(0,0,0,0.2), inset 0 4px 0 #ededed }
+	#header { padding:30px 20px; border-bottom:solid 1px #e0e0e0; margin-bottom:20px; text-align:center; font-family:'Open Sans', sans-serif;}
+	#logo { display:inline-block; font-weight:300;  margin:0 0 0px; font-size:30px; line-height:24px;  color:#000; text-decoration:none; position:relative;  }
+	#logo span{ color:#0088cc;}
+
+	section { padding:0 20px 20px}
+	h2, h3{ font:300 22px/30px 'Open Sans', sans-serif;  margin:0 0 10px 0; padding:0}
+	h2 span{color:#0088cc;}
+    h3 { font-size:18px; margin:20px 0 5px 0;}
+
+	.classname { display:block;  padding:20px;  border:solid 2px #CCC; text-align:center;}
+    </style>
+<style>
+.switch {
+	position: relative;
+	display: block;
+	vertical-align: top;
+	width: 100px;
+	height: 30px;
+	padding: 3px;
+	margin:0;
+	background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
+	background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
+	border-radius: 18px;
+	box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+  box-sizing:content-box;
+}
+.switch-input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+  box-sizing:content-box;
+}
+.switch-label {
+	position: relative;
+	display: block;
+	height: inherit;
+	font-size: 10px;
+	text-transform: uppercase;
+	background: #eceeef;
+	border-radius: inherit;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+  box-sizing:content-box;
+}
+.switch-label:before, .switch-label:after {
+	position: absolute;
+	top: 50%;
+	margin-top: -.5em;
+	line-height: 1;
+	-webkit-transition: inherit;
+	-moz-transition: inherit;
+	-o-transition: inherit;
+	transition: inherit;
+  box-sizing:content-box;
+}
+.switch-label:before {
+	content: attr(data-off);
+	right: 11px;
+	color: #aaaaaa;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.switch-label:after {
+	content: attr(data-on);
+	left: 11px;
+	color: #FFFFFF;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+	opacity: 0;
+}
+.switch-input:checked ~ .switch-label {
+	background: #E1B42B;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.switch-input:checked ~ .switch-label:before {
+	opacity: 0;
+}
+.switch-input:checked ~ .switch-label:after {
+	opacity: 1;
+}
+.switch-handle {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 28px;
+	height: 28px;
+	background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+	background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+	border-radius: 100%;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.switch-handle:before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -6px 0 0 -6px;
+	width: 12px;
+	height: 12px;
+	background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
+	background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
+	border-radius: 6px;
+	box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+}
+.switch-input:checked ~ .switch-handle {
+	left: 74px;
+	box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+/* Switch Flat
+==========================*/
+.switch-flat {
+	padding: 0;
+	background: #FFF;
+	background-image: none;
+}
+.switch-flat .switch-label {
+	background: #FFF;
+	border: solid 2px #eceeef;
+	box-shadow: none;
+}
+.switch-flat .switch-label:after {
+	color: #0088cc;
+}
+.switch-flat .switch-handle {
+	top: 6px;
+	left: 6px;
+	background: #dadada;
+	width: 22px;
+	height: 22px;
+	box-shadow: none;
+}
+.switch-flat .switch-handle:before {
+	background: #eceeef;
+}
+.switch-flat .switch-input:checked ~ .switch-label {
+	background: #FFF;
+	border-color: #0088cc;
+}
+.switch-flat .switch-input:checked ~ .switch-handle {
+	left: 72px;
+	background: #0088cc;
+	box-shadow: none;
+}
+/* Transition
+============================================================ */
+.switch-label, .switch-handle {
+	transition: All 0.3s ease;
+	-webkit-transition: All 0.3s ease;
+	-moz-transition: All 0.3s ease;
+	-o-transition: All 0.3s ease;
+}
+</style>
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+      <div class="container">
+
+         <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                       <div class="body">
+                       <p ><strong style="font-family: monospace; font-size: 23px; color: #1A5276">Auto SMS Settings</strong>
+
+                       </p>
+
+                    </div>
+
+                    <div class="body">
+
+                        <div class=" table-responsive" >
+                           <form action="" method="post" onsubmit="return myfunction();">
+                               {% csrf_token %}
+                             <table class="table">
+                                <thead class="thead">
+                                    <tr>
+
+                                        <th >S.no.</th>
+                                        <th >Setting</th>
+                                        <th >SMS Template</th>
+                                        <th >On/Off</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                        <tr>
+                                        <td><b>1.</b></td>
+
+                                        <td style="font-family: italic; font-size: 17px; color: #1A5276">Send notification to student after new admission
+                                            save.
+
+                                        </td>
+                                         <td>
+                                            <select class="form-control show-tick" name="temp1" id="01">
+                                                <option value="0">Select SMS Template</option>
+                                                 {% for t in templates %}
+                                                {% if data.new_addmission and data.sms_new_add.title == t.title %}
+                                                <option value="{{ t.id }}" selected>{{ t.title }} </option>
+                                                {% else %}
+                                                <option value="{{ t.id }}">{{ t.title }} </option>
+                                                {% endif %}
+                                                {% endfor %}
+
+
+                                            </select>
+                                        </td>
+
+                                        <td>
+
+                                           <label class="switch switch-flat">
+                                               {% if data.new_addmission %}
+                                               <input class="switch-input" type="checkbox" name="check" value="1" checked id="001"/>
+
+                                               {% else %}
+                                            <input class="switch-input" type="checkbox" name="check" value="1"  id="001"/>
+                                               {% endif %}
+                                            <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span>
+                                           </label>
+
+
+                                        </td>
+
+                                        </tr>
+                                       <tr>
+                                        <td><b>2.</b></td>
+
+                                        <td style="font-family: italic; font-size: 17px; color: #1A5276">Send notification to student after Fees receipt
+                                            save.
+
+                                        </td>
+                                         <td>
+                                            <select class="form-control show-tick" name="temp2" id="02">
+                                                <option value="0">Select SMS Template</option>
+                                                {% for t in templates %}
+                                                {% if data.student_fees and data.sms_student_fee.title == t.title %}
+                                                <option value="{{ t.id }}" selected>{{ t.title }} </option>
+                                                {% else %}
+                                                <option value="{{ t.id }}">{{ t.title }} </option>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+                                        </td>
+                                        <td>
+
+                                           <label class="switch switch-flat">
+                                              {% if data.student_fees %}
+                                            <input class="switch-input" type="checkbox" name="check" value="2" checked id="002"/>
+                                            {% else %}
+                                               <input class="switch-input" type="checkbox" name="check" value="2" id="002"/>
+                                            {% endif %}
+                                               <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span> </label>
+
+
+                                        </td>
+
+                                        </tr>
+                                        <tr>
+                                        <td><b>3.</b></td>
+
+                                        <td style="font-family: italic; font-size: 17px; color: #1A5276">Fees Reminder [Schedual between 9AM - 10AM]
+                                        </td>
+                                             <td>
+                                            <select class="form-control show-tick" name="temp3" id="03">
+                                                <option value="0">Select SMS Template</option>
+                                                {% for t in templates %}
+                                                {% if data.fee_reminder and data.sms_fee_reminder.title == t.title %}
+                                                <option value="{{ t.id }}" selected>{{ t.title }} </option>
+                                                {% else %}
+                                                <option value="{{ t.id }}">{{ t.title }} </option>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+                                        </td>
+                                        <td>
+
+                                            <label class="switch switch-flat">
+                                                {% if data.fee_reminder %}
+                                            <input class="switch-input" type="checkbox" name="check" checked value="3" id="003"/>
+                                            {% else %}
+                                                <input class="switch-input" type="checkbox" name="check" value="3" id="003"/>
+                                            {% endif %}
+                                                <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span> </label>
+
+                                        </td>
+
+                                        </tr>
+                                        <tr>
+                                        <td><b>4.</b></td>
+
+                                        <td style="font-family: italic; font-size: 17px; color: #1A5276">Student Birthday Auto SMS Setting
+                                        </td>
+                                         <td>
+                                            <select class="form-control show-tick" name="temp4" id="04">
+                                                <option value="0">Select SMS Template</option>
+                                                {% for t in templates %}
+                                                {% if data.student_bday and data.sms_student_bday.title == t.title %}
+                                                <option value="{{ t.id }}" selected>{{ t.title }} </option>
+                                                {% else %}
+                                                <option value="{{ t.id }}">{{ t.title }} </option>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+                                        </td>
+                                        <td>
+
+                                            <label class="switch switch-flat">
+                                                {% if data.student_bday %}
+                                            <input class="switch-input" type="checkbox" name="check"  value="4" checked id="004" />
+                                            {% else %}
+                                                <input class="switch-input" type="checkbox" name="check" value="4" id="004" />
+                                            {% endif %}
+                                                <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span> </label>
+
+
+                                        </td>
+
+                                        </tr>
+                                       <tr>
+                                        <td><b>5.</b></td>
+
+                                        <td style="font-family: italic; font-size: 17px; color: #1A5276">Employee Birthday Auto SMS Setting
+                                        </td>
+                                        <td>
+                                            <select class="form-control show-tick" name="temp5" id="05">
+                                                <option value="0">Select SMS Template</option>
+                                                {% for t in templates %}
+                                                {% if data.emp_bday and data.sms_emp_bday.title == t.title %}
+                                                <option value="{{ t.id }}" selected>{{ t.title }} </option>
+                                                {% else %}
+                                                <option value="{{ t.id }}">{{ t.title }} </option>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+                                        </td>
+                                        <td>
+
+                                           <label class="switch switch-flat">
+                                               {% if data.emp_bday %}
+                                            <input class="switch-input" type="checkbox" name="check" checked value="5" id="005"/>
+                                            {% else %}
+                                              <input class="switch-input" type="checkbox" name="check" value="5" id="005"/>
+                                            {% endif %}
+                                               <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span> </label>
+
+
+                                        </td>
+
+                                        </tr>
+                                          <tr>
+                                        <td><b>6.</b></td>
+
+                                        <td style="font-family: italic; font-size: 17px; color: #1A5276">Send notification to student after new Test
+                                            series Asign.
+                                        </td>
+                                           <td>
+                                            <select class="form-control" name="temp6" id="06">
+                                                <option value="0">Select SMS Template</option>
+                                                {% for t in templates %}
+                                                {% if data.new_ts_asign and data.sms_new_ts_asign.title == t.title %}
+                                                <option value="{{ t.id }}" selected>{{ t.title }} </option>
+                                                {% else %}
+                                                <option value="{{ t.id }}">{{ t.title }} </option>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+                                        </td>
+                                        <td>
+
+                                           <label class="switch switch-flat">
+                                               {% if data.new_ts_asign %}
+                                            <input class="switch-input" type="checkbox" checked name="check" value="6" id="006"/>
+                                               {% else %}
+                                            <input class="switch-input" type="checkbox" name="check" value="6" id="006"/>
+                                            {% endif %}
+                                               <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span> </label>
+
+
+                                        </td>
+
+                                        </tr>
+
+                                </tbody>
+                            </table>
+                             <center><input type="submit" value="Save" class="btn btn-primary btn-round"></center>
+                           </form>    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+      </div></section>
+<script>
+    function myfunction(){
+    var p = document.getElementById('001');
+    var p1 = document.getElementById('002');
+    var p2 = document.getElementById('003');
+    var p3 = document.getElementById('004');
+    var p4 = document.getElementById('005');
+    var p5 = document.getElementById('006');
+    if (p.checked == true){
+
+      var num = parseInt(document.getElementById("01").value);
+      if (num == 0){
+      alert("Please select sms template for new student admission Notification. ")
+      return false;
+      }
+      }
+      if (p1.checked == true){
+
+      var num1 = parseInt(document.getElementById("02").value);
+      if (num1 == 0){
+      alert("Please select sms template for  student Fee Receipt Notification. ")
+      return false;
+      }
+      }
+      if (p2.checked == true){
+
+      var num2 = parseInt(document.getElementById("03").value);
+      if (num2 == 0){
+      alert("Please select sms template for  Fee Reminder Notification. ")
+      return false;
+      }
+      }
+      if (p3.checked == true){
+
+      var num3 = parseInt(document.getElementById("04").value);
+      if (num3 == 0){
+      alert("Please select sms template for  student Birthday Notification. ")
+      return false;
+      }
+      }
+      if (p4.checked == true){
+
+      var num4 = parseInt(document.getElementById("05").value);
+      if (num4 == 0){
+      alert("Please select sms template for  Employee Birthday Notification. ")
+      return false;
+      }
+      }
+
+      if (p5.checked == true){
+
+      var num5 = parseInt(document.getElementById("06").value);
+      if (num5 == 0){
+      alert("Please select sms template for  New Test Series Notification. ")
+      return false;
+      }
+      }
+
+
+
+    }
+</script>
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<!-- data tables -->
+<!-- Jquery DataTable Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+
+{% endblock %}
+</body>
+
+</html>

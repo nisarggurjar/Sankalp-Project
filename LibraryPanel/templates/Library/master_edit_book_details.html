@@ -1,0 +1,153 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Edit Book Details</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Edit Book</h2>
+            </div>
+          
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+			 <form class="form" method="post" action="">
+                <div class="card">
+                    <div class="body">
+                                  <div class="row clearfix">
+								 
+							    {% csrf_token %}
+
+								
+
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Book Title</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control"  name = 'title' placeholder="Book Title"
+                                            value = "{{ book.book_title }}"   required='required'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Book SubTitle</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.subbook_title }}"
+                                               name = 'subtitle' placeholder="Book SubTitle"required='required'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+								<label><b>ISBN Number</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.ISBN }}"
+                                               name = 'isbn' placeholder="ISBN">
+                                    </div>
+                                </div>
+								 <div class="col-lg-4 col-md-12">
+								<label><b>Author Name</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.author }}"
+                                               name = 'author' placeholder="Author Name"required='required'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Publisher Name</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.publisher }}"
+                                               name = 'publisher' placeholder="Publisher Name"required='required'>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Editor Name</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.editor }}"
+                                               name = 'editor' placeholder="Editor Name">
+                                    </div>
+                                </div>
+								 <div class="col-lg-4 col-md-12">
+								<label><b>Series</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.series }}"
+                                               name = 'series' placeholder="Series">
+                                    </div>
+                                </div>
+								 <div class="col-lg-4 col-md-12">
+								<label><b>Publication Year</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.publication_year }}"
+                                               name = 'publisher_year' placeholder="Publication Year">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Edition</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.edition }}"
+                                               name = 'edition' placeholder="Edition">
+                                    </div>
+                                </div>
+								
+
+								 <div class="col-lg-4 col-md-12">
+								<label><b>Total Pages</b></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value = "{{ book.pages }}" name = 'total_page' placeholder="Total Page">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+								<label><b>Number Of Copies</b></label>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" value = "{{ book.copies }}"
+                                               name = 'copies' placeholder="Number Of Copies">
+                                    </div>
+                                </div>
+                               
+                               
+                                <div class="col-md-12">
+                                <center><input class="btn btn-primary btn-round btn-lg" type = "submit" value="Edit Book"></center>
+                                </div>
+								
+                            </div>
+                      
+                    </div>
+                </div>
+				</form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js --> 
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

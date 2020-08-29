@@ -1,0 +1,302 @@
+
+{% extends 'front/front_base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Edit Student Details</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Edit Student Details
+
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                    <div class="card">
+
+                        <div class="body">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                 <div class="row clearfix">
+
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+
+								<div class="header">
+
+                           <center>  <h5>Your Image</h5>
+                               {% if student.image %}
+                               <img id="blah" src="{{ student.image.url }}" height="120" width="150"  />
+
+                               {% else %}
+                           <img id="blah" src="{% static 'download.png' %}" height="120" width="150"  />
+                              {% endif %}
+                           </center>
+                               </div>
+
+					<div class="content col-md-6">
+                        <div >
+                            {{ form.image }}
+
+                            </div>
+
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+                        </div>
+                         <div class="row clearfix">
+                             <div class="col-lg-4 col-md-6 col-sm-12">
+
+								<br>
+                                <label style="float:left;"><b>Name</b></label>
+                                    {{ form.name }}
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+								<br>
+                                <label style="float:left;"><b>Date Of Birth</b></label>
+                                    {{ form.dob }}
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                              <br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Mobile Number</b></label>
+                                     {{ form.mobile }}
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Email Id</b></label>
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Address</b></label>
+                                   {{ form.address }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <br>
+
+                                <label style="float:left;"><b>Gender</b></label>
+                                    {{ form.gender }}
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                 <br>
+                               <div class="form-group">
+                               <label style="float:left;"><b>College</b></label>
+                                   {{ form.college }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Graduation/Class</b></label>
+                                   {{ form.graduation }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Stream/Subject</b></label>
+                                    {{ form.stream }}
+                                </div>
+                            </div>
+							 <div class="col-lg-4 col-md-6 col-sm-12">
+							 <br>
+                                <div class="form-group">
+                                   <label style="float:left;"><b>Father's Name</b></label>
+                                 {{ form.Father_name }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Father's Address</b></label>
+                                    {{ form.father_add }}
+                                    </div>
+                            </div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Father's Mobile No.</b></label>
+                                        {{ form.father_mob }}
+                                   </div>
+                            </div>
+
+
+							<div class="col-lg-4 col-md-6 col-sm-12">
+
+                                        <br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Occupation</b></label>
+                                    {{ form.Occupation }}
+                                    </div>
+                            </div>
+
+
+       </div>
+                                <center>  <div class="footer text-center" style = "max-width:400px; min-width:200px;">
+                        <input class="btn btn-info btn-round " type = "submit" value="Edit Details" name="Submit">
+
+                    </div></center>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+        </div>
+    <!-- Large Size -->
+
+</section>
+
+<!-- Jquery Core Js -->
+
+
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+</script>
+<script>
+
+</script>
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/index.bundle.js' %}"></script> <!-- Jquery Knob, Count To, Sparkline Js -->
+<script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'assets/plugins/dropzone/dropzone.js' %}"></script> <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'assets/js/pages/index2.js' %}"></script>
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+<script>
+function readURL(input) {
+var filePath = input.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png only.');
+        input.value = '';
+        return false;
+    }else{
+           var FileSize = input.files[0].size / 1024 /1024;
+                if (FileSize > 1) {
+                    alert('File size exceeds 1 MB');
+                   input.value = '';
+                return false;
+                }
+                else{
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                $('#blah')
+                                    .attr('src', e.target.result)
+                                    .width(150)
+                                    .height(120);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                }
+
+        }
+    }
+
+</script>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

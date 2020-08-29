@@ -1,0 +1,228 @@
+{% extends 'StudentHome/base.html' %}
+{% block body %}
+{% load static %}
+    <div id="main-content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-8 col-sm-12">
+                        <h2>Dashboard</h2>
+                    </div>
+                    <div class="col-lg-7 col-md-4 col-sm-12 text-right">
+                        <ul class="breadcrumb justify-content-end">
+                            <li class="breadcrumb-item"><a href=""><i class="icon-home"></i></a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+            	<div class="col-lg-6 col-md-6" >
+                    <div class="card w_profile">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="profile-image float-md-right"> <img src="{{ student.image.url }}" width="175px;" height="175px;" alt=""> </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <h4 class="m-t-0 m-b-0"><strong>{{ name }}</strong> {{ lname }}</h4>
+                                    <span class="job_post"><b>College:</b> {{ student.college }}</span>
+                                    <p><b>Address:</b>{{ student.address }}, Mob- {{ student.mobile }}</p>
+
+                                    <div class="row">
+                                      <div class="col-6">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa  fa-download text-col-green"></i><br>
+                                            <small><b>{{ doc }} Documents</b></small>
+                                        </div>
+                                        <div class="col-6">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa  fa-bell text-col-blue"></i><br>
+                                           <small><b>{{ noti }} Notifications</b></small>
+
+                                        </div>
+                                    </div>
+                                    <div class="m-t-15" style="margin-bottom: 16px;">
+                                        <a href="{% url 'StudentPanel:profile' %}"> <button class="btn btn-primary">View Profile</button></a>
+                                        <a href="{% url 'logout' %}"><button class="btn btn-success">Logout</button>
+                                        </a></div>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-6">
+                    <div class="card top_report">
+                        <div class="row">
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="body">
+                                    <div class="clearfix">
+                                        <div class="float-left">
+                                            <i class="fa fa-2x fa-inr text-col-blue"></i>
+                                        </div>
+                                        <div class="number float-right text-right">
+                                            <h6>Total Paid Fee</h6>
+                                            <span class="font700">&#8377; {{ paid }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-xs progress-transparent custom-color-blue mb-0 mt-3">
+                                        <div class="progress-bar" data-transitiongoal="{{ per }}"></div>
+                                    </div>
+                                    <small class="text-muted">{{ per }}% is paid of {{ Total }}</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="body">
+                                    <div class="clearfix">
+                                        <div class="float-left">
+                                            <i class="fa fa-2x fa-window-restore text-col-green"></i>
+                                        </div>
+                                        <div class="number float-right text-right">
+                                            <h6>Your Remaining Fee</h6>
+                                            <span class="font700"> &#8377; {{ remain }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-xs progress-transparent custom-color-green mb-0 mt-3">
+                                        <div class="progress-bar" data-transitiongoal="{{ per3 }}"></div>
+                                    </div>
+                                    <small class="text-muted">{{ per3 }}% is remaining</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="body">
+                                    <div class="clearfix">
+                                        <div class="float-left">
+                                            <i class="fa fa-2x fa-dropbox text-col-red"></i>
+                                        </div>
+                                        <div class="number float-right text-right">
+                                            <h6>Courses you Joined</h6>
+                                            <span class="font700">{{ joined_course }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-xs progress-transparent custom-color-red mb-0 mt-3">
+                                        <div class="progress-bar" data-transitiongoal="{{ per2 }}"></div>
+                                    </div>
+                                    <small class="text-muted">Total Courses are {{ total_course }}</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="body">
+                                    <div class="clearfix">
+                                        <div class="float-left">
+                                            <i class="fa fa-2x fa-sticky-note-o text-col-yellow"></i>
+                                        </div>
+                                        <div class="number float-right text-right">
+                                            <h6>Your {{ option }} Fee</h6>
+                                            {% if option == "Due" %}
+                                            <span class="font700">{{ Due }}</span>
+                                            {% else %}
+                                            <span class="font700">{{ upcoming }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% if option == "Due" %}
+                                    <div class="progress progress-xs progress-transparent custom-color-yellow mb-0 mt-3">
+
+                                        <div class="progress-bar" data-transitiongoal="{{ per4 }}"></div>
+
+
+                                    </div>
+                                    <small class="text-muted">{{ per4 }}% is due of your {{ remain }} Fee.</small>
+                                    {% else %}
+                                     <div class="progress progress-xs progress-transparent custom-color-yellow mb-0 mt-3">
+
+                                        <div class="progress-bar" data-transitiongoal="{{ per5 }}"></div>
+
+
+                                    </div>
+                                    <small class="text-muted">{{ per5 }}% is upcoming fee of your {{ remain }} Fee.</small>
+                                     {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Your Last Five Notification</h2>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-hover m-b-0 c_list">
+                                    <thead>
+                                        <tr>
+                                            <th>S.no.</th>
+                                            <th>Messege</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody>
+                                        {% for i in last_five %}
+                                        <tr>
+
+                                            <td>
+                                                <address>{{ forloop.counter }}</address>
+                                            </td>
+                                            <td>
+                                                <address>{{ i.info }}</address>
+                                            </td>
+                                            <td>
+                                                <address>{{ i.noti_date }}</address>
+                                            </td>
+
+                                        </tr>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+  <script>
+ function myfunction() {
+
+           var d1 = {{ exams }}
+           var d2 = {{ questions }}
+
+                 for (var i = 0; i<d1.length; i++)
+                    {
+                      var t = i + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("texams"+k);
+                      td3.innerText = d1[i];
+                    }
+
+                    for (var j = 0; j<d2.length; j++)
+                    {
+                      var t = j + 1;
+                      var k = t.toString();
+                      var td3 = document.getElementById("tquestions"+k);
+                      td3.innerText = d2[j];
+                    }
+
+
+
+
+        }
+window.onload =myfunction;
+</script>
+
+{% endblock %}

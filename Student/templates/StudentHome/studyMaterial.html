@@ -1,0 +1,75 @@
+{% extends 'StudentHome/base.html' %}
+{% block body %}
+{% load static %}
+
+
+
+    <div id="main-content" class="file_manager">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-8 col-sm-12">                        
+                        <h2>File Images</h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-4 col-sm-12 text-right">
+                        <ul class="breadcrumb justify-content-end">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>                            
+                            <li class="breadcrumb-item">File Manager</li>
+                            <li class="breadcrumb-item active">File Images</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row clearfix">
+{% for i in data %}
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="card">
+                        <div class="file">
+                            <div class="hover">
+                                <button type="button" class="btn btn-icon btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                            <a href="{{ i.file.url }}" target="_blank">
+                                {% if '.jpg' in i.file.name %}
+                                <div class="image">
+                                    <img src="{{ i.file.url }}" alt="img" class="img-fluid">
+                                </div>
+                                {% elif '.png' in i.file.name %}
+                                <div class="image">
+                                    <img src="{{ i.file.url }}" alt="img" class="img-fluid">
+                                </div>
+                                {% elif '.xlsx' in i.file.name %}
+                                <div class="icon">
+                                    <i class="fa fa-bar-chart text-warning"></i>
+                                </div>
+                                {% elif '.xls' in i.file.name %}
+                                <div class="icon">
+                                    <i class="fa fa-bar-chart text-warning"></i>
+                                </div>
+                                {% elif '.csv' in i.file.name %}
+                                <div class="icon">
+                                    <i class="fa fa-bar-chart text-warning"></i>
+                                </div>
+                                {% else %}
+                                <div class="icon">
+                                    <i class="fa fa-file text-info"></i>
+                                </div>
+                                {% endif %}
+
+                                <div class="file-name">
+                                    <p class="m-b-5 text-muted">{{ i.name }}</p>
+                                    <small>Date: <span class="date text-muted">{{ i.date }}</span></small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+{% endfor %}
+
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}

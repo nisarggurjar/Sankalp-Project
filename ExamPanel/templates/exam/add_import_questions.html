@@ -1,0 +1,196 @@
+{% extends 'exam/base.html' %}
+
+{% block up %}
+
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - </title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>All Exam List
+
+                </h2>
+            </div>
+
+        </div>
+    </div>
+      <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Assets</strong> Exam Lists</h2>
+                        <ul class="header-dropdown">
+                            <li class="remove">
+                                <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <ul class="nav nav-tabs padding-0">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#addlibrary">Edit Main Exam</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="addlibrary">
+                        <div class="card">
+                    <div class="body">
+                        <div class="row clearfix">
+
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+							<form class="form" method="get" action="{% url 'ExamPanel:select_question_type' exam 'exam' %}" enctype="multipart/form-data">
+							{% csrf_token %}
+								<div class="header">
+                      <center>  <h5>Edit Details</h5> </center>
+                    </div>
+                  <center>
+					<div class="content" style = "max-width:500px; min-width:250px;">
+
+                          <div class="row clearfix">
+
+                            <div class="col-lg-12 col-md-12">
+
+                                <div class="form-group">
+                                    Select Course
+                                   <select class="form-control show-tick" name = 'category' required='required'
+                                           onchange="window.location=this.value" >
+                                    {% if cour == "0" %}
+                                    <option > -- Select Course --</option>
+                                    {% endif %}
+
+                                    {% for cs in course %}
+                                       {% if cs.id == icour %}
+                                    <option value="{% url 'ExamPanel:add_import_questions' cs.id '0' '0' '0'  %}" selected>{{ cs.name }}</option>
+                                       {% else %}
+                                        <option value="{% url 'ExamPanel:add_import_questions' cs.id '0' '0' '0' %}">{{ cs.name }}</option>
+                                       {% endif %}
+                                    {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12">
+
+                                <div class="form-group">
+                                    Select Exam Package
+                                   <select class="form-control show-tick" name = 'category'  onchange="window.location=this.value" >
+                                    {% if cour != "0" and pack == "0"  %}
+                                    <option > -- Select Exam Package --</option>
+                                    {% endif %}
+
+                                    {% for pk in package %}
+                                       {% if pk.id == ipack %}
+                                    <option value="{% url 'ExamPanel:add_import_questions' cour pk.id '0' '0'  %}" selected>{{ pk.name }}</option>
+                                       {% else %}
+                                        <option value="{% url 'ExamPanel:add_import_questions' cour pk.id '0' '0' %}">{{ pk.name }}</option>
+                                       {% endif %}
+                                    {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12">
+
+                                <div class="form-group">
+                                    Select Exam Sub-Package
+                                   <select class="form-control show-tick" name = 'category'  onchange="window.location=this.value" >
+                                    {% if cour != "0" and subpack == '0' %}
+                                    <option > -- Select Exam Sub-Package --</option>
+                                    {% endif %}
+
+                                    {% for sb in subpackage %}
+                                       {% if sb.id == isubpack %}
+                                    <option value="{% url 'ExamPanel:add_import_questions' cour pack sb.id '0'  %}" selected>{{ sb.name }}</option>
+                                       {% else %}
+                                        <option value="{% url 'ExamPanel:add_import_questions' cour pack sb.id '0'  %}">{{ sb.name }}</option>
+                                       {% endif %}
+                                       {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    Select Exam
+                                   <select class="form-control show-tick" name = 'category' onchange="window.location=this.value" >
+                                    {% if subpack != '0' and exam == '0' %}
+                                    <option > -- Select Exam --</option>
+                                    {% endif %}
+
+                                    {% for ex in exams %}
+                                     {% if ex.id == iexam %}
+                                    <option value="{% url 'ExamPanel:add_import_questions' cour pack subpack ex.id  %}" selected>{{ ex.name }}</option>
+                                       {% else %}
+                                        <option value="{% url 'ExamPanel:add_import_questions' cour pack subpack ex.id  %}">{{ ex.name }}</option>
+                                       {% endif %}
+                                       {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                  </center>
+                  <center>  <div class="footer text-center" style = "max-width:400px; min-width:200px;">
+                        <input class="btn btn-primary btn-round btn-lg   " type = "submit" value="Add Questions">
+
+                    </div></center>
+                </form>
+            </div>
+        </div>
+    </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

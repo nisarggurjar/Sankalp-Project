@@ -1,0 +1,593 @@
+{% extends 'StudentHome/base.html' %}
+{% block body %}
+{% load static %}
+
+    <div id="main-content" class="taskboard">
+        <div class="container-fluid">
+           
+
+    <style type="text/css">
+    .leftborder {
+        position: absolute;
+    content: '';
+    left: 0;
+    top: 15px;
+    width: 3px;
+    height: 40%;
+    background: #ffce4b;
+    }
+
+        .wstatus {
+        position: absolute;
+    content: '';
+    right: 0;
+    top: 73%;
+    width: 90px;
+    height: 25%;
+    background: red;
+    }
+
+            .cstatus {
+        position: absolute;
+    content: '';
+    right: 0;
+    top: 73%;
+    width: 90px;
+    height: 25%;`
+    background: green;
+    }
+</style>
+
+
+
+<style type="text/css">
+        
+
+        .pn-ProductNav_Wrapper {
+          position: relative;
+          padding: 0 11px;
+          box-sizing: border-box;
+        }
+
+        .pn-ProductNav {
+          /* Make this scrollable when needed */
+          overflow-x: auto;
+          /* We don't want vertical scrolling */
+          overflow-y: hidden;
+          /* For WebKit implementations, provide inertia scrolling */
+          -webkit-overflow-scrolling: touch;
+          /* We don't want internal inline elements to wrap */
+          white-space: nowrap;
+          /* If JS present, let's hide the default scrollbar */
+          /* positioning context for advancers */
+          position: relative;
+          font-size: 0;
+        }
+        .js .pn-ProductNav {
+          /* Make an auto-hiding scroller for the 3 people using a IE */
+          -ms-overflow-style: -ms-autohiding-scrollbar;
+          /* Remove the default scrollbar for WebKit implementations */
+        }
+        .js .pn-ProductNav::-webkit-scrollbar {
+          display: none;
+        }
+
+        .pn-ProductNav_Contents {
+          float: left;
+          -webkit-transition: -webkit-transform .2s ease-in-out;
+          transition: -webkit-transform .2s ease-in-out;
+          transition: transform .2s ease-in-out;
+          transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+          position: relative;
+        }
+
+        .pn-ProductNav_Contents-no-transition {
+          -webkit-transition: none;
+          transition: none;
+        }
+
+        .pn-ProductNav_Link {
+          text-decoration: none;
+          color: #888;
+          font-size: 1.2rem;
+          font-family: -apple-system, sans-serif;
+          display: -webkit-inline-box;
+          display: -ms-inline-flexbox;
+          display: inline-flex;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          min-height: 44px;
+          border: 1px solid transparent;
+          padding: 0 11px;
+        }
+        .pn-ProductNav_Link + .pn-ProductNav_Link {
+          border-left-color: #eee;
+        }
+        .pn-ProductNav_Link[aria-selected="true"] {
+          color: #111;
+        }
+
+        .pn-Advancer {
+          /* Reset the button */
+          -webkit-appearance: none;
+             -moz-appearance: none;
+                  appearance: none;
+          background: transparent;
+          padding: 0;
+          border: 0;
+          /* Now style it as needed */
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          /* Set the buttons invisible by default */
+          opacity: 0;
+          -webkit-transition: opacity .3s;
+          transition: opacity .3s;
+        }
+        .pn-Advancer:focus {
+          outline: 0;
+        }
+        .pn-Advancer:hover {
+          cursor: pointer;
+        }
+
+        .pn-Advancer_Left {
+          left: 0;
+        }
+        [data-overflowing="both"] ~ .pn-Advancer_Left, [data-overflowing="left"] ~ .pn-Advancer_Left {
+          opacity: 1;
+        }
+
+        .pn-Advancer_Right {
+          right: 0;
+        }
+        [data-overflowing="both"] ~ .pn-Advancer_Right, [data-overflowing="right"] ~ .pn-Advancer_Right {
+          opacity: 1;
+        }
+
+        .pn-Advancer_Icon {
+          width: 20px;
+          height: 44px;
+          fill: #bbb;
+        }
+
+        .pn-ProductNav_Indicator {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 4px;
+          width: 100px;
+          background-color: transparent !important;
+          -webkit-transform-origin: 0 0;
+                  transform-origin: 0 0;
+          -webkit-transition: background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
+          transition: background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
+          transition: transform .2s ease-in-out, background-color .2s ease-in-out;
+          transition: transform .2s ease-in-out, background-color .2s ease-in-out, -webkit-transform .2s ease-in-out;
+        }
+    </style>
+
+
+<style>
+.dot {
+    height: 40px;
+    width: 40px;
+    background-color: #092C35;
+    border-radius: 40%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid #51647a;
+
+}
+
+.cdot {
+    height: 35px;
+    width: 40px;
+    background-color: #AAB7B8;
+    border-radius: 40%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid #AAB7B8;
+    padding-bottom: 30px;
+
+}
+
+.seendot {
+    height: 35px;
+    width: 40px;
+    background-color: #1F618D;
+    border-radius: 40%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid #1F618D;
+    padding-bottom: 30px;
+
+}
+
+.tagdot {
+    height: 35px;
+    width: 40px;
+    background-color: #ffc107;
+    border-radius: 40%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid #ffc107;
+    padding-bottom: 30px;
+
+}
+
+
+.correct {
+    height: 35px;
+    width: 40px;
+    background-color: #1E8449;
+    border-radius: 40%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid #1E8449;
+    padding-bottom: 30px;
+}
+
+.wrong {
+    height: 35px;
+    width: 40px;
+    background-color: red;
+    border-radius: 40%;
+    display: inline-block;
+        border-width: 5px;
+        color: white;
+    border: 1px solid red;
+    padding-bottom: 30px;
+}
+
+
+</style>
+
+
+
+                <div class="row clearfix" style="width: 100%;">
+            		<div class="col-lg-3 col-md-12">
+                        <div class="card progress_task">
+                        <div class="body taskboard">
+                            
+                        <div class="dd" data-plugin="nestable">
+                                <ol class="dd-list" style="list-style-type:none; padding:0px;">
+                                    <li class="dd-item" data-id="1" style="background-color:#1fbad6!important; margin-left: -20px; margin-right: -20px;">
+                                        <div style="width: 100%;padding: 10px;">
+                                            <center><h5 style="color: white;">Good Try, {{ name }}</h5>
+                                            <p style="color: white;">Keep Practicing, Keep Improving.</p></center>
+                                        </div>
+                                    </li>
+                                    <br>
+                                    <li class="dd-item" data-id="1">
+                                        <center><img src="{% static 'student/assets/trophy.png' %}" width="60" height="60">
+                                        <p style="font-size: 20px;">Your Rank</p>
+                                        <p style="font-size: 25px;">{{ your_rank }}/{{ All_Marks }}</p></center>
+                                    </li><br>
+
+                                    <li class="dd-item" data-id="1">
+                                        <center><img src="{% static 'student/assets/score.png' %}" width="60" height="60">
+                                        <p style="font-size: 20px;">Your Score</p>
+                                        <p style="font-size: 25px;">{{ your_marks }}/{{ total_marks }}</p></center>
+                                    </li><br>
+
+                                    <li class="dd-item" data-id="1">
+                                        <center><img src="{% static 'student/assets/accuracy.png' %}" width="60" height="60">
+                                        <p style="font-size: 20px;">Accuracy</p>
+                                        <p style="font-size: 25px;">{{ accuracy }}%</p></center>
+                                    </li><br>
+
+                                    <li class="dd-item" data-id="1">
+                                        <center><img src="{% static 'student/assets/attempt.png' %}" width="60" height="60">
+                                        <p style="font-size: 20px;">Attempt</p>
+                                        <p style="font-size: 25px;">{{ attempt }}/{{ total }}</p></center>
+                                    </li><br>
+
+
+                                    <li class="dd-item" data-id="1">
+
+                                    <center>
+                                    <a href = "{% url 'StudentPanel:solution' exam.id section.id question.id '1' 'Solution' 'Best_Answers' %}"
+                                       class="btn btn-success btn-block max-width-200 pad-h0 pad-v8" style="color: white; max-width: 200px;">View Solution
+                                                </a></center>
+                                    </li><br>
+                                
+                                
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card progress_task">
+                        <div class="body taskboard">
+                            
+                        <div class="dd" data-plugin="nestable">
+                                <ol class="dd-list" style="list-style-type:none; padding:0px;">
+                                    <li class="dd-item" data-id="1" style="background-color:#1fbad6!important; margin-left: -20px; margin-right: -20px;">
+                                        <div style="width: 100%;padding: 10px;">
+                                            <center><h5 style="color: white;">Top Rankers</h5>
+                                            </center>
+                                        </div>
+                                    </li>
+                                    <br>
+
+                                    <table class="table table-hover m-b-0 c_list">
+                                      {% for top in Toppers %}
+                                        <tr>
+                                            {% if top.IStudent %}
+                                            <td>
+                                               <img src="{{ top.IStudent.image.url }}" class="rounded-circle avatar" alt="{{ top.IStudent.name }}">
+                                                <p class="c_name">{{ top.IStudent.name }} <br><span class="badge badge-default m-l-10 hidden-sm-down">{{ top.your_marks }}/{{ total_marks }}</span></p>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                               <img src="{{ top.EStudent.photo.url }}" class="rounded-circle avatar" alt="{{ top.EStudent.name }}">
+                                                <p class="c_name">{{ top.EStudent.name }} <br><span class="badge badge-default m-l-10 hidden-sm-down">{{ top.your_marks }}/{{ total_marks }}</span></p>
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                      {% endfor %}
+                                        
+
+                                </table>
+                                
+                                
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                  <div class="col-lg-9 col-md-12">
+                    <div class="card progress_task">
+                        <div class="body taskboard">
+                            
+                        <div class="dd" data-plugin="nestable">
+                                <ol class="dd-list" style="list-style-type:none; padding:0px;">
+                                    <li class="dd-item" data-id="1" style="background-color:#1fbad6!important; margin-left: -20px; margin-right: -20px;">
+                                        <div style="width: 100%;padding: 10px;">
+                                            <center><h5 style="color: white;">Good Try, {{ name }}</h5>
+                                            <p style="color: white;">Keep Practicing, Keep Improving.</p></center>
+                                        </div>
+                                    </li>
+                                    <br>                                
+                                </ol>
+                            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <h4>Sectional Summary</h4>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table m-b-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Section</th>
+                                            <th>Score</th>
+                                            <th>Attempted</th>
+                                            <th>Accuracy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for sec in exam.studentmainexamsection_set.all %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td><span class="text-info">{{ sec.name }}</span></td>
+                                            <td><span id = "yourmarks{{ forloop.counter }}" ></span>/<span id = "totalmarks{{ forloop.counter }}" ></span></td>
+                                            <td><span id = "attempt{{ forloop.counter }}" ></span>/{{ sec.studentexamquestion_set.all.count }}</td>
+                                            <td><span id = "secaccuracy{{ forloop.counter }}"></span>%</td>
+                                        </tr>
+                                    {% endfor %}
+
+                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="card progress_task">
+                        <div class="body taskboard">
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <h5 style="padding-top: 20px; padding-bottom: 20px; ">
+TIME USAGE FOR EACH QUESTION:</h5>
+                        <div class="body" >
+{% for sec in exam.studentmainexamsection_set.all %}
+<p style="font-size: 17px;"><b>Section:</b>{{ sec.name }}</p>
+
+<div class="pn-ProductNav_Wrapper" style="width: 100%;">
+<nav id="pnProductNav" class="pn-ProductNav dragscroll">
+<div id="pnProductNavContents" class="pn-ProductNav_Contents">
+
+{% for q in sec.studentexamquestion_set.all %}
+<a href="#largeModal{{ sec.id }}{{ q.id }}" class="pn-ProductNav_Link" aria-selected="true" data-toggle="modal" data-target="#largeModal{{ sec.id }}{{ q.id }}">
+ Q{{ forloop.counter }}-
+
+        {% if q.status == "Unseen" %}
+            <span class="cdot" style="padding-top: 5px; font-size: 15px;">
+        {% elif q.status == "Correct" %}
+             <span class="correct" style="padding-top: 5px; font-size: 15px;">
+        {% elif q.status == "Wrong" %}
+             <span class="wrong" style="padding-top: 5px; font-size: 15px;">
+        {% elif q.status == "Seen" %}
+            <span class="seendot" style="padding-top: 5px; font-size: 15px;">
+        {% else %}
+        {% endif %}
+    <center>{{ q.time_taken }}</center>
+  </span>
+</a>
+{% endfor %}
+
+<span id="pnIndicator" class="pn-ProductNav_Indicator"></span>
+</div>
+</nav>
+<button id="pnAdvancerLeft" class="pn-Advancer pn-Advancer_Left" type="button">
+<svg class="pn-Advancer_Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z" /></svg>
+</button>
+<button id="pnAdvancerRight" class="pn-Advancer pn-Advancer_Right" type="button">
+<svg class="pn-Advancer_Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z" /></svg>
+</button>
+</div>
+<br>
+{% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        </div>
+                    </div>
+
+
+<div class="row clearfix" style="width: 100%; margin-bottom: -25px;">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2 style="color: #F5B041;">Next Tests</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<center><div class="row clearfix" style="width: 100%;">
+                {% for ex in Exams %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="card">
+                        <div class="header">
+                            <h2>{{ ex.name }}</h2>
+                        </div>
+                        <div class="body">
+                            <h6 class="m-b-15"><span class="badge badge-success float-right">Valid: {{ ex.end_date }}</span></h6>
+                            <table class="table table-hover m-b-0 c_list">
+                                    <tbody>
+                                       <tr>
+                                           <td>Total Question - <span id = "tquestion{{ forloop.counter }}"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Marks - <span id = "tmarks{{ forloop.counter }}"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Minutes - {{ ex.duration }}</td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+
+                            <div class="progress progress-xs progress-transparent custom-color-blue">
+                                <div class="progress-bar" data-transitiongoal="87"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                   <a href="{% url 'StudentPanel:instruction' ex.id %}">
+                                    <button type="button" class="btn btn-secondary">
+                                        {% if ex.status == "Unseen" %}
+                                            Start Test
+                                        {% else %}
+                                            Resume Test
+                                        {% endif %}
+                                    </button></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>{% endfor %}
+
+
+            </div>
+                </center>
+
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>    
+
+
+<script>
+ function ExamSectionalDetails() {
+           var d1 = {{ sec_accuracy }};
+           var d2 = {{ your_sec_question }};
+           var d3 = {{ sec_marks }};
+           var d4 = {{ Que }};
+           var d5 = {{ Marks }};
+
+                 for (var i = 0; i<d1.length; i++)
+                    {
+                        var tt = i+1;
+                        var kk = tt.toString();
+                        var td2 = document.getElementById("secaccuracy"+kk);
+                        td2.innerText = d1[i];
+                    }
+
+                 for (var i = 0; i<d2.length; i++)
+                    {
+                        var tt = i+1;
+                        var kk = tt.toString();
+                        var td2 = document.getElementById("attempt"+kk);
+                        td2.innerText = d2[i];
+                    }
+
+                 for (var i = 0; i<d3.length; i++)
+                    {
+                        var tt = i+1;
+                        var kk = tt.toString();
+                        var td2 = document.getElementById("totalmarks"+kk);
+                        td2.innerText = d3[i][0];
+                        var td2 = document.getElementById("yourmarks"+kk);
+                        td2.innerText = d3[i][1];
+                    }
+
+                 for (var i = 0; i<d4.length; i++)
+                    {
+                        var tt = i+1;
+                        var kk = tt.toString();
+                        var td2 = document.getElementById("tquestion"+kk);
+                        td2.innerText = d4[i];
+                    }
+
+
+                 for (var i = 0; i<d5.length; i++)
+                    {
+                        var tt = i+1;
+                        var kk = tt.toString();
+                        var td2 = document.getElementById("tmarks"+kk);
+                        td2.innerText = d5[i];
+                    }
+
+
+
+
+
+        }
+
+window.onload = ExamSectionalDetails;
+</script>
+
+
+{% endblock %}

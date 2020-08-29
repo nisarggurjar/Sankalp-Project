@@ -1,0 +1,458 @@
+﻿{%  extends 'front_temp/F_base.html' %}
+{% block up %}
+{% load static %}
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+
+<title>:: Buzzer :: Home</title>
+
+<!-- Bootstrap Core and Font Icon -->
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'front_static2/assets/plugins/font-awesome/css/font-awesome.min.css' %}">
+
+<!-- Plugins css -->
+<link rel="stylesheet" href="{% static 'front_static2/assets/plugins/charts-c3/plugin.css' %}"/>
+<link rel="stylesheet" href="{% static 'front_static2/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}"/>
+<!-- Core css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+   </head>
+{% endblock %}
+{%  load static %}
+{% block body %}
+    <div class="page">
+        <div class="container">
+
+            <div class="page-header">
+                <div class="row row-deck">
+                    <div class="col-md-6 col-sm-12">
+                        <h1 class="page-title">Enquiries</h1>
+                    </div>
+
+                </div>
+            </div>
+                 <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Enquiry List/Add Enquiry</h3>
+                        </div>
+
+
+                        <div class="card-body">
+                        <ul class="nav nav-tabs padding-0">
+
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#open_enquiry">
+                                <button type="button" class="btn mb-1 btn-simple btn-sm btn-success">Open Enquiry</button>
+
+                            </a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#close_enquiry">
+                               <button type="button" class="btn mb-1 btn-simple btn-sm btn-danger ">Close Enquiry</button>
+
+                            </a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addenquiry">
+                               <button type="button" class="btn mb-1 btn-simple btn-sm btn-info ">Add Enquiry</button>
+
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    </div>
+                    <div class="tab-content">
+
+                        <div class="tab-pane active " id="open_enquiry">
+                        <div class="card">
+                            <div class="body">
+                               <div class="table-responsive mt-20">
+                                <table class="table table-vcenter  table-hover mb-0  js-basic-example ">
+
+                                    <thead>
+                                        <tr>
+
+
+                                            <th>Course</th>
+                                            <th>Name</th>
+                                            <th>Mobile Number</th>
+                                            <th>Visited Date</th>
+                                            <th>Follow Up Date</th>
+                                            <th>View</th>
+                                            <th>Update FollowUp</th>
+                                            <th>Make Addmission</th>
+                                            <th>Close Enquiry</th>
+
+                                        </tr>
+
+                                    </thead>
+                                     <tbody>
+                                     {% for en in all_enquiry  %}
+                                     {% if en.status == 'open' %}
+                                        <tr>
+
+                                            <td>{{ en.course.name }}-{{ en.course.medium }}</td>
+                                            <td>{{ en.student_name }}</td>
+                                            <td>{{ en.mobile }}</td>
+                                            <td>{{ en.visited_date }}</td>
+                                            <td>{{ en.follow_up_date }}</td>
+                                            <td><a href="" data-toggle="modal" data-target="#view_details{{ en.id }}"><span class="badge badge-info">View</span></a></td>
+                                            <td><a href="" data-toggle="modal" data-target="#update{{ en.id }}"><span class="badge badge-warning">Update Follow Up</span></a></td>
+
+                                            <td>
+                                                <div class="item-action dropdown">
+                                    <a href="javascript:void(0)" data-toggle="dropdown"><span class="badge badge-success">Make Addmission</span></a>
+                                    <div class="dropdown-menu dropdown-menu-right vivify popIn">
+                                        <a href="" class="dropdown-item"> Addmission </a>
+                                        <a href="" class="dropdown-item"> Group Addmission </a>
+                                        </div>
+                                </div>
+                                            </td>
+                                            <td><a href="{% url 'NewFrontdesk:front_enq_close_or_update' en.id 'Close' %}"><span class="badge badge-danger">Close Enquiry</span></a></td>
+
+
+                                        </tr>
+                                     {% endif %}
+                                     {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div></div>
+                        <div class="tab-pane " id="close_enquiry">
+                        <div class="card">
+                            <div class="body">
+                                <div class="table-responsive mt-20">
+                                <table class="table table-vcenter table-filter table-hover mb-0  js-basic-example dataTable">
+
+                                    <thead>
+                                        <tr>
+
+
+                                            <th>Course</th>
+                                            <th>Name</th>
+                                            <th>Mobile Number</th>
+                                            <th>Visited Date</th>
+                                            <th>Follow Up Date</th>
+                                            <th>View</th>
+
+                                        </tr>
+
+                                    </thead>
+                                     <tbody>
+                                     {% for en in all_enquiry %}
+                                     {% if en.status == 'close' %}
+                                        <tr>
+
+                                            <td>{{ en.course.name }}-{{ en.course.medium }}</td>
+                                            <td>{{ en.student_name }}</td>
+                                            <td>{{ en.mobile }}</td>
+                                            <td>{{ en.visited_date }}</td>
+                                            <td>{{ en.follow_up_date }}</td>
+                                            <td><a href="" data-toggle="modal" data-target="#view_details{{ en.id }}"><span class="badge badge-info">View</span></a></td>
+
+                                        </tr>
+                                     {% endif %}
+                                     {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="tab-pane" id="addenquiry">
+                        <div class="card">
+                            <div class="body">
+
+                                              <div class="row clearfix">
+
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+							<form class="form" action="" method="post" name="frmSample"  onsubmit="return ValidateForm();" >
+							{% csrf_token %}
+								<div class="">
+
+								  <center>
+									  <h3>New  Enquiry</h3>
+                                      <p><b>Visited Date: </b>{{ visited_date }}</p>
+								  </center>
+                                </div>
+                  <center>
+					<div class="content">
+
+
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+
+								<br>
+                                <label style="float:left;"><b>Chosse Course</b></label>
+                                    {{ form.course }}
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                              <br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Name</b></label>
+                                    {{ form.student_name }}
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Father's Name</b></label>
+                                   {{ form.father_name }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Address</b></label>
+                                   {{ form.address }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                 <br>
+                               <div class="form-group">
+                               <label style="float:left;"><b>Email Address</b></label>
+                                   {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Mobile No.</b></label>
+                                   {{ form.mobile }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>College</b></label>
+                                   {{ form.college }}
+                                </div>
+                            </div>
+							 <div class="col-lg-4 col-md-6 col-sm-12">
+							 <br>
+                                <div class="form-group">
+                                   <label style="float:left;"><b>Graduation</b></label>
+                                   {{ form.graduation }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <br>
+                                <div class="form-group">
+                                <label style="float:left;"><b>Remark</b></label>
+                                   {{ form.remark }}
+                                </div>
+                            </div>
+							<div class="col-lg-6 col-md-6 col-sm-12">
+							<br>
+                                <div class="form-group">
+                                    <label style="float:left;"><b>Follow Up Date</b></label>
+                                    <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="icon-calendar"></i></span>
+                                            </div>
+                                          {{ form.follow_up_date }}
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+							<div class="col-lg-6 col-md-6 col-sm-12">
+
+                                        <br>
+                                <div class="form-group">
+
+                                    <label style="float:left;"><b>Follow Up Time</b></label>
+                                    <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="icon-clock"></i></span>
+                                            </div>
+                                           {{ form.follow_up_time }}
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div></center>
+                  <center>  <div class="footer text-center" style = "max-width:400px; min-width:200px;">
+                        <input class="btn btn-primary btn-round btn-lg" type = "submit" value="Add Enquiry" name="Submit">
+
+                    </div></center>
+                </form>
+            </div>
+        </div>
+    </div>
+
+                        </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% for ii in all_enquiry %}
+
+<div class="modal fade" id="view_details{{ ii.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                    <h5 class="title" id="largeModalLabel1"><strong class="col-orange"> Enquiry Details </strong></h5>
+
+                <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                            <table class="table table-hover m-t-20 ">
+                                <thead>
+                                <th style="color:#17626a;"><b>Course</b></th>
+                                <th style="color:#17626a;"><b>Name</b></th>
+                                <th style="color:#17626a;"><b>Mobile No.</b></th>
+                                <th style="color:#17626a;"><b>Address</b></th>
+
+                               </thead>
+                                <tbody>
+                                <td >{{ii.course.name}}</td>
+                                <td>{{ii.student_name}}</td>
+                                <td>{{ii.mobile}}</td>
+                                <td>{{ii.address}}</td>
+
+
+
+                                </tbody>
+                                <thead>
+                                <th style="color:#17626a;"><b>Father's Name</b></th>
+                                <th style="color:#17626a;"><b>Email</b></th>
+                                <th style="color:#17626a;"><b>College/School</b></th>
+                                <th style="color:#17626a;"><b>Graduation</b></th>
+
+                               </thead>
+                                <tbody>
+                                <td>{{ii.father_name}}</td>
+                                <td>{{ii.email}}</td>
+                                <td>{{ii.college}}</td>
+                                <td>{{ii.graduation}}</td>
+
+
+
+                                </tbody>
+
+                                 <thead>
+                                 <th style="color:#17626a;"><b>Visited Date</b></th>
+                                <th style="color:#17626a;"><b>Follow Up Date</b></th>
+                                <th style="color:#17626a;"><b>Follow Up Time</b></th>
+                                <th style="color:#17626a;"><b>Remark</b></th>
+
+                               </thead>
+                                <tbody>
+                                <td>{{ii.visited_date}}</td>
+                                <td>{{ii.follow_up_date}}</td>
+                                <td>{{ii.follow_up_time}}</td>
+                                <td>{{ii.remark}}</td>
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                            </div>
+                        </div>
+
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+{% endfor %}
+{% for anquiry in all_enquiry %}
+{% if anquiry.status == 'open' %}
+<div class="modal fade" id="update{{ anquiry.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title col-orange" id="defaultModalLabel">Update Date And Time</h4>
+            </div>
+            <form class="form" action="{% url 'NewFrontdesk:front_enq_close_or_update' anquiry.id 'Update' %}" method="post"  >
+                {% csrf_token %}
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><b>Next Follow Up Date</b></label>
+                    <div class="form-line">
+                        <input type="text" class="form-control" name = 'fdate'  placeholder="Follow Up Date"  value="{{ anquiry.follow_up_date }}"
+                         data-provide = "datepicker" data-date-autoclose = "true" data-date-format = 'dd/mm/yyyy' >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Next Follow Up Time</b></label>
+                    <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Follow UP Time " value="{{ anquiry.follow_up_time }}"
+                        name="ftime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Next Remark</b></label>
+                    <div class="form-line">
+                        <textarea class="form-control no-resize" placeholder="Remark..." name="remark">{{anquiry.remark}}</textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Update" name="Submit1">
+                <button type="button" class="btn btn-simple btn-round waves-effect" data-dismiss="modal">CLOSE</button>
+            </div></form>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+{% endblock %}
+
+
+{% block down %}
+    </div>
+<script src="{% static 'Front_static/assets/bundles/libscripts.bundle.js' %}"></script>
+<script src="{% static 'Front_static/assets/bundles/vendorscripts.bundle.js' %}"></script>
+
+<script src="{% static 'Front_static/assets/bundles/c3.bundle.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+<script src="{% static 'Front_static/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'Front_static/assets/js/page/index.js' %}"></script>
+<script src="{% static 'front_static2/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'%}"></script>
+<script src="{% static 'Front_static/assets/js/form/form-advanced.js' %}"></script>
+<script src="{% static 'front_static2/assets/plugins/jquery.maskedinput/jquery.maskedinput.min.js'%}"></script>
+<script src="{% static 'front_static2/assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js'%}"></script>
+<script src="{% static 'front_static2/assets/plugins/dropify/js/dropify.min.js'%}"></script>
+
+
+{% endblock %}
+</body>
+</html>

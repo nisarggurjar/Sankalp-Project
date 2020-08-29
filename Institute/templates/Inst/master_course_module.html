@@ -1,0 +1,207 @@
+{% extends 'Inst/base.html' %}
+{% block up %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - All Courses</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/morrisjs/morris.min.css' %}" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+    <div class="container">
+
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 style="font-family: monospace; font-size: 25px; color: #1A5276"><strong style="font-family: monospace; font-size: 25px; color: #1A5276">Course</strong> Details</h2>
+
+                    </div>
+                    <div class="body">
+                        <ul class="nav nav-tabs padding-0">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#librarylist">All Course</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addlibrary">Add Course</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                    <div class="tab-pane active" id="librarylist">
+
+                    <div class="body">
+                        <div class="body table-responsive">
+                                <table class="table  table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Course Name</th>
+                                             <th>Medium</th>
+                                            <th>Short Name</th>
+                                            <th>Created Date</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									{% for course in all_courses %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ course.name }}</td>
+                                            <td>{{ course.medium }}</td>
+                                            <td>{{ course.short_name }}</td>
+                                            <td>{{ course.created_date }}</td>
+                                             <td>
+                                            <a href="" data-target="#edit{{ forloop.counter }}" data-toggle="modal"><i style="color:#1A5276;" class="zmdi zmdi-edit"></i></a>&nbsp;&nbsp;
+                                            <a href="{% url 'Master:delete' course.id 'Course' %}"><i style="color:#1A5276;" class="zmdi zmdi-delete"></i></a>
+                                        </td>
+                                        </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    </div>
+
+                    <div class="tab-pane " id="addlibrary">
+                    <div class="body">
+                        <form class="form" method="post" action="">
+							{% csrf_token %}
+								<div class="header">
+
+                                    <center>  <h1 style="font-family: italic; font-size: 25px; color: #1A5276"><u> Add New Course</u></h1>
+                         </center>
+                    </div>
+                  <center>
+					<div class="content col-md-6" >
+
+                        <label style="float:left;font-family: monospace;"><b>Select Medium</b></label>
+
+
+                        <select class="form-control show-tick" name = 'medium' required>
+                                    <option value="">-- Select Medium --</option>
+									{% for m in mediums %}
+                                    <option value="{{ m.name }}">{{ m.name }}</option>
+                                    {% endfor %}
+                        </select><br><br>
+                        <label style="float:left; font-family: monospace;"><b>Course Name</b></label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter Course Name" name = 'course' required>
+
+                        </div>
+
+                        <label style="float:left;font-family: monospace;"><b>Course Short Name</b></label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter Short  Name" name = 'short_name' required>
+
+                        </div>
+                        <p  style="font-family:monospace;color:#f96332;"><b>Note: </b>Course short name will used for creating Roll Number. </p>
+
+
+                    </div></center>
+                  <center>  <div class="footer text-center">
+                        <input class="btn btn-primary btn-round btn-lg   " type = "submit" value="Add">
+
+                    </div></center>
+                </form>
+
+
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div></section>
+
+{% for course in all_courses %}
+<div class="modal fade" id="edit{{ forloop.counter }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title " id="defaultModalLabel" style="font-family: monospace; font-size: 20px; color: #1A5276">Edit Course</h4>
+            </div>
+            <form class="form" action="{% url 'Master:edit' course.id  'Course' %}" method="post" >
+                {% csrf_token %}
+            <div class="modal-body">
+                 <div class="form-group">
+                    <label style="float:left;font-family: monospace;"><b>Select Medium</b></label>
+
+                    <select class="form-control show-tick" name = 'medium' required>
+                                    <option value="">-- Select Medium --</option>
+									{% for m in mediums %}
+                                     {% if m.name == course.medium %}
+                                    <option value="{{ m.name }}" selected>{{ m.name }}</option>
+                                    {% else %}
+                                    <option value="{{ m.name }}" >{{ m.name }}</option>
+                                     {% endif %}
+                                    {% endfor %}
+                        </select>
+                </div>
+                <label style="float:left; font-family: monospace;"><b>Course Name</b></label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter Course Name" name = 'course' value="{{ course.name }}" required>
+
+                        </div>
+
+                <div class="form-group">
+                   <label style="float:left;font-family: monospace;"><b>Course Short Name</b></label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter Short  Name" name = 'short_name' value="{{ course.short_name }}" required>
+
+                        </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Edit" name="Submit1">
+                <button type="button" class="btn btn-simple btn-round waves-effect" data-dismiss="modal">CLOSE</button>
+            </div></form>
+
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<!-- data tables -->
+<!-- Jquery DataTable Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
+<script src="{% static 'Master/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
+<script src="{% static 'Master/assets/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+
+
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

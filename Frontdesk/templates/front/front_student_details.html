@@ -1,0 +1,655 @@
+
+{% extends 'front/front_base.html' %}
+
+{% block up %}
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Student details</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <h2>Student Profile
+
+                </h2>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="" data-toggle="modal" data-target="#upload"><i class="zmdi zmdi-download"></i> &nbsp;&nbsp;Upload Files</a></li>
+                    <li class="breadcrumb-item "><a href="" data-toggle="modal" data-target="#Idcard">Generate Id Card</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+        <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="pw_img">
+                        <center>
+                            {% if student_data.image  %}
+                                <img id="blah" class="img-fluid" src="{{ student_data.image.url }}"   alt="{{ student_data.name }}" width="250" height="250">
+                            {% else %}
+                                <img id="blah" class="img-fluid" src="{% static 'download.png' %}"  alt="{{ student_data.name }}">
+                            {% endif %}
+                        </center>
+                    </div>
+                    <div class="pw_content">
+                        <div class="pw_header">
+                            <h6>{{ student_data.name }}&nbsp;<a href="{% url 'Frontdesk:front_VED_student' 'Edit' student_data.id %}"><i class="zmdi zmdi-edit"></i>
+                                            </a></h6>
+
+                        </div>
+                        <div class="pw_meta">
+                           <ul class="list-unstyled">
+                               <li><p><i class=" m-r-5"></i><strong>Roll Number: </strong>{{ student_data.roll_number }}</p></li>
+                               <li><p><i class=" m-r-5"></i><strong>College: </strong>{{ student_data.college }}</p></li>
+                                <li><p><i class=" m-r-5"></i><strong>Address: </strong> {{ student_data.address }}</p></li>
+                               <li><p><i class=" m-r-5"></i><strong>Mobile Number: </strong>{{ student_data.mobile }}</p></li>
+
+                                <li>
+                                <ul class="pagination pagination-primary">
+                                    <li class="page-item active">
+                                        <a href="{% url 'Frontdesk:front_asign_course' student_data.id '0' '0' %}" class="page-link">Asign Course</a>
+                                    </li>
+                                    {% if student_data.front_student_course_batch_data_set.count > 0 %}
+                                    {% if button_show %}
+                                    <ul class="pagination pagination-primary">
+                                    <li class="page-item active" >
+                                        <a href="" data-toggle="modal" data-target="#cancal" class="page-link">Cancel Course</a>
+
+                                    </li>
+
+                                </ul>
+                                    {% endif %}
+                                    {% endif %}
+
+                                </ul>
+
+                                </li>
+                           </ul>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane body active" id="about">
+                             <h5 class="m-b-2"><strong>Basic Details</strong> </h5>
+
+                            <ul class="list-unstyled">
+                                <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Date Of Birth: </strong>{{ student_data.dob }}</p></li>
+                                <li><p><i class="zmdi zmdi-star m-r-5"></i><strong>Gender: </strong> {{ student_data.gender }}</p></li>
+                               <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Email Id: </strong>{{ student_data.email }}</p></li>
+
+                                <li><p><i class="zmdi zmdi-graduation-cap m-r-5"></i><strong>Class/Graduation: </strong>{{ student_data.graduation }}</p></li>
+                                <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Stream: </strong> {{ student_data.stream }}</p></li>
+                                <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Id Card Validity: </strong> {{ student_data.id_card_validity }}</p></li>
+
+                            </ul>
+                            <hr>
+                            <h5 class="m-b-2"><strong>Gaurdian Details</strong> </h5>
+
+                            <ul class="list-unstyled">
+                                <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Father's Name: </strong>{{ student_data.Father_name }}</p></li>
+                                <li><p><i class="zmdi zmdi-star m-r-5"></i><strong>Address: </strong> {{ student_data.father_add }}</p></li>
+                                <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Mobile Number: </strong> {{ student_data.father_mob }}</p></li>
+                                <li><p><i class="zmdi zmdi-graduation-cap m-r-5"></i><strong>Occupation: </strong> {{ student_data.Occupation }}</p></li>
+
+                            </ul>
+
+                            </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+             <div class="row clearfix">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Followers">Course Details</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#friends">Fee Installments</a></li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane body active" id="Followers">
+
+                                    <div class="table-responsive">
+                            <table class="table table-hover m-t-0">
+                                <tr>
+                                <th>Course</th>
+                                <th>Batch</th>
+                                <th>Admission Date</th>
+                                <th>Discount in (%)</th>
+                                <th>Total Fee</th>
+
+                               </tr>
+                                <tbody>
+                                {% for sc in student_data.front_student_course_batch_data_set.all %}
+                                <tr>
+                                <td>{{ sc.course.name }}</td>
+                                <td>{{ sc.Batch.name }}</td>
+                                <td>{{ sc.addmission_date }}</td>
+                                <td>{{ sc.discount }}%</td>
+                                <td>{{ sc.total_fee }}</td>
+
+                                </tr>
+                                {% endfor %}
+
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                                </div>
+
+                                <div class="tab-pane body" id="friends">
+
+                            <div class="table-responsive">
+                            <table class="table table-hover m-t-20">
+                                <tr>
+                                <th>Course</th>
+                                <th>Total Fee</th>
+                                <th>Paid Fee</th>
+                                <th>Remaining Fee</th>
+                                <th>Details</th>
+                                <th>Invoices</th>
+
+                               </tr>
+                                <tbody>
+                                {% for sc in student_data.front_student_course_batch_data_set.all %}
+                                <tr>
+                                <td>{{ sc.course.name }}</td>
+                                <td>{{ sc.total_fee }}/-</td>
+                                <td>{{ sc.total_fee_pay }}/-</td>
+                                <td>{{ sc.fee_after_pay }}/-</td>
+                                <td>
+                                <ul class="pagination pagination-primary">
+                                    <li class="page-item active">
+                                        <a  class="page-link"  data-toggle="modal" data-target="#view_details{{ sc.id }}">Details</a>
+                                    </li>
+                                </ul>
+                                </td>
+                                 <td>
+                                <ul class="pagination pagination-warning">
+                                    <li class="page-item active">
+                                        <a  class="page-link"  data-toggle="modal" data-target="#invoice{{ sc.id }}">Invoices</a>
+                                    </li>
+                                </ul>
+                                </td>
+
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                                <div class="card">
+
+                                    <div class="header">
+                                        <h2><strong>Course Fee</strong> Types </h2>
+
+                                    </div>
+                                    <div class="body">
+                                        {% for sc in student_data.front_student_course_batch_data_set.all %}
+                                        <h6 class="col-cyan">Course: {{ sc.course.name }}</h6>
+
+                                           <ul class="right_chat list-unstyled">
+
+                                        <li class="online">
+
+                                            <div>
+                                                   {% for ftype in sc.front_student_fee_type_data_set.all %}
+                                                <div class="media">
+                                                    <ul class="pagination pagination-primary">
+                                                        <li class="page-item active">
+                                                            <div class="page-link" >{{ forloop.counter }}</div>
+                                                        </li>
+                                                    </ul>
+                                                    &nbsp;&nbsp;&nbsp;
+
+                                                    <div class="media-body">
+                                                        <span class="name">{{ ftype.name }}</span>
+                                                        <span class="message">{{ ftype.fee }}/- Rs.</span>
+                                                        <span class=""></span>
+                                                    </div>
+
+                                                </div>
+                                                {% endfor %}
+                                                   <div class="media">
+                                                    <b class="name">Total:</b>
+                                                    &nbsp;&nbsp;&nbsp;
+
+                                                    <div class="media-body">
+                                                       <span class="name" id="total{{ forloop.counter }}"></span>
+                                                        <span class="message"></span>
+                                                        <span class=""></span>
+                                                    </div>
+
+                                                </div>
+                                                {% if sc.discount != '0' %}
+                                                <div class="media">
+                                                    <b class="name">Discount:</b>
+                                                    &nbsp;&nbsp;&nbsp;
+
+                                                    <div class="media-body">
+                                                       <span class="name">{{ sc.discount }} %</span>
+                                                        <span class="message"></span>
+                                                        <span class=""></span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="media">
+                                                    <b class="name">Fee After Discount:</b>
+                                                    &nbsp;&nbsp;&nbsp;
+
+                                                    <div class="media-body">
+                                                       <span class="name">{{ sc.total_fee }} /- Rs.</span>
+                                                        <span class="message"></span>
+                                                        <span class=""></span>
+                                                    </div>
+
+                                                </div>
+                                                {% else %}
+                                                <div class="media">
+                                                    <b class="name">Discount:</b>
+                                                    &nbsp;&nbsp;&nbsp;
+
+                                                    <div class="media-body">
+                                                       <span class="name">No</span>
+                                                        <span class="message"></span>
+                                                        <span class=""></span>
+                                                    </div>
+
+                                                </div>
+                                                {% endif %}
+
+
+                                              </div>
+                                        </li>
+
+                                    </ul>
+
+                                        {% endfor %}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                </div>
+    </div>
+</section>
+{% for sc in student_data.front_student_course_batch_data_set.all %}
+
+ <div class="modal fade" id="view_details{{ sc.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h5 class="title" id="largeModalLabel1"><strong class="text-primary"> Fee Details </strong></h5>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tr>
+                                <th>Installments</th>
+                                <th>Amount</th>
+                                <th>Paid Amount</th>
+                                <th>Remaining Amount</th>
+
+                               </tr>
+                                <tbody>
+                                {% for ins in sc.front_student_fee_installment_data_set.all %}
+                                <tr>
+                                <td>{{ ins.installment }}</td>
+                                <td>{{ ins.amount }}</td>
+                                <td>{{ ins.pay_fee }}</td>
+                                <td>{{ ins.remaining_fee }}</td>
+
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td><strong class="col-orange" >Total</strong></td>
+                                    <td><strong>{{ sc.total_fee }}</strong></td>
+                                    <td><strong>{{ sc.total_fee_pay }}</strong></td>
+                                    <td><strong>{{ sc.fee_after_pay }}</strong></td>
+                                </tr>
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                            </div>
+                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+<div class="modal fade" id="invoice{{ sc.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h5 class="title" id="largeModalLabel111"><strong class="text-primary">Invoices</strong></h5>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tr>
+                                <th>S.no.</th>
+                                <th>Paid Amount</th>
+                                <th>Payment Date</th>
+                                <th>Generate Invoice</th>
+
+                               </tr>
+                                <tbody>
+                                {% for payment in sc.front_student_pay_fee_set.all %}
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ payment.amount }}</td>
+                                <td>{{ payment.payment_date }}</td>
+                                <td>
+                                    <div class="pagination ">
+                                    <div class="page-item active">
+                                        <a  href ="{% url 'Frontdesk:front_student_invoice' payment.id %}" class="page-link">Invoices</a>
+                                    </div>
+                                </div>
+                                </td>
+
+                                </tr>
+                                {% endfor %}
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                            </div>
+                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+{% endfor %}
+
+ <div class="modal fade" id="cancal" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel11"><strong> Cancel Course </strong></h6>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'Frontdesk:front_cancal_addmission' %}" method="post">
+                {% csrf_token %}
+                   <div class="form-group">
+                   <center><label><b>Select Course</b></label></center>
+
+                        <select  class="form-control show-tick" name="course" required = 'required' >
+                            <option value="">Select Course</option>
+                            {% for i in li %}
+
+                            <option value="{{i.course.id}}">{{ i.course.name }}-{{ i.course.medium }}</option>
+                            {% endfor %}
+
+                        </select>
+                   </div>
+
+
+                    <input type="hidden" name = 'sid' value="{{ student_data.id }}" >
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Cancal" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+                </div>
+
+        </div>
+<div class="modal fade" id="upload" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel1111"><strong>Upload Document</strong></h6>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'Frontdesk:front_single_s_doc_id' student_data.id 'DOC' %}" method="post" enctype="multipart/form-data"
+                onsubmit="return fileValidation2('dd')">
+                {% csrf_token %}
+                 <div class="form-group">
+                   <center><label><b>Choose File</b></label></center>
+                    <div class="form-line">
+                        <input type="text" class="form-control" name="doc_name" required="required" placeholder="Document Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                   <center><label><b>Choose File</b></label></center>
+                    <div class="form-line">
+                        <input type="file" class="form-control" name="doc" required="required" id = 'dd'>
+                    </div>
+                </div>
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Upload File" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+                </div>
+
+        </div>
+
+
+<div class="modal fade" id="Idcard" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel113"><strong> Generate Id Card</strong></h6>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'Frontdesk:front_single_s_doc_id' student_data.id 'ID' %}" method="post"  onsubmit="return ValidateForm2()" >
+                {% csrf_token %}
+                <div class="form-group">
+                   <center><label><b>Select Course</b></label></center>
+
+                        <select required = "" class="form-control show-tick" name="course" >
+                            <option value="">Select Course</option>
+                            {% for sc in student_data.front_student_course_batch_data_set.all %}
+
+                            <option value="{{sc.course.id}}">{{ sc.course.name }}-{{ sc.course.medium }}</option>
+                            {% endfor %}
+
+                        </select>
+
+                </div>
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Generate Id Card" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+                </div>
+
+        </div>
+
+
+<script>
+    function Total_fee_show() {
+    Totalfee_list = {{ total }}
+    for (var i = 0; i<Totalfee_list.length; i++)
+        {
+           a = Totalfee_list[i]
+           var t1 = i + 1;
+           var k1 = t1.toString();
+           document.getElementById("total"+k1).innerText = a;
+
+        }
+    }
+window.onload = Total_fee_show;
+</script>
+<script>
+    function fileValidation2(id){
+    var fi = document.getElementById(id);
+    var fp = fi.value;
+    var ae = /(\.jpg|\.jpeg|\.png|\.pdf|\.txt|\.csv|\.ppt|\.xls|\.xlsx|\.odp|\.odt|\.docx|\.doc)$/i;
+    if(!
+    ae.exec(fp)
+    ){
+    alert('This File Does not supporting');
+    fi.value ="";
+    return false;
+    }
+    var fs = fi.files[0].size/1024/1024;
+    if(fs>10){
+     alert('File size exceeds 10 MB');
+     fi.value ="";
+     return false;
+     }
+
+    }
+</script>
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+</script>
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+ <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+
+<script src="{% static 'assets/js/pages/charts/sparkline.js' %}"></script>
+<script src="{% static 'assets/js/pages/forms/basic-form-elements.js' %}"></script>
+
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

@@ -1,0 +1,142 @@
+{% extends 'Inst/base.html' %}
+{% block up %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - Create SMS Templates</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/morrisjs/morris.min.css' %}" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="body">
+                        <div class="header">
+                            <h5 style="font-family: monospace ;font-size:25px;color: #1A5276"><b>New SMS Template</b></h5>
+                       </div>
+                        <div class="row clearfix">
+
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+							<form class="form" method="post" action="">
+							{% csrf_token %}
+
+                  <center>
+					<div class="content col-md-6">
+
+                        <div class="form-group">
+                            <label style="float:left;font-family: monospace ;color: #1A5276"><b>Choose Sender Id</b></label>
+                           {{ form.sender_id }}
+                        </div>
+
+
+                    </div>
+
+                  <div class="content col-md-6">
+                      <label style="float:left;font-family: monospace ;color: #1A5276"><b>Title</b></label>
+
+                        <div class="form-group">
+                           {{ form.title }}
+                        </div>
+                    </div>
+
+                      <script>
+                        function myFunction() {
+                            var x = document.getElementById("mySelect").value;
+                            var sms = document.getElementById("mySMS").value;
+                            document.getElementById("mySMS").value = sms + " " + x;
+                        }
+                      </script>
+
+                      <div class="content col-md-6">
+                            <label style="float:left;font-family: monospace ;color: #1A5276"><b>Add Custom Field</b></label>
+                        <div class="form-group">
+                           <select id="mySelect" onchange="myFunction();" class="form-control show-tick">
+                               <option value="">--choose --</option>
+                              <option value="[[StudentName]]">Student Name</option>
+                              <option value="[[AdmissionDate]]">Admission Date</option>
+                              <option value="[[RollNumber]]">Roll Number</option>
+                              <option value="[[InvoiceNo]]">Invoice Number</option>
+                              <option value="[[FeesPackageAmount]]">Fee Package Amount</option>
+                              <option value="[[PaymentMode]]">Payment Mode</option>
+                              <option value="[[InstallmentDueDate]]">Installment Due Date</option>
+                              <option value="[[EnquiryDate]]">Enquiry Date</option>
+                              <option value="[[Course]]">Course</option>
+                              <option value="[[TotalReceivedAmount]]">Total Received Amount</option>
+                              <option value="[[TotalReceivableAmount]]">Total Receivable Amount</option>
+                              <option value="[[InstallmentAmount]]">Installment Amount</option>
+                              <option value="[[BranchName]]">Branch Name</option>
+                              <option value="[[BranchEmail]]">Branch Email</option>
+                              <option value="[[BranchMobileNo]]">Branch Mobile Number</option>
+                               <option value="[[staff_member_name]]">Staff Member Name</option>
+                              <option value="[[Designation_Name]]">Designation Name</option>
+                              <option value="[[DOJ]]">Date of Joining</option>
+                           </select>
+                        </div>
+                    </div>
+
+                      <div class="content col-md-6">
+                          <label style="float:left;font-family: monospace ;color: #1A5276"><b>Messege</b></label>
+
+                        <div class="form-group">
+                           {{ form.sms }}
+                        </div>
+                    </div>
+
+                  </center>
+                  <center>  <div class="footer text-center" >
+                        <input class="btn btn-primary btn-round btn-lg" type = "submit" value="Create SMS Template">
+                    </div></center>
+                </form>
+            </div>
+        </div>
+    </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="{% static 'Master/assets/assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/jvectormap.bundle.js' %}"></script> <!-- JVectorMap Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/knob.bundle.js' %}"></script> <!-- Jquery Knob-->
+
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/widgets/infobox/infobox-1.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/index.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

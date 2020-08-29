@@ -1,0 +1,245 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+
+    <!-- slider-start -->
+    <div class="slider-area pos-relative">
+        <div class="slider-active">
+            {% for i in banners %}
+            <div class="single-slider slider-height d-flex align-items-center justify-content-center" style="background-image: url({{ i.slider.url }});">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9 col-md-12">
+                            <div class="slider-content slider-content-2">
+                                <h2 class="white-color f-700" data-animation="fadeInUp" data-delay=".2s">{{ i.head }}</h2>
+                                <p data-animation="fadeInUp" data-delay=".4s">{{ i.subhead }}</p>
+                                </div>
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'Website:delete_slider' i.id %}"><button class="theme-btn" data-animation="fadeInUp" data-delay=".6s"><span class="btn-text">Delete</span></button></a>
+                           {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    <!-- slider-end -->
+    <!-- about start -->
+    <div id="about" class="about-area pt-100 pb-70">
+        <div class="container">
+            <div class="row">
+                 <div class="col-xl-5 col-lg-5">
+                    <div class=" mb-30">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'Website:change_image' 'Welcome_content' %}"><img src="{{ welcome_content.image.url }}" alt="" height="250px;" width="450px;"></a>
+                        {% else %}
+                        <img src="{{ welcome_content.image.url }}" alt="" height="250px;" width="450px;">
+                        {% endif %}
+                        </div>
+                </div>
+                <div class="col-xl-7 col-lg-7">
+                    <div class="about-title-section mb-30">
+                        <h1><b>Welcome To <span style="color:orange">Sankalp Institute</span></b>
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'Website:edit_content' 'First_Content' %}"><span class="ti-pencil" style="font-size:25px;"></span></a>
+                        {% endif %}
+                        </h1>
+
+                        <p>{{welcome_content.content}}</p>
+                        <a href="{% url 'Website:aboutus' %}"><button class="theme-btn" data-animation="fadeInUp" data-delay=".6s"><span class="btn-text">Read More</span></button></a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- about end -->
+    <!-- courses start -->
+    <div id="courses" class="courses-area courses-bg-height pt-100 pb-70" style="background-image: url('{% static 'web/img/courses/courses_bg.png' %}');">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="section-title mb-50 text-center">
+                        <div class="section-title-heading mb-20">
+                            <h1 class="white-color">Our Latest Courses</h1>
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'Website:web_add_course' %}"><span class="btn-text">Add Course</span></a>
+                           {% endif %}
+                        </div>
+                        <div class="section-title-para">
+
+                            <p class="white-color">Sankalp Institute Offers Courses for Competitive exam with highly professional teachers. Some of our top courses are-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-list">
+                <div class="row courses-active">
+                    {% for i in all_course %}
+<div>
+
+                <div class="col-md-12">
+                  <div class="courses1">
+                      <a href="{% url 'Website:main_cdetails' i.id %}"><h3>{{ i.name }}</h3></a>
+                    <p>{{ i.dis }}</p>
+                    <img src="{% static 'web/t.svg' %}">
+                       <a href="{% url 'Website:main_cdetails' i.id %}"><h5 style="color:orange"><b>More Details</b></h5></a>
+
+                      {% if request.user.is_staff %}
+                     <a href="{% url 'Website:edit_maincourse' i.id %}"><h5 style="color:orange"><b>Edit</b></h5></a>
+                      <a href="{% url 'Website:delete_stuff' 'MainCourse' i.id %}"><h5 style="color:orange"><b>Delete</b></h5></a>
+                     {% endif %}
+                  </div>
+                </div>
+
+                </div>{% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- courses end -->
+    <!-- team start -->
+    <div class="team-area pt-95 pb-70">
+        <div class="container">
+
+            <div class="team-list">
+                <div class="row">
+
+                    <div class="col-xl-7 col-lg-5">
+                        <div class="about-title-section mb-30">
+                        <h1>Why Choose The Sankalp Institutes?
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'Website:edit_content' 'Second_Content' %}"><span class="ti-pencil" style="font-size:25px;"></span></a>
+                             {% endif %}
+                        </h1>
+                        <p>{{welcome_content.why_choose}}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-5">
+<div class="subscribe-area">
+        <div class="container">
+            <div class="subscribe-box">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1 col-md-12">
+                        <div class="row justify-content-between">
+                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                <div class="subscribe-text">
+                                    <h2>Submit Your Enquiry</h2>
+                                    <span>Fill up the below form and our team will get back to you regarding your query.</span>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 justify-content-end">
+                                <div class="email-submit-form">
+                                    <div class="subscribe-form">
+                                        <form action="{% url 'Website:student_query' %}" method="post">
+                                            {% csrf_token %}
+                                            <input placeholder="Enter your Name" type="text" name="name" class="form-control" required>
+                                           <br>
+                                             <input placeholder="Enter your Mobile Number" type="text" name="mob" class="form-control" required>
+                                            <br>
+                                             <input placeholder="Enter your email" type="email" name="email" class="form-control" required>
+                                           <br>
+                                            <select name="course" class="form-control" required>
+                                                <option value="">
+                                                 --Select Course--
+                                                </option>
+                                                {% for i in all_sub_course %}
+                                                <option value="{{ i.id }}">{{ i.main_course.name }} - {{ i.name }}</option>
+                                                 {% endfor %}
+                                            </select>
+                                             <br>
+                                            <select name="center" class="form-control" required>
+                                                <option value="">
+                                               --Select center--
+                                                </option>
+                                                {% for i in all_ins %}
+                                                <option value="{{ i.id }}">{{ i.Title }}</option>
+                                                 {% endfor %}
+                                            </select>
+                                            <br>
+                                             <textarea  name="msg" class="form-control" required>Enter Your Message
+                                             </textarea>
+                                            <br><br>
+                                             <input class="btn btn-info" value="Get a Callback" type="submit" style="background-color:#002147;color:#ffffff;">
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                        <div id="events"  class="events-area pt-100 pb-95" style="background-image: url('{% static 'web/img/courses/courses_bg.png' %}');padding-bottom:10px;">
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- team end -->
+    <!-- testimonials start -->
+    <div class="testimonilas-area pt-10 pb-90" style="background-image: url('{% static 'web/sbg.png' %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="section-title mb-50 text-center">
+                        <div class="section-title-heading mb-20">
+                            <h1 class="primary-color">What Our Faculties Say</h1>
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'Website:add_f_review' %}"><span class="btn-text">Add Reviews</span></a>
+                           {% endif %}
+                        </div>
+                        <div class="section-title-para">
+                            <p class="gray-color">The Sankalp Institutes is entirely committed towards the education of students.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonilas-list">
+                <div class="row testimonilas-active">
+
+
+                    {% for i in all_feedback %}
+                    <div class="col-xl-12">
+                        <div class="testimonilas-wrapper">
+                            <div class="testimonilas-heading d-flex">
+                                <div class="testimonilas-author-thumb">
+                                    <img src="{{ i.image.url }}" alt="" height="50px;" width="50px;">
+                                </div>
+                                <div class="testimonilas-author-title">
+                                    <h1>{{ i.name }}</h1>
+
+                                </div>
+                            </div>
+                            <div class="testimonilas-para">
+                                <p>{{ i.feedback }}
+                                    {% if request.user.is_staff %}
+                                <a href="{% url 'Website:delete_stuff' 'Faculty' i.id %}"><span class="ti-trash" style="font-size:20px;"></span></a></li>
+                                {% endif %}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div> {% endfor %}
+
+                </div>
+            </div>
+            <center><a href="{% url 'Website:student_review' %}"><button class="btn btn-info">What Our Students Says</button></a></center>
+        </div>
+    </div>
+    <!-- testimonials end -->
+    <!-- video start -->
+
+    <!-- video end -->
+
+    {% endblock %}

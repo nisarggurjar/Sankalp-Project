@@ -1,0 +1,952 @@
+
+{% extends 'exam/base.html' %}
+
+{% block up %}
+
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - External Students Details</title>
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon">
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <h2>Student Profile
+
+                </h2>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+        <div class="col-lg-4 col-md-12">
+                <div class="card project_widget">
+                    <div class="pw_img">
+                        <img class="img-fluid" src="{{ student_data.photo.url }}"  alt="About the image"
+                       >
+                    </div>
+                    <div class="pw_content">
+                        <div class="pw_header">
+                            <h6>{{ student_data.name }}</h6>
+
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane body active" id="about">
+                             <h5 class="m-b-2"><strong>Basic Details</strong> </h5>
+
+                            <ul class="list-unstyled">
+                                <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Father Name: </strong>{{ student_data.father_name }}</p></li>
+                                <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Date Of Birth: </strong>{{ student_data.dob }}</p></li>
+                                <li><p><i class="zmdi zmdi-star m-r-5"></i><strong>Gender: </strong> {{ student_data.gender }}</p></li>
+                               <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Email Id: </strong>{{ student_data.email }}</p></li>
+                               <li><p><i class="zmdi zmdi-label m-r-5"></i><strong>Mobile Number: </strong>{{ student_data.mobile }}</p></li>
+                                <li><p><i class="zmdi zmdi-graduation-cap m-r-5"></i><strong>Class/Graduation: </strong>{{ student_data.pursuing }}</p></li>
+                                <li><p><i class="zmdi zmdi-graduation-cap m-r-5"></i><strong>College/University: </strong>{{ student_data.college }}</p></li>
+                                <li><p><i class="zmdi zmdi-graduation-cap m-r-5"></i><strong>ID Proof: </strong><a href="{{ student_data.id_proof.url }}" target="_blank">{{ student_data.id_proof.name }}</a></p></li>
+                            </ul>
+                            <hr>
+
+                            </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <center>
+             <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="">
+                            <div class="">
+                                    <div class="table-responsive">
+                                        <table >
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <ul class="pagination pagination-primary">
+                                                        <li class="page-item active">
+                                                            <a href="{% url 'ExamPanel:assign_test_package' student_data.id '0' '0' 'External' %}"
+                                                               class="page-link">Assign Test Package</a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <ul class="pagination pagination-primary">
+                                                        <li class="page-item active" >
+                                                            <a href="" data-toggle="modal" data-target="#cancal_test" class="page-link">Cancal Test Package</a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <ul class="pagination pagination-primary">
+                                                        <li class="page-item active">
+                                                            <a href="{% url 'ExamPanel:assign__quiz' student_data.id '0' '0' 'External' %}"  class="page-link">Assign Quiz Package</a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <ul class="pagination pagination-primary">
+                                                        <li class="page-item active">
+                                                            <a  class="page-link"  data-toggle="modal" data-target="#cancel_quiz">Cancel Quiz</a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+    </center>
+
+
+
+
+<center>
+             <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Followers">Assigned Test Series</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#friends">Assigned Quiz Packages</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane body active" id="Followers">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-t-0">
+                                            <tr>
+                                            <th>Package Name</th>
+                                            <th>Course</th>
+                                            <th>Assigned Date</th>
+                                            <th>Details</th>
+                                            <th>Invoice</th>
+                                            <th>Pay</th>
+
+                                           </tr>
+                                            <tbody>
+                                            {% for sc in student_data.assign_test_series_external_student_set.all %}
+                                            <tr>
+                                            <td>{{ sc.package.name }}</td>
+                                            <td>{{ sc.package.course.name }}</td>
+                                            <td>{{ sc.date }}</td>
+                                            <td>
+                                            <ul class="pagination pagination-success">
+                                                <li class="page-item active">
+                                                    <a  class="page-link"  data-toggle="modal" data-target="#largeModal{{ sc.id }}">Details</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                             <td>
+                                            <ul class="pagination pagination-info">
+                                                <li class="page-item active">
+                                                    <a  class="page-link"  data-toggle="modal" data-target="#invoice{{ sc.id }}">Invoice</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+
+                                            <td>
+                                            <ul class="pagination pagination-primary">
+                                                <li class="page-item active">
+                                                    <a  class="page-link"  data-toggle="modal" data-target="#pay{{ sc.id }}">Pay Now</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane body" id="friends">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-t-20">
+                                            <tr>
+                                            <th>Package Name</th>
+                                            <th>Course</th>
+                                            <th>Assigned Date</th>
+                                            <th>Details</th>
+                                            <th>Invoice</th>
+                                            <th>Pay</th>
+                                           </tr>
+                                            <tbody>
+                                            {% for sc in student_data.assign_quiz_external_student_set.all %}
+                                            <tr>
+                                            <td>{{ sc.package.name }}</td>
+                                            <td>{{ sc.package.course.name }}</td>
+                                            <td>{{ sc.date }}</td>
+                                             <td>
+                                            <ul class="pagination pagination-success">
+                                                <li class="page-item active">
+                                                    <a  class="page-link"  data-toggle="modal" data-target="#largequiz{{ sc.id }}">Details</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                            <td>
+                                            <ul class="pagination pagination-info">
+                                                <li class="page-item active">
+                                                    <a  class="page-link"  data-toggle="modal" data-target="#quiz{{ sc.id }}">Invoice</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                                <td>
+                                            <ul class="pagination pagination-primary">
+                                                <li class="page-item active">
+                                                    <a  class="page-link"  data-toggle="modal" data-target="#payquiz{{ sc.id }}">Pay Now</a>
+                                                </li>
+                                            </ul>
+                                            </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+    </center>
+    </div>
+</section>
+
+
+
+
+
+
+{% for sc in student_data.assign_test_series_external_student_set.all %}
+
+<div class="modal fade" id="invoice{{ sc.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h5 class="title" id="largeModalLabel111"><strong class="text-primary">Invoices</strong></h5>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tr>
+                                <th>S.no.</th>
+                                <th>Paid Amount</th>
+                                <th>Payment Date</th>
+                                <th>Generate Invoice</th>
+
+                               </tr>
+                                <tbody>
+                                {% for payment in sc.examinvoicegenerate_set.all %}
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ payment.paid_fee }}</td>
+                                <td>{{ payment.date }}</td>
+                                <td>
+                                    <div class="pagination ">
+                                    <div class="page-item active">
+                                        <a  href ="{% url 'ExamPanel:exam_generate_invoice' payment.id %}" class="page-link">Invoices</a>
+                                    </div>
+                                </div>
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                            </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+{% endfor %}
+
+{% for sc in student_data.assign_quiz_external_student_set.all %}
+
+<div class="modal fade" id="quiz{{ sc.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h5 class="title" id="largeModalLabel111"><strong class="text-primary">Invoices</strong></h5>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                            <div class="body">
+                                <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tr>
+                                <th>S.no.</th>
+                                <th>Paid Amount</th>
+                                <th>Payment Date</th>
+                                <th>Generate Invoice</th>
+
+                               </tr>
+                                <tbody>
+                                {% for payment in sc.examinvoicegenerate_set.all %}
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ payment.paid_fee }}</td>
+                                <td>{{ payment.date }}</td>
+                                <td>
+                                    <div class="pagination ">
+                                    <div class="page-item active">
+                                        <a  href ="{% url 'ExamPanel:exam_generate_invoice' payment.id %}" class="page-link">Invoices</a>
+                                    </div>
+                                </div>
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                            </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+{% endfor %}
+
+
+
+
+  {% for i in student_data.assign_test_series_external_student_set.all %}
+                  <div class="modal fade" id="pay{{ i.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="title" id="largeModalLabel">Pay Fee </h5>
+
+                 <p class="title" ><strong class="col-orange">Payment Date  </strong>  {{ payment_date }}</p>
+
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                            <div class="body">
+                                <form method="post" action="{% url 'ExamPanel:pay_test_quiz_fee' i.id 'Test' 'External' %}" onsubmit="return ValidateForm{{i.id|add:2}}()">
+                                    {% csrf_token %}
+                                    <center>
+                                          <lable><b>Select Payment Mode</b></lable>
+                                    <div class="col-lg-7">
+
+                                        <lable>Amount</lable>
+                                        <input type="text" name="amount" class="form-control" placeholder="Amount" id = "testfee{{i.id}}" onkeyup="return ValidateForm{{i.id|add:2}}()" required="required">
+
+                                         <input type="hidden" class="form-control" value="{{ i.student.id }}" name="studnt_id" /><br />
+
+                                        <input type="submit" class="btn btn-primary " value="Pay Fee" />
+
+
+
+                                    </div></center>
+                                </form>
+
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+<script>
+    function ValidateForm{{i.id|add:2}}() {
+             var total_fee = {{ i.remain_fee }};
+             var dt = parseInt(document.getElementById("testfee"+{{i.id}}).value);
+             if (total_fee <= 0)
+             {
+             alert('Your Fee has been paid');
+             document.getElementById("testfee"+{{i.id}}).value = 0;
+             return false
+             }
+
+            if (dt>parseInt(total_fee)) {
+
+               var s = total_fee.toString();
+               var st = "Amount can not be greter than "+s;
+               alert(st);
+               document.getElementById("testfee"+{{i.id}}).value = s;
+               return false
+            }
+         return true
+
+        }
+</script>
+{% endfor %}
+
+
+  {% for i in student_data.assign_quiz_external_student_set.all %}
+                  <div class="modal fade" id="payquiz{{ i.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="title" id="largeModalLabel">Pay Fee </h5>
+
+                 <p class="title" ><strong class="col-orange">Payment Date  </strong>  {{ payment_date }}</p>
+
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                            <div class="body">
+                                <form method="post" action="{% url 'ExamPanel:pay_test_quiz_fee' i.id 'Quiz' 'External' %}" onsubmit="return ValidateForm{{i.id|add:5}}()">
+                                    {% csrf_token %}
+                                    <center>
+                                          <lable><b>Enter Amount</b></lable>
+                                    <div class="col-lg-7">
+
+                                        <lable>Amount</lable>
+                                        <input type="text" name="amount" class="form-control" placeholder="Amount" id = "feequiz{{i.id}}" onkeyup="return ValidateForm{{i.id|add:5}}()" required="required">
+
+
+
+                                        <input type="submit" class="btn btn-primary " value="Pay Fee" />
+
+
+
+                                    </div></center>
+                                </form>
+
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+<script>
+    function ValidateForm{{i.id|add:5}}() {
+             var total_fee = {{ i.remain_fee }};
+             var dt = parseInt(document.getElementById("feequiz"+{{i.id}}).value);
+             if (total_fee <= 0)
+             {
+             alert('Your Fee has been paid');
+             document.getElementById("feequiz"+{{i.id}}).value = 0;
+             return false
+             }
+
+            if (dt>parseInt(total_fee)) {
+
+               var s = total_fee.toString();
+               var st = "Amount can not be greter than "+s;
+               alert(st);
+               document.getElementById("feequiz"+{{i.id}}).value = s;
+               return false
+            }
+         return true
+
+        }
+</script>
+{% endfor %}
+
+
+
+ <div class="modal fade" id="cancal_test" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel11"><strong> Cancel Test Series </strong></h6>
+                    </center>
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'ExamPanel:cancel_packages' 'Test' 'External' %}" method="post">
+                {% csrf_token %}
+                   <div class="form-group">
+                   <center><label><b>Select Test Package</b></label></center>
+
+                        <select  class="form-control show-tick" name="test" required = 'required' >
+                            <option value="">Select Test Package</option>
+                            {% for sc in student_data.assign_test_series_external_student_set.all %}
+                            <option value="{{sc.id}}">{{ sc.package.name }}</option>
+                            {% endfor %}
+
+                        </select>
+                   </div>
+
+
+                    <input type="hidden" name = 'sid' value="{{ student_data.id }}" >
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Cancal" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+    </div>
+
+ </div>
+
+
+ <div class="modal fade" id="cancel_quiz" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel11"><strong> Cancel Quiz Package </strong></h6>
+                    </center>
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'ExamPanel:cancel_packages' 'Quiz' 'External' %}" method="post">
+                {% csrf_token %}
+                   <div class="form-group">
+                   <center><label><b>Select Quiz Package</b></label></center>
+
+                        <select  class="form-control show-tick" name="quiz" required = 'required' >
+                            <option value="">Select Quiz Package</option>
+                            {% for sc in student_data.assign_quiz_external_student_set.all %}
+                            <option value="{{sc.id}}">{{ sc.package.name }}</option>
+                            {% endfor %}
+
+                        </select>
+                   </div>
+
+
+                    <input type="hidden" name = 'sid' value="{{ student_data.id }}" >
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Cancal" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+    </div>
+
+ </div>
+
+
+ <div class="modal fade" id="cancel_study" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel11"><strong> Cancel Quiz Package </strong></h6>
+                    </center>
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'ExamPanel:cancel_packages' 'Study' 'External' %}" method="post">
+                {% csrf_token %}
+                   <div class="form-group">
+                   <center><label><b>Select Study Package</b></label></center>
+
+                        <select  class="form-control show-tick" name="study" required = 'required' >
+                            <option value="">Select Quiz Package</option>
+                            {% for sc in student_data.assign_study_external_student_set.all %}
+                            <option value="{{sc.id}}">{{ sc.package.name }}</option>
+                            {% endfor %}
+
+                        </select>
+                   </div>
+
+
+                    <input type="hidden" name = 'sid' value="{{ student_data.id }}" >
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Cancal" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+    </div>
+
+ </div>
+
+
+
+
+<div class="modal fade" id="upload" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel1111"><strong>Upload Document</strong></h6>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'Frontdesk:front_single_s_doc_id' student_data.id 'DOC' %}" method="post" enctype="multipart/form-data"
+                onsubmit="return fileValidation2('dd')">
+                {% csrf_token %}
+                 <div class="form-group">
+                   <center><label><b>Choose File</b></label></center>
+                    <div class="form-line">
+                        <input type="text" class="form-control" name="doc_name" required="required" placeholder="Document Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                   <center><label><b>Choose File</b></label></center>
+                    <div class="form-line">
+                        <input type="file" class="form-control" name="doc" required="required" id = 'dd'>
+                    </div>
+                </div>
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Upload File" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+                </div>
+
+        </div>
+
+
+{% for sc in student_data.assign_test_series_external_student_set.all %}
+
+<div class="modal fade" id="largeModal{{ sc.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h5 class="title" id="largeModalLabel111"><strong class="text-primary">Package Details</strong></h5>
+                    </center>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Package Name:</strong> {{ sc.package.name }} </h2>
+                    </div>
+
+
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tr>
+                                <th>Total Fee</th>
+                                <th>Paid Fee</th>
+                                <th>Remain Fee</th>
+                               </tr>
+                                <tr>
+                                <td>{{ sc.total_fee }}</td>
+                                <td>{{ sc.paid_fee }}</td>
+                                <td>{{ sc.remain_fee }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row clearfix" >
+                            <div class="col-md-12 col-lg-12">
+                                <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                    <p style="font:bold; color:black; font-family:monospace;" >List of Sub Packages</p>
+                                    {% for i in sc.package.studentpackage_subpackage_set.all %}
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_1">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_{{ i.id }}" aria-expanded="false"
+                                                                        aria-controls="collapseOne_1" class="collapsed">{{ i.sub.name }} </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_{{ i.id }}" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_{{ i.id }}" style="">
+                                            <div class="panel-body">
+                                                <p style="font:bold; color:black; font-family:monospace;" >List of Exams</p>
+                                                <div class="body table-responsive">
+                                                     <table class="table table-striped table-hover m-b-0 js-basic-example dataTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.no.</th>
+                                                                <th>Name</th>
+                                                                <th>Time Duration</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                                <th>Sections</th>
+                                                                <th>Edit</th>
+                                                                <th>Delete</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for student in i.sub.studentsubpackage_mainexam_set.all %}
+
+                                                            <tr>
+                                                                <td>{{ forloop.counter }}</td>
+                                                                <td>{{ student.main.name}}</td>
+                                                                <td>{{ student.main.duration}}</td>
+                                                                <td>{{ student.main.start_date }}</td>
+                                                                <td>{{ student.main.end_date }}</td>
+                                                                <td><a href="{% url 'ExamPanel:student_main_exam_sections' student.main.id  %}">
+                                                                    Sections</a></td>
+                                                                <td><a href="{% url 'ExamPanel:edit_student_main' student.main.id sid 'Edit' 'External'  %}">
+                                                                    <i class="zmdi zmdi-edit"></i></a></td>
+                                                                <td><a href="{% url 'ExamPanel:edit_student_main' student.main.id sid 'Delete' 'External'  %}">
+                                                                    <i class="zmdi zmdi-delete"></i></a></td>
+                                                                </tr>
+
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+{% for sc in student_data.assign_quiz_external_student_set.all %}
+<div class="modal fade" id="largequiz{{ sc.id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h5 class="title" id="largeModalLabel111"><strong class="text-primary">Invoices</strong></h5>
+                    </center>
+            </div>
+            <div class="modal-body">
+                            <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Total Fee</th>
+                                    <th>Paid Fee</th>
+                                    <th>Remain Fee</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ sc.total_fee }}</td>
+                                    <td>{{ sc.paid_fee }}</td>
+                                    <td>{{ sc.remain_fee }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="body">
+                               <div class="body table-responsive">
+                                    <table class="table table-striped table-hover m-b-0 js-basic-example dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th>S.no.</th>
+                                                <th>Name</th>
+                                                <th>Time Duration</th>
+                                                <th>Total Questions</th>
+                                                <th>Add Questions</th>
+                                                <th>List of Questions</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in sc.package.studentquiz_quizpackage_set.all %}
+
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ i.quiz.name}}</td>
+                                                <td>{{ i.quiz.duration}}</td>
+                                                <td>{{ i.quiz.studentquiz_questions_set.all.count}}</td>
+                                                <td><a href="{% url 'ExamPanel:add_questions_in_student_quiz' i.quiz.id '0' '0' '10'  %}">
+                                                    Add Question</a></td>
+                                                <td><a href="{% url 'ExamPanel:student_quiz_question_list' i.quiz.id '10'  %}">
+                                                    Questions List</a></td>
+                                                <td><a href="{% url 'ExamPanel:edit_student_quiz' i.quiz.id 'Edit' sid 'External'  %}">
+                                                    <i class="zmdi zmdi-edit"></i></a></td>
+                                                <td><a href="{% url 'ExamPanel:edit_student_quiz' i.quiz.id 'Delete' sid 'External' %}">
+                                                    <i class="zmdi zmdi-delete"></i></a></td>
+
+                                                </tr>
+
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+{% endfor %}
+
+
+
+
+<div class="modal fade" id="Idcard" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>
+                    <h6 class="title" id="largeModalLabel113"><strong> Generate Id Card</strong></h6>
+                    </center>
+
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{% url 'Frontdesk:front_single_s_doc_id' student_data.id 'ID' %}" method="post"  onsubmit="return ValidateForm2()" >
+                {% csrf_token %}
+                <div class="form-group">
+                   <center><label><b>Select Course</b></label></center>
+
+                        <select required = "" class="form-control show-tick" name="course" >
+                            <option value="">Select Course</option>
+                            {% for sc in student_data.front_student_course_batch_data_set.all %}
+
+                            <option value="{{sc.course.id}}">{{ sc.course.name }}-{{ sc.course.medium }}</option>
+                            {% endfor %}
+
+                        </select>
+
+                </div>
+
+                <center>
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Generate Id Card" >
+                </center>
+
+               </form><br><br>
+
+
+            </div>
+        </div>
+                </div>
+
+        </div>
+
+
+<script>
+    function Total_fee_show() {
+    Totalfee_list = {{ total }}
+    for (var i = 0; i<Totalfee_list.length; i++)
+        {
+           a = Totalfee_list[i]
+           var t1 = i + 1;
+           var k1 = t1.toString();
+           document.getElementById("total"+k1).innerText = a;
+
+        }
+    }
+window.onload = Total_fee_show;
+</script>
+<script>
+    function fileValidation2(id){
+    var fi = document.getElementById(id);
+    var fp = fi.value;
+    var ae = /(\.jpg|\.jpeg|\.png|\.pdf|\.txt|\.csv|\.ppt|\.xls|\.xlsx|\.odp|\.odt)$/i;
+    if(!
+    ae.exec(fp)
+    ){
+    alert('This File Does not supporting');
+    fi.value ="";
+    return false;
+    }
+    var fs = fi.files[0].size/1024/1024;
+    if(fs>10){
+     alert('File size exceeds 10 MB');
+     fi.value ="";
+     return false;
+     }
+
+    }
+</script>
+
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+ <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+
+<script src="{% static 'assets/js/pages/charts/sparkline.js' %}"></script>
+<script src="{% static 'assets/js/pages/forms/basic-form-elements.js' %}"></script>
+
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

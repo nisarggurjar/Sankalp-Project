@@ -1,0 +1,141 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - All Categories</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>All Book Category
+                
+                </h2>
+            </div>
+           
+        </div>
+    </div>
+      <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>All Category</strong> List</h2>
+                    </div>
+                    <div class="body">
+                        <ul class="nav nav-tabs padding-0">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#librarylist">Book Category List</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addlibrary">Add Category</a></li>
+                        </ul>                        
+                    </div>
+                </div>
+                <div class="tab-content">                   
+                    <div class="tab-pane active" id="librarylist">
+                        <div class="card">
+                            <div class="body table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Category Name</th>
+                                            <th>Created Date</th>
+                                            <th>Delete</th>
+                                            
+                                        </tr>
+                                    </thead>                            
+                                    <tbody>
+									{% for cat in all_cat %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ cat.name }}</td>
+                                            <td>{{ cat.created_date }}</td>
+                                            <td><a href ="{% url 'LibraryPanel:delete_for_all' cat.id 'Category' %}"><span class="badge badge-primary">Delete</span></a></td>
+                                            
+                                        </tr>
+                                      {% endfor %}  
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="addlibrary">
+                        <div class="card">
+                    <div class="body">
+                        <div class="row clearfix">
+						
+						 <div class="container">
+					<div class="col-md-12">
+						<div class="card-plain">
+							<form class="form" method="post" action="">
+							{% csrf_token %}
+								<div class="header">
+                       
+                      <center>  <h5>New  Category</h5> </center>
+                    </div>
+                  <center>
+					<div class="content" style = "max-width:500px; min-width:250px;">                                                
+                        <div class="input-group ">
+                            <input type="text" class="form-control" placeholder="Enter  Name" name = 'cat_book' required>
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-plus"></i>
+                            </span>
+                        </div>
+                       
+                    </div></center>
+                  <center>  <div class="footer text-center" style = "max-width:400px; min-width:200px;">
+                        <input class="btn btn-primary btn-round btn-lg   " type = "submit" value="Add">
+                      
+                    </div></center>
+                </form>
+            </div>
+        </div>
+    </div>
+                            
+                        </div>
+                      
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

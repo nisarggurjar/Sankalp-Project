@@ -1,0 +1,196 @@
+{% extends 'Library/base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:52:22 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Book details</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+</head>
+{% endblock %}
+
+{% block down %}
+
+<!-- Main Content -->
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Book Details
+                <small></small>
+                </h2>
+            </div>
+           
+        </div>
+    </div>
+    <div class="container-fluid">
+
+              <div class="row clearfix">
+            <div class="col-md-12 col-lg-4">
+                <div class="card">
+                    <div class="body">
+                        <div class="pw_img">
+                            <h6 class="m-b-0"><strong>Book Cover Image</strong></h6>
+                            <br>
+                            {% if book.cover_image %}
+                            <img id="blah" src="{{ book.cover_image.url }}" height="150" width="350"  />
+
+                            {% else %}
+                            <img class="img-fluid" src="{% static 'assets/images/book3.jpeg' %}" alt="About the image"
+                            >
+
+                            {% endif %}
+
+                    </div>
+                        <div>
+                            <h4 class="m-b-0"><strong>{{ book.book_title }}</strong></h4><br>
+                            <span class="job_post"><strong>Sub-Title</strong> {{ book.subbook_title }}</span>
+                            <p><strong>Edition:</strong> {{ book.edition }} Edition</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-8">
+
+             <div class="card">
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane body active" id="about">
+                             <h5 class="m-b-2"><strong>Book Details</strong> </h5>
+
+                            <div class="table-responsive">
+                            <table class="table  m-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+										 <th>Sub Category</th>
+                                        <th>Author</th>
+										<th>Publisher</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        {% if book.category %}
+                                        <td>{{ book.category.name }}</td>
+                                        {% else %}
+                                        <td>No Category</td>
+                                        {% endif %}
+										{% if book.subcategory %}
+                                        <td>{{ book.subcategory.name }}</td>
+                                        {% else %}
+                                        <td>No SubCategory</td>
+                                        {% endif %}
+                                        <td>{{ book.author }}</td>
+										<td>{{ book.publisher }}</td>
+                                        </tr>
+                                 </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Editor</th>
+										 <th>ISBN</th>
+                                        <th>Publication Year</th>
+										<th>Series</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;{{ book.editor }}</td>
+										<td>{{ book.ISBN }}</td>
+                                        <td>{{ book.publication_year }}</td>
+										<td>{{ book.series }}</td>
+                                    </tr>
+                                 </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Edition</th>
+										 <th>Pages</th>
+                                        <th>Copies</th>
+										<th>Created Date</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ book.edition }}</td>
+										<td>{{ book.pages }} Page</td>
+                                        <td>{{ book.copies }} Copy</td>
+										<td>{{ book.created_date }}</td>
+                                    </tr>
+                                 </tbody>
+                            </table>
+                        </div>
+                                {% if book.category %}
+                                <ul class="pagination pagination-primary">
+                                    <li class="page-item active">
+                                        <a href="{% url 'LibraryPanel:Library_book_edit' book.id book.category.id book.subcategory.id %}" class="page-link">Edit Details</a>
+
+                                    </li>
+                                </ul>
+                                {% else %}
+                            <ul class="pagination pagination-primary">
+                                    <li class="page-item active">
+                                        <a href="{% url 'LibraryPanel:asign_cat' '0' book.id %}" class="page-link">Asign Category</a>
+
+                                    </li>
+                                </ul>
+                            {% endif %}
+
+
+
+                            </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+</script>
+<!-- Jquery Core Js -->
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

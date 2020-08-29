@@ -1,0 +1,187 @@
+{% extends 'Inst/base.html' %}
+{% block up %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    {% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<title>{{ ins_data.name }} - All Sender Ids</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'Master/assets/plugins/morrisjs/morris.min.css' %}" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'Master/assets/assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+
+</head>
+{% endblock %}
+
+{% block body %}
+
+<!-- Main Content -->
+<section class="content">
+
+      <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <strong style="font-family: monospace ;font-size:25px;color: #1A5276"><b>All Sender IDs</b></strong>
+
+                    </div>
+                    <div class="body">
+                        <ul class="nav nav-tabs padding-0">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#librarylist">Sender Id List</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addlibrary">Add Sender Id</a></li>
+                        </ul>
+                    </div>
+                       <div class="tab-content">
+                    <div class="tab-pane active" id="librarylist">
+                        <div>
+                            <div class="body table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Sender Id</th>
+                                            <th>Created Date</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									{% for si in all_sender_id %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ si.name }}</td>
+                                            <td>{{ si.created_date }}</td>
+                                            <td>
+                                            <a href="" data-target="#edit{{ forloop.counter }}" data-toggle="modal"><i style="color:#1A5276;" class="zmdi zmdi-edit"></i></a>&nbsp;&nbsp;
+                                            {% if si.smstemplate_set.all %}
+                                                <a href="" data-target="#delete_alert" data-toggle="modal"><i style="color:#1A5276;" class="zmdi zmdi-delete"></i></a>&nbsp;&nbsp;
+                                             {% else %}
+                                                 <a href="{% url 'Master:delete' si.id 'SenderId' %}"><i style="color:#1A5276;" class="zmdi zmdi-delete"></i></a>
+                                             {% endif %}
+                                        </td>
+                                        </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="addlibrary">
+                        <div >
+                    <div class="body">
+                        <div class="row clearfix">
+
+						 <div class="container">
+					<div class="col-md-12">
+						<div>
+							<form class="form" method="post" action="">
+							{% csrf_token %}
+								<div class="header">
+
+                      <center>  <h5 style="font-family: monospace ;color: #1A5276">New  Sender Id</h5> </center>
+                    </div>
+                  <center>
+					<div class="content col-md-6" >
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter  Name" name = 'sender' maxlength="6" required>
+
+                        </div>
+
+                    </div></center>
+                  <center>  <div class="footer text-center">
+                        <input class="btn btn-primary btn-round btn-lg   " type = "submit" value="Add">
+
+                    </div></center>
+                </form>
+            </div>
+        </div>
+    </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="delete_alert" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title " id="defaultModalLabel" style="font-family: monospace; font-size: 20px; color: #1A5276">Delete Sender Id Alart</h4>
+            </div>
+            <div class="modal-body">
+
+                <label style="float:left; font-family: monospace;"><b> This Sender Id is connected with SMS Templates. So now you
+                can't delete it.</b></label>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% for si in all_sender_id %}
+<div class="modal fade" id="edit{{ forloop.counter }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title " id="defaultModalLabel" style="font-family: monospace; font-size: 20px; color: #1A5276">Edit Sender Id</h4>
+            </div>
+            <form class="form" action="{% url 'Master:edit' si.id  'SenderId' %}" method="post" >
+                {% csrf_token %}
+            <div class="modal-body">
+
+                <label style="float:left; font-family: monospace;"><b>Sender Id </b></label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" maxlength="6" name = 'sender' value="{{ si.name }}" required>
+
+                        </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary btn-round waves-effect" value="Edit" name="Submit1">
+                <button type="button" class="btn btn-simple btn-round waves-effect" data-dismiss="modal">CLOSE</button>
+            </div></form>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- Jquery Core Js -->
+<script src="{% static 'Master/assets/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{% static 'Master/assets/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="{% static 'Master/assets/assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/jvectormap.bundle.js' %}"></script> <!-- JVectorMap Plugin Js -->
+<script src="{% static 'Master/assets/assets/bundles/knob.bundle.js' %}"></script> <!-- Jquery Knob-->
+
+<script src="{% static 'Master/assets/assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/widgets/infobox/infobox-1.js' %}"></script>
+<script src="{% static 'Master/assets/assets/js/pages/index.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:19 GMT -->
+</html>

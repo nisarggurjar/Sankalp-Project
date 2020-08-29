@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ins_data.Title}} - {{ ins_data.sub_title }}</title>
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+
+</head>
+<body>
+<div class="content invoice">
+    <div class="block-header">
+        <div class="row">
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <center>
+            <div class="col-lg-8">
+                <div class="card">
+
+
+                </div>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane in active" id="details" aria-expanded="true">
+                        <div class="row clearfix" id = "div_area">
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="card" id="details1">
+                                     <div class="body">
+                        <p style="float:left;" class="m-b-0">Invoice Number : <strong class="text-primary">{{ data.invoice }}</strong></p>
+                    </div>
+                                    <div class="body">
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 text-left">
+                                                <address>
+                                                    <strong>{{ ins_data.name }}</strong><br>
+                                                    {{ ins_data.office_add }}<br>
+                                                    {{ins_data.city}}, {{ins_data.state}}<br>
+                                                    <abbr title="Phone">P:</abbr>{{ ins_data.office_mob }}
+                                                </address>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 text-right">
+                                                {% if data.exam %}
+                                                <strong>{{ data.exam.student.name }}</strong><br>
+                                                {% endif %}
+                                                {% if data.quiz %}
+                                                <strong>{{ data.quiz.student.name }}</strong><br>
+                                                {% endif %}
+                                                {% if data.o_exam %}
+                                                <strong>{{ data.o_exam.student.name }}</strong><br>
+                                                {% endif %}
+                                                {% if data.o_quiz %}
+                                                <strong>{{ data.o_quiz.student.name }}</strong><br>
+                                                {% endif %}
+                                                <p class="m-b-0"><strong>Payment Date: </strong> {{ data.date }}</p>
+                                                <p class="m-b-0"><strong>Payment Mode: </strong> <span class="badge bg-blue">{{ data.mode }}</span></p>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="mt-40"></div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover m-b-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Packege Name</th>
+                                                                <th>Total Fee</th>
+                                                                <th>Paid Fee</th>
+                                                                <th>Remaining Fee</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                {% if data.exam %}
+                                                                <td>{{ data.exam.real.name }}</td><br>
+                                                                {% endif %}
+                                                                {% if data.quiz %}
+                                                                <td>{{ data.quiz.real.name }}</td><br>
+                                                                {% endif %}
+                                                                {% if data.o_exam %}
+                                                                <td>{{ data.o_exam.real.name }}</td><br>
+                                                                {% endif %}
+                                                                {% if data.o_quiz %}
+                                                                <td>{{ data.o_quiz.real.name }}</td><br>
+                                                                {% endif %}
+
+                                                                <td>{{ data.total_fee }} /- Rs.</td>
+                                                                <td>{{ data.paid_fee }} /- Rs.</td>
+                                                                <td>{{ data.remain_fee }} /- Rs.</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6 text-left">
+                                                <h6> Authorized Signature</h6>
+                                                <p style="visibility:hidden;">Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.</p>
+                                            </div>
+
+                                            <div class="col-md-6 text-right">
+
+                                                <h3 class="m-b-0 m-t-10">Rs. {{ data.paid_fee }}.00 /-</h3>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="hidden-print col-md-12 text-right">
+                                            <button class="btn btn-warning btn-icon  btn-icon-mini btn-round " onclick="printDiv('div_area');"><i class="zmdi zmdi-print"></i></button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div></center>
+        </div>
+    </div>
+</div>
+<script>
+function printDiv(divName){
+       var pc = document.getElementById(divName).innerHTML;
+	   var oc = document.body.innerHTML;
+	   document.body.innerHTML = pc;
+	   window.print();
+	   document.body.innerHTML = oc;
+
+}
+</script>
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+
+
+</body>
+
+</html>

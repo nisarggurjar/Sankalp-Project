@@ -1,0 +1,178 @@
+
+{% block up %}
+{% endblock %}
+
+{% load static %}
+<link rel="icon" href="{{ ins_data.institute_logo.url }}" type="image/x-icon"> <!-- Favicon-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<body class="theme-cyan menu_dark">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{{ ins_data.institute_logo.url }}" style="border-radius: 50%;" width="48" height="48" alt="{{ ins_data.name }}"></div>
+        <p>Please wait...</p>
+    </div>
+</div>
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+<!-- Top Bar -->
+<nav class="navbar p-l-5 p-r-5">
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href=""><img src="{{ ins_data.institute_logo.url }}" width="30" style="border-radius: 50%;" alt="Logo">
+
+                         {% if request.user.last_name == "Admin" %}
+                            {% if not request.user.is_staff %}
+                                <span class="m-l-10">{{ request.user.visiteduser_set.first.institute }}</span></a>
+                            {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                            {% endif %}
+                        {% else %}
+                                <span class="m-l-10">{{ ins_data.name }}</span></a>
+                        {% endif %}
+
+            </div>
+        </li>
+        <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+
+        <li class="float-right">
+
+            <a href="{% url 'logout' %}" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a>
+
+        </li>
+    </ul>
+</nav>
+<!-- Left Sidebar-->
+<aside id="leftsidebar" class="sidebar">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#dashboard"></a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane stretchRight active" id="dashboard">
+            <div class="menu">
+                <ul class="list">
+                    <li>
+                        {% if request.user.last_name == "Admin" %}
+                        <div class="user-info">
+                            <div class="image"><a href=""><img src="{{ adminprofile.image.url }}" alt="{{ adminprofile.name }}"></a></div>
+                            <div class="detail">
+                                <h4>{{ adminprofile.name }}</h4>
+                                <small>Admin</small>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="user-info">
+                            <div class="image"><a href=""><img src="{{ request.user.user_management_set.first.emp.image.url }}" alt="{{ request.user.admin_profile_set.first.name }}"></a></div>
+                            <div class="detail">
+                                <h4>{{ request.user.user_management_set.first.emp.name }}</h4>
+                                <small>{{ request.user.user_management_set.first.emp.designation }}</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </li>
+
+                    <li><a href="{% url 'Frontdesk:home' %}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-library"></i><span>Enquiry</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_enquiry' %}">All Enquiry</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-phone"></i><span>Call Logs</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:call_logs' %}">All call logs</a></li>
+
+                        </ul>
+                    </li>
+
+					 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>Admission</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_add_student' '0' '0' '0' %}">Admission</a></li>
+                        </ul>
+                    </li>
+                     <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-circle"></i><span>Students</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_all_student' %}">All Students</a></li>
+                            <li><a href="{% url 'Frontdesk:front_filter_student'  '0' '0' %}">Filter Students</a></li>
+                            <li><a href="{% url 'Frontdesk:front_cancal_addmission_list' '0' %}">Admission Cancal List</a></li>
+
+
+                        </ul>
+                    </li>
+
+					<li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-balance"></i><span>Accounting</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_fee_details' '0' '0' %}">Collect Fee</a></li>
+                            <li><a href="{% url 'Frontdesk:front_complete_fee_paid' %}">Complete Fee Paid List</a></li>
+
+                        </ul>
+                    </li>
+
+					<li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-card"></i><span>Generate Id Card</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_upload_doc_or_idcard' '0' 'Idcard' %}">Student Id Card</a></li>
+                            <li><a href="{% url 'Frontdesk:front_staff_idcard' %}">Staff Id Card</a></li>
+
+
+                        </ul>
+                    </li>
+
+					 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-alarm"></i><span>Reminders</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_enquiry_previous_followup' %}">Previous Follow Up's</a></li>
+
+                            <li><a href="{% url 'Frontdesk:front_enquiry_followup_reminder' %}">Upcoming Follow Up's</a></li>
+                            <li><a href="{% url 'Frontdesk:front_fee_collection_reminder' %}">Fee Collection Reminder</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-upload"></i><span>Upload Document</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_upload_doc_or_idcard' '0' 'UploadDoc' %}">Upload Document</a></li>
+                            <li><a href="{% url 'Frontdesk:front_all_uploded' %}">Uploaded Document List</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-notifications-active"></i><span>Notifications</span> </a>
+                        <ul class="ml-menu">
+                           <li><a href="{% url 'Frontdesk:notification_batch' '0' '0' %}">Batch Students</a></li>
+                            <li><a href="{% url 'Frontdesk:select_student' '0' '0' %}">Individual Student</a></li>
+                            <li><a href="{% url 'Frontdesk:select_enq_students' '0' %}">For Enquiry Students</a></li>
+
+                            <li><a href="{% url 'Frontdesk:notification_all_stu_or_staff' 'AllStaff' %}">For All Staff</a></li>
+                            <li><a href="{% url 'Frontdesk:notification_for_single_staff' %}">Individual Staff Member</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-copy"></i><span>Receipts</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{% url 'Frontdesk:front_all_receipts' %}">All Receipts</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="ml-menu">
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="ml-menu">
+                            <li></li>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
+
+
+
+{% block down %}
+{% endblock %}

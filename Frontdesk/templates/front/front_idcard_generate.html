@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html >
+<head>
+    {% load static %}
+  <meta charset="UTF-8">
+ <title>{{ ins_data.name }} - Generate Id card</title>
+  
+
+<script src='https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js'></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+      <link rel="stylesheet" href="{% static 'Idcard/css/style.css' %}">
+<style>
+    .clash-card {
+  background: white;
+  width: 330px;
+  height: 420px;
+  display: inline-block;
+  margin: auto;
+  border-radius: 19px;
+  position: relative;
+  text-align: center;
+  box-shadow: -1px 15px 30px -12px black;
+  z-index: 9999;
+}
+
+</style>
+    <style>
+.fill {object-fit: fill;}
+.contain {object-fit: contain;}
+.cover {object-fit: cover;}
+.scale-down {object-fit: scale-down;}
+.none {object-fit: none;}
+</style>
+  
+</head>
+
+<body>
+<center>
+
+
+    <div class="row clearfix" id = "">
+        {% for data in li %}
+
+
+<div class="col-lg-4 col-md-4 col-sm-4" style="padding-top: 10px;">
+    <div class="slide-container"> 
+  <div class="wrapper">
+    <div class="clash-card barbarian">
+      <div class="clash-card__image clash-card__image--barbarian">
+        <p align="left" style=" padding-left: 10px; font-family: monospace !important; padding-top: 15px; font-size: 30px; color: white;">{{ ins_data.Title }}</p>
+        <img src="{{ data.student.image.url }}"
+        height="120" alt="Student Name" style="border-radius: 50%;" />
+      </div>
+      <div class="clash-card__unit-name" style="margin-top: -70px;">{{ data.student.name }}</div>
+
+
+      <p align="left" style="padding-left: 10px; padding-right: 5px; margin-bottom: 7px; font-size: 18px; 
+      color: black;"><span style="font-weight: bold;">Course: </span>{{ data.course.name }}</p>
+
+      <p align="left" style="padding-left: 10px; margin-bottom: 7px; font-size: 18px;
+      color: black;"><span style="font-weight: bold;">Batch: </span> {{ data.Batch.name }}-{{ data.Batch.batch_shot_name }}</p>
+
+      <p align="left" style="padding-left: 10px; padding-right: 5px; margin-bottom: 7px; font-size: 18px; 
+      color: black;"><span style="font-weight: bold;">Roll No.: </span>{{ data.student.roll_number }}</p>
+
+      <p align="left" style=" font-size: 18px; margin-bottom: 7px; color: black;">
+        <span style="font-weight: bold; padding-left: 10px;">Medium: </span>{{ data.course.medium }}
+      </p>
+      <p align="left" style=" font-size: 18px; margin-bottom: 7px; color: black;">
+        <span style="font-weight: bold; padding-left: 10px;">A. Date:</span>{{ data.addmission_date }}
+        </p>
+       <p align="left" style=" font-size: 18px; margin-bottom: 7px; color: black;">
+       <span style="font-weight: bold; padding-left: 8px;">Validity: </span>{{ data.student.id_card_validity }}
+       </p>
+<input type="hidden" value="{{ Rnumber }}" id = roll>
+      <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix" style="padding-top:-10px;">
+        <div class="one-third no-border">
+        </div>
+        <div class="one-third no-border">
+        </div>
+        <div class="one-third no-border">
+          <div class="" style="margin-left: -80px; font-size: 25px;">Director Sign</div>
+        </div>
+      </div>
+    </div> <!-- end clash-card barbarian-->
+  </div> <!-- end wrapper -->
+
+  </div> 
+</div>
+          {% endfor %}
+</div>
+</center>
+<!-- end container -->
+
+
+<script type="text/javascript">
+function CodeCode(ID, Numb){
+     JsBarcode(ID, Numb, {
+  format: "CODE39",
+  lineColor: "black",
+  width: 1,
+  height: 30,
+  displayValue: false
+});
+}
+
+function Barcodes(){
+var Number = document.getElementById("roll").value;
+var AllNum = Number.split("___")
+for (var i = 0; i<AllNum.length; i++)
+{   var k = i+1;
+    CodeCode("#barcode" + k, AllNum[i]);
+}
+}
+window.onload = Barcodes;
+</script>
+
+
+</body>
+</html>

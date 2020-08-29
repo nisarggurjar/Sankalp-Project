@@ -1,0 +1,284 @@
+
+{% extends 'front/front_base.html' %}
+
+{% block up %}
+
+
+<!doctype html>
+<html class="no-js " lang="en">
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{{ ins_data.name }} - Upload Documents</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link href="{% static 'assets/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css' %}"/>
+<link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/color_skins.css' %}">
+<link href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+</head>
+
+
+{% endblock %}
+
+{% block down %}
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                {% if upload %}
+                <h2>Upload Document
+               </h2>
+                {% else %}
+                <h2>Generate Id Card
+               </h2>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card student-list">
+                      <div class="header">
+                          {% if upload %}
+                             <h2><strong>Upload</strong> Document</h2>
+                          {% else %}
+                          <h2><strong>Generate Student</strong>Id Card</h2>
+                          {% endif %}
+
+                      </div>
+
+                    <div class="body">
+                           <center>
+
+                         <div class="content col-md-6">
+
+                               <form action="" method="post" enctype="multipart/form-data" onsubmit="return fileValidation2('doc_file');">
+                                 {% csrf_token %}
+
+
+                                        <label><b>Choose Option</b></label>
+                                             <select class="form-control show-tick" onchange="yesnoCheck(this);" required ='required' name="option">
+                                                 <option value="">Choose option</option>
+                                                  <option value ='allstudent'>For All Students</option>
+                                                 {% if course %}
+                                                  <option value="batches" selected>For Batches</option>
+                                                 {% else %}
+                                                  <option value="batches">For Batches</option>
+                                                 {% endif %}
+                                             </select>
+                                        <br>
+
+
+                                      <div class=""  id="ifYes" style="display: none;">
+                                             <br>
+                                        <label><b>Choose Course</b></label>
+                                             <select class="form-control show-tick" onchange="window.location=this.value">
+                                                  <option value =''>choose course</option>
+                                                 {% for c in all_course %}
+                                                 {% if upload %}
+                                                 {% if course.id == c.id %}
+                                                  <option value="{% url 'Frontdesk:front_upload_doc_or_idcard' c.id 'UploadDoc' %}" selected>{{ c.name }}-{{ c.medium }}</option>
+                                                 {% else %}
+                                                 <option value="{% url 'Frontdesk:front_upload_doc_or_idcard' c.id 'UploadDoc' %}" >{{ c.name }}-{{ c.medium }}</option>
+                                                 {% endif %}
+                                                 {% else %}
+                                                 {% if course.id == c.id %}
+                                                  <option value="{% url 'Frontdesk:front_upload_doc_or_idcard' c.id 'Idcard' %}" selected>{{ c.name }}-{{ c.medium }}</option>
+                                                 {% else %}
+                                                 <option value="{% url 'Frontdesk:front_upload_doc_or_idcard' c.id 'Idcard' %}" >{{ c.name }}-{{ c.medium }}</option>
+
+                                                 {% endif %}
+                                                 {% endif %}
+                                                 {% endfor %}
+                                             </select>
+                                    </div>
+
+                                    <div class="table-responsive" id="ifYes1" style="display: none;">
+                                        <br>
+
+                                        {% if rr %}
+                                        <label><b>Running Batches</b></label>
+                                    <table class="">
+                                        <thead>
+
+                                            <tr>
+                                                {% for b in rr %}
+                                                <th style="padding-left:15px;">{{ b.name }}</th>
+                                                {% endfor %}
+
+                                            </tr>
+                                        </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                 {% for b in rr %}
+                                                <td style="text-align:center">
+                                                    <div class="">
+                                                        <input id="ch{{ forloop.counter }}" type="checkbox" name="batch" value="{{ b.id }}">
+                                                        <label for="ch{{ forloop.counter }}">&nbsp;</label>
+                                                    </div>
+                                                </td>
+
+                                                   {% endfor %}
+                                            </tr>
+                                            {% else %}
+                                            {% if course %}
+                                            <p style="color:orange">There is no running Batch.</p>
+                                            {% endif %}
+                                            {% endif %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                   <br>
+                                   {% if upload %}
+                                   <label><b>Documemt Title</b></label>
+                                   <input type="text" name="name" class="form-control" placeholder="Document Title">
+                                   <br>
+
+                                        <label><b>Choose File</b></label>
+                                        <input type="file" name="document" class="form-control" id = 'doc_file'>
+
+                                   <center>
+
+                                       <input type="submit" class="btn btn-primary btn-round" value="Upload File" >
+
+                                   </center>
+
+                                   {% else %}
+                                    <center>
+                                   <input type="submit" class="btn btn-primary btn-round" value="Generate Id Cards">
+
+                                   </center>{% endif %}
+
+                       </form>
+                         </div>
+
+
+
+                         </center>   </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    </div>
+</section>
+
+<!-- Jquery Core Js -->
+
+<script>
+    function yesnoCheck(that) {
+        if (that.value == 'batches') {
+
+
+            document.getElementById("ifYes").style.display = "block";
+            document.getElementById("ifYes1").style.display = "block";
+        } else {
+            document.getElementById("ifYes").style.display = "none";
+            document.getElementById("ifYes1").style.display = "none";
+        }
+    }
+
+</script>
+{% if course %}
+<script>
+   document.getElementById("ifYes").style.display = "block";
+   document.getElementById("ifYes1").style.display = "block";
+
+</script>
+{% endif %}
+
+<script>
+    function fileValidation2(id){
+    var fi = document.getElementById(id);
+    var fp = fi.value;
+    var ae = /(\.jpg|\.jpeg|\.png|\.pdf|\.txt|\.csv|\.ppt|\.xls|\.xlsx|\.odp|\.odt|\.doc|\.docx)$/i;
+    if(!
+    ae.exec(fp)
+    ){
+    alert('This File Does not supporting');
+    fi.value ="";
+    return false;
+    }
+    var fs = fi.files[0].size/1024/1024;
+    if(fs>10){
+     alert('File size exceeds 10 MB');
+     fi.value ="";
+     return false;
+     }
+
+    }
+</script>
+
+<script src="{% static 'assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+<script src="{% static 'assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js -->
+
+<script src="{% static 'assets/bundles/index.bundle.js' %}"></script> <!-- Jquery Knob, Count To, Sparkline Js -->
+<script src="{% static 'assets/bundles/morrisscripts.bundle.js' %}"></script><!-- Morris Plugin Js -->
+<script src="{% static 'assets/plugins/dropzone/dropzone.js' %}"></script> <!-- Dropzone Plugin Js -->
+<script src="{% static 'assets/bundles/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/charts/jquery-knob.js' %}"></script>
+<script src="{% static 'assets/js/pages/index2.js' %}"></script>
+<script src="{% static 'assets/bundles/datatablescripts.bundle.js' %}"></script>
+<script src="{% static 'assets/js/pages/tables/jquery-datatable.js' %}"></script>
+<script src="{% static 'assets/js/pages/forms/basic-form-elements.js' %}"></script>
+
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+      //Checks if li has sub (ul) and adds class for toggle icon - just an UI
+
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      //If width is more than 943px dropdowns are displayed on hover
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+      //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
+
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+      //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
+
+    });
+    </script>
+	{% endblock %}
+</body>
+
+<!-- Mirrored from thememakker.com/templates/oreo/university/html/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Sep 2018 02:53:20 GMT -->
+</html>

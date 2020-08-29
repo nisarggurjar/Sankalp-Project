@@ -1,0 +1,55 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- slider-start -->
+
+    <!-- slider-end -->
+    <!-- courses start -->
+    <div class="advisors-area gray-bg pt-95 pb-70" style="background-image: url('{% static 'web/sbg.png' %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2">
+                    <div class="events-details-form faq-area-form mb-30 p-0">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xl-8 offset-xl-2">
+                                    <div class="events-form-title text-center mb-30">
+                                        <h2>Edit Details</h2>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <label><b>SATISFIED STUDENTS</b></label>
+                                    <input value="{{ counter.value1 }}" type="text" required name="value1">
+                                </div>
+                                 <div class="col-xl-12">
+                                     <label><b>TOTAL COURSE</b></label>
+                                    <input value="{{ counter.value2 }}" type="text" required name="value2">
+                                </div>
+                                 <div class="col-xl-12">
+                                     <label><b>EXPERT FACULTIES</b></label>
+                                    <input value="{{ counter.value3 }}" type="text" required name="value3">
+                                </div>
+                                 <div class="col-xl-12">
+                                      <label><b>WON AWARDS</b></label>
+                                    <input value="{{ counter.value4 }}" type="text" required name="value4">
+                                </div>
+
+
+
+
+                                <div class="col-xl-12">
+                                    <div class="faq-form-btn events-form-btn text-center">
+                                        <button class="btn m-0">Edit Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- courses end -->
+    {% endblock %}
